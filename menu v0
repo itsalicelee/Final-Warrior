@@ -1,5 +1,7 @@
 import pygame, sys
-
+'''
+建立簡易menu，用esc離開submenu
+'''
 
 mainClock = pygame.time.Clock()
 from pygame.locals import *
@@ -65,7 +67,7 @@ def main_menu():
         mainClock.tick(60)
 
 
-def game():
+def game():  # 遊戲本身
     running = True
     while running:
         screen.fill((0, 0, 0))
