@@ -22,10 +22,10 @@ screen_caption = pygame.display.set_caption("game")
 
 
 # 匯入主角圖片
-actorIMG = pygame.image.load("/Users/zhangxiangxian/Desktop/racecar.png")
+actorIMG = pygame.image.load("images/racecar.png")
 
 # 匯入地圖image，並取得長寬資訊
-bg = pygame.image.load("/Users/zhangxiangxian/Desktop/1.1-4d046d33a07490f813867425851deff9.jpg")
+bg = pygame.image.load("images/1.1-4d046d33a07490f813867425851deff9.jpg")
 map_width = bg.get_width()
 map_height = bg.get_height()
 
