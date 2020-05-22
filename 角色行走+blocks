@@ -63,32 +63,32 @@ if (__name__ == '__main__'):
 
 	block_group = pygame.sprite.Group()
 
-	character = Block()
+	character = Block((0,0,0))
 	character.set_image('koya.png')
 	character.set_posotion(window_width/2, windiw_height/2)
 	# 左上長方形
-	block_1 = Block((0,500,0))
+	block_1 = Block((0,0,0))
 	block_1.set_posotion(150,125)
 	# 右上
-	block_2 = Block((0,400,0))
+	block_2 = Block((0,0,0))
 	block_2.set_posotion(850,125)
 	# 左下
-	block_3 = Block((0,300,0))
+	block_3 = Block((0,0,0))
 	block_3.set_posotion(150,625)
 	# 右下
-	block_4 = Block((0,200,0))
+	block_4 = Block((0,0,0))
 	block_4.set_posotion(850,625)
 	# 左外
-	block_5 = Block((0,500,0))
+	block_5 = Block((0,0,0))
 	block_5.set_posotion(-150,375)
 	# 上外
-	block_6 = Block((0,400,0))
+	block_6 = Block((0,0,0))
 	block_6.set_posotion(500,-125)
 	# 右外
-	block_7 = Block((0,300,0))
+	block_7 = Block((0,0,0))
 	block_7.set_posotion(1150,375)
 	# 下外
-	block_8 = Block((0,200,0))
+	block_8 = Block((0,0,0))
 	block_8.set_posotion(500,875)
 
 	block_group.add(block_1, block_2, block_3,block_4, character)
