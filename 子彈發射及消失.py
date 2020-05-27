@@ -1,14 +1,17 @@
 import pygame,random,math,time
+bg = pygame.image.load("images/1.1-4d046d33a07490f813867425851deff9.jpg")
 
 class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色類別
-    direction=0
-    speed=0
-    x=0
-    y=0
-    dx=0
-    dy=0
+    # direction=0
+    # speed=0
+    # x=0
+    # y=0
+    # dx=0
+    # dy=0
+
     def __init__(self,inputspeed,inputx,inputy,radius,color):
         pygame.sprite.Sprite.__init__(self)#一定要有這行，但不要問我為啥 我也不知道
+
         self.speed=inputspeed
         self.x=inputx
         self.y=inputy
@@ -37,6 +40,7 @@ class brick(pygame.sprite.Sprite): # 建立邊界 然後切記切記把它做成
         self.rect=self.image.get_rect() #方形畫布get
         self.rect.x=x
         self.rect.y=y
+
 class moveclip(pygame.sprite.Sprite): # 這邊是簡單的滑鼠點擊開始這樣
     def __init__(self,color,x,y):
         pygame.sprite.Sprite.__init__(self)
@@ -68,45 +72,47 @@ bulletsprite = pygame.sprite.Group()
 controller=moveclip((255,0,0),0,350) # 鼠標操作
 allsprite.add(controller) 
 controllersprite.add(controller)
-clock=pygame.time.Clock()
+clock = pygame.time.Clock()
 tick = 0
 
-for j in range(0,60): #建立邊界 然後把它放進brick和all的group，放進brick才好做碰撞測試
-    i = 0
-    thebrick=brick((0,0,0),j*10+1,i*10+1)
+for j in range(0, 60): #建立邊界 然後把它放進brick和all的group，放進brick才好做碰撞測試
+    up = 0
+    thebrick=brick((0,0,0),j*10+1,up*10+1)
     bricksprite.add(thebrick)
     allsprite.add(thebrick)
-for j in range(0,60):
-    i =39
-    thebrick=brick((0,0,0),j*10+1,i*10+1)
-    bricksprite.add(thebrick)
-    allsprite.add(thebrick)
-for i in range(0,40):
-    j=0
-    thebrick=brick((0,0,0),j*10+1,i*10+1)
-    bricksprite.add(thebrick)
-    allsprite.add(thebrick)
-for i in range(0,40):
-    j=59
-    thebrick=brick((0,0,0),j*10+1,i*10+1)
-    bricksprite.add(thebrick)
-    allsprite.add(thebrick)
-#for
 
-playing=False#playing true代表球正在動
-run=True#run false代表程式結束
+for j in range(0,60):
+    down =39
+    thebrick=brick((0,0,0),j*10+1,down*10+1)
+    bricksprite.add(thebrick)
+    allsprite.add(thebrick)
+for i in range(0,40):
+    left = 0
+    thebrick=brick((0,0,0), left*10+1,i*10+1)
+    bricksprite.add(thebrick)
+    allsprite.add(thebrick)
+for i in range(0,40):
+    right = 59
+    thebrick=brick((0,0,0), right * 10+1,i*10+1)
+    bricksprite.add(thebrick)
+    allsprite.add(thebrick)
+
+
+playing = True #playing true代表球正在動
+run = True#run false代表程式結束
 while run:
     clock.tick(20)
     for event in pygame.event.get():
         if event.type==pygame.QUIT:#使用者者按x結束視窗
             running=False#跳出pygame
-    button=pygame.mouse.get_pressed()
-    #按下滑鼠左鍵開始遊戲（求開始動）
-    if button[0]:
-        playing=True
+            pygame.quit()
+    # button=pygame.mouse.get_pressed()
+    # #按下滑鼠左鍵開始遊戲（求開始動）
+    # if button[0]:
+    #     playing=True
     if playing:
-        window.blit(background,(0,0))#清除繪圖視窗window
-        if tick %  bullet_add_speed== 0: # 時間進行多少毫秒的時候出一次子彈
+        window.blit(bg,(0,0))#清除繪圖視窗window
+        if tick %  bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
             new_bul =(bullet(6,300,200,8,(0,0,255))) #子彈格式 ，這邊如果多弄幾個東東 就可以每隔多少秒弄出不同大小速度形狀的子彈
             bulletsprite.add(new_bul)  # 更新敵機組
         bulletsprite.update() #刷新新的bulletgroup
