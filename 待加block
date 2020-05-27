@@ -31,7 +31,7 @@ class Block(pygame.sprite.Sprite):
         self.hspeed += hspeed
         self.vspeed += vspeed
 
-    def set_posotion(self, x, y):
+    def set_position(self, x, y):
         self.rect.x = x - self.origin_x
         self.rect.y = y - self.origin_y
         return self.rect.x , self.rect.y
@@ -227,28 +227,28 @@ def game():
     #將block顯示出來
         # 左上長方形
         block_1 = Block((0,0,0))
-        block_1.set_posotion(150,125)
+        block_1.set_position(150,125)
         # 右上
         block_2 = Block((0,0,0))
-        block_2.set_posotion(850,125)
+        block_2.set_position(850,125)
         # 左下
         block_3 = Block((0,0,0))
-        block_3.set_posotion(150,625)
+        block_3.set_position(150,625)
         # 右下
         block_4 = Block((0,0,0))
-        block_4.set_posotion(850,625)
+        block_4.set_position(850,625)
         # 左外
         block_5 = Block((0,0,0))
-        block_5.set_posotion(-150,375)
+        block_5.set_position(-150,375)
         # 上外
         block_6 = Block((0,0,0))
-        block_6.set_posotion(500,-125)
+        block_6.set_position(500,-125)
         # 右外
         block_7 = Block((0,0,0))
-        block_7.set_posotion(1150,375)
+        block_7.set_position(1150,375)
         # 下外
         block_8 = Block((0,0,0))
-        block_8.set_posotion(500,875)
+        block_8.set_position(500,875)
 
         #block_group.add(block_1, block_2, block_3,block_4)
 
