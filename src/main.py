@@ -1,37 +1,34 @@
-import sys
 import pygame
+import sys
+import random
+import math
+from pygame.locals import *
 
-pygame.init()
+import const
+from renderer import Renderer
+from sound import Sound
+from bullet import Bullet
+from brick import Brick
+from menu import Menu
+from game import hand
 
-screen = pygame.display.set_mode((800, 600))  # 顯示視窗
+# #######################
+class Game:
+	"""docstring for game"""
+	def __init__(self):
+		pygame.init()
+		self.mainClock = pygame.time.Clock()
+		self.renderer = Renderer()
+		self.menu = Menu()
+		self.menu.main_menu()
+		self.mainClock.tick(60)
 
-# Title and icon
-pygame.display.set_caption("casters")
-icon = pygame.image.load("avatar.png")
-pygame.display.set_icon(icon)
-
-# Player
-playerImage = pygame.image.load("avatar.png")
-playerX = 370
-playerY = 480
-
-
-def player():
-    screen.blit(playerImage, (playerX, playerY))
-
-
-# Game Loop
-running = True
-while running:  # 死迴圈確保視窗一直顯示
-    screen.fill((0, 0, 0))  # RGB background
-
-    for event in pygame.event.get():  # 遍歷所有事件
-        if event.type == pygame.QUIT:  # 如果單擊關閉視窗，則退出
-            running = False
-
-    player()
-
-    pygame.display.update()
+	# def update(self):
+	# 	self.mainClock.tick(60)
+	# 	pygame.display.update()
 
 
+# ######################
+if __name__ == "__main__":
+	Game()
 

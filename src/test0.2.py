@@ -59,7 +59,6 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 
 # 子彈生成速度 印象中是毫秒
-bullet_add_speed = 5 #子彈生成速度 印象中是毫秒
 
 # 初始化各種 sprite
 allsprite=pygame.sprite.Group() # 角色群組變數
