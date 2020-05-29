@@ -14,41 +14,52 @@ class Game:
         self.character = Character()
         self.mainClock.tick(60)
         self.pause = False
+        self.button = 1
 
     # game 的 main loop
     def game_start(self):
         # self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
         
-        while not self.pause:
-            # 在螢幕上方印出 game 字樣
-            self.renderer.draw_text('game', self.renderer.font, const.color["black"], self.renderer.screen, 500, 50)
+        while True:
+            if not self.pause:  
+                # # 在螢幕上方印出 game 字樣
+                # self.renderer.draw_text('game', self.renderer.font, const.color["black"], self.renderer.screen, 500, 50)
 
-            # 讀取使用者指令
-            for event in pygame.event.get():
-                self.event_handler(event)
+                # 讀取使用者指令
+                for event in pygame.event.get():
+                    self.event_handler(event)
 
-            # 算出主角和地圖分別要怎麼顯示
-            self.character.character_move(const.x_change, const.y_change)
-            self.now_x, self.now_y = self.character.get_loc()
-            self.renderer.rolling_map(self.now_x, self.now_y)
+                # 算出主角和地圖分別要怎麼顯示
+                self.character.character_move(const.x_change, const.y_change)
+                const.now_x, const.now_y = self.character.get_loc()
+                self.renderer.rolling_map(const.now_x, const.now_y)
 
-            # 將 background 顯示在screen上
-            self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
+                # 將 background 顯示在screen上
+                self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
-            # 將主角顯示在screen上
-            self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + self.now_x), int(const.map_y + self.now_y)))
-            # print(self.now_x, self.now_y)
+                # 將主角顯示在screen上
+                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                # print(self.now_x, self.now_y)
 
-            self.renderer.draw_hp()
-            # 螢幕更新
-            pygame.display.update()
+                self.renderer.draw_hp()
+                self.renderer.draw_pasue_button()
+                # 螢幕更新
+                pygame.display.update()
 
-        if self.pause:
-            self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
+            else:
+                # 將 background 顯示在screen上
+                self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
-            # 將主角顯示在screen上
-            self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + self.now_x), int(const.map_y + self.now_y)))
-            # pygame.display.update()
+                # 將主角顯示在screen上
+                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                # print(self.now_x, self.now_y)
+
+                self.renderer.draw_hp()
+                # self.renderer.draw_pasue_button()
+                self.game_pause()
+
+                 # 螢幕更新
+                pygame.display.update()
             
 
     def event_handler(self, event):
@@ -77,9 +88,11 @@ class Game:
                 const.y_change = 5
 
             if event.key == const.key["pause"]:
-                # self.renderer.draw_game_pause()
-                # self.pause = True
-                pass
+                # self.renderer.game_pause()
+                if self.pause == False:
+                    self.pause = True
+                else:
+                    self.pause = False
 
         # 鍵盤：放掉按鍵
         if event.type == pygame.KEYUP:
@@ -93,14 +106,51 @@ class Game:
         if event.type ==  pygame.MOUSEBUTTONDOWN:  
             if event.button == 1:
                 click = True
-    
+
+    # 按下暫停後，遊戲暫停並跳出選單，預設為 “繼續遊戲”
+    def game_pause(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
+                # if event.key == pygame.K_ESCAPE:
+                #     self.pause = False
+
+                if event.key == const.key["right"]:  # 若按下down
+                    self.button -= 1
+                if event.key == const.key["left"]:
+                    self.button += 1
+
+                if event.key == const.key["space"]:
+                   
+                    if self.button % 3 == 1:  # 進入theme
+                        self.pause = False
+
+                    if self.button % 3 == 2:  # 回到main menu
+                        pass
+
+                    if self.button % 3 == 0:  # 進入 resume
+                        pass
+
+        if self.button % 3 == 1:  # 選到resume
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+
+
+        if self.button % 3 == 2:  # 選到quit
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+        if self.button % 3 == 0:  # 選到option
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+
     def quit_game(self):
         pass
         
-
-
-
-
 
 
 

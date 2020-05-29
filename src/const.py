@@ -2,8 +2,9 @@ import pygame
 
 ###########################################################
 # 螢幕長尺寸
-screen_width = 1000
-screen_height = 750
+screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+screen_width = screen.get_width()
+screen_height = screen.get_height()
  
 
 # 設定Menu的選單位置，且button上的字可以隨著button位置置中
@@ -16,8 +17,9 @@ menuButton = {
 
 # 設定遊戲暫停時的選單按鈕
 pauseButton = {
-				"quit": (400, 350, 60, 60),
-				"resume": (500, 350, 60, 60),
+				
+				"resume": (400, 350, 60, 60),
+				"quit": (500, 350, 60, 60),
 				"option": (600, 350, 60, 60)
 }
 

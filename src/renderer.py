@@ -5,6 +5,8 @@ class Renderer:
 
     def __init__(self):
         pygame.init()
+        # pygame.display.set_caption('menu test')
+        # pygame.display.set_icon(self.photo_dct["icon"])
 
         self.photo_dct = {
                             "icon": pygame.image.load("images/avatar.png"),
@@ -15,9 +17,11 @@ class Renderer:
         self.map_width = self.photo_dct["bg"].get_width()
         self.map_height = self.photo_dct["bg"].get_height()
 
-        self.screen = pygame.display.set_mode((1000, 750))  # 顯示視窗
-        
-
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)  # 顯示視窗
+        const.screen_width = self.screen.get_width()
+        const.screen_height = self.screen.get_height()
+##########################################################################################
+# 各種按鈕們
         # 建立矩形_1，長200寬50，距離左邊邊界為400，距離上面邊界400
         self.button_1 = pygame.Rect(const.menuButton["game"])
 
@@ -26,6 +30,14 @@ class Renderer:
 
         # 建立矩形_3，長200寬50，距離左邊邊界為400，距離上面邊界600
         self.button_3 = pygame.Rect(const.menuButton["quit"])
+
+
+        self.pause_button = {
+                                "quit": pygame.Rect(const.pauseButton["quit"]),
+                                "option": pygame.Rect(const.pauseButton["option"]),
+                                "resume": pygame.Rect(const.pauseButton["resume"])
+        }
+##########################################################################################
 
         # 建立字型和字體大小
         self.font = pygame.font.SysFont(None, 50)
@@ -76,6 +88,31 @@ class Renderer:
         else:
             const.map_y = -(role_y - const.screen_height / 2)
     
+
+    # def game_pause(self):
+    #     # 將 background 顯示在screen上
+    #     self.screen.blit(self.photo_dct["bg"], (const.map_x, const.map_y))
+
+    #     # 將主角顯示在screen上
+    #     self.screen.blit(self.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+    #     # print(self.now_x, self.now_y)
+
+    #     self.draw_hp()
+    #     self.draw_pasue_button()
+
+    #     self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width/2, const.screen_height/2)
+
+    #     # 螢幕更新
+    #     pygame.display.update()
+
+
+
+
+
+
+
+
+    # 先畫出hp的位置，之後要改成 hp 血條的圖片
     def draw_hp(self):
         # self.hit_box = (17, 11, 29, 52)
         # 血條：绿色背景矩形
@@ -85,9 +122,12 @@ class Renderer:
 
         self.draw_text("hp ...", self.font, const.color["black"], self.screen, 130, 70)
 
-    def draw_game_pause(self):
-        self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width/2, const.screen_height/2)
+    # 先畫出暫停的位置，之後要改成暫停鍵的圖片
+    def draw_pasue_button(self):
+        pygame.draw.rect(self.screen, const.color["red"], (900, 50, 50, 50)) # [x坐標, y坐標, 寬度, 高度]
+        self.draw_text("pause", self.font, const.color["black"], self.screen, 900, 60)
 
+    
 
 
 
