@@ -88,28 +88,6 @@ class Renderer:
             const.map_y = -(role_y - const.screen_height / 2)
     
 
-    # def game_pause(self):
-    #     # 將 background 顯示在screen上
-    #     self.screen.blit(self.photo_dct["bg"], (const.map_x, const.map_y))
-
-    #     # 將主角顯示在screen上
-    #     self.screen.blit(self.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-    #     # print(self.now_x, self.now_y)
-
-    #     self.draw_hp()
-    #     self.draw_pasue_button()
-
-    #     self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width/2, const.screen_height/2)
-
-    #     # 螢幕更新
-    #     pygame.display.update()
-
-
-
-
-
-
-
 
     # 先畫出hp的位置，之後要改成 hp 血條的圖片
     def draw_hp(self):
