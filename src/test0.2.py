@@ -4,59 +4,59 @@ BUG:
 '''
 
 
-########################################################
-# module
-import pygame
-import sys
-import random
-import math
-from pygame.locals import *
+# ########################################################
+# # module
+# import pygame
+# import sys
+# import random
+# import math
+# from pygame.locals import *
 
-# 初始化 pygame
-pygame.init()
-mainClock = pygame.time.Clock()
-ball_clock = pygame.time.Clock()
+# # 初始化 pygame
+# pygame.init()
+# mainClock = pygame.time.Clock()
+# ball_clock = pygame.time.Clock()
 
-#################################
-# 視窗
-# 寬度、高度
-screen_width, screen_height = 1000, 750
-pygame.display.set_caption('menu test')  # 設定視窗名稱
+# #################################
+# # 視窗
+# # 寬度、高度
+# screen_width, screen_height = 1000, 750
+# pygame.display.set_caption('menu test')  # 設定視窗名稱
 
-icon = pygame.image.load("images/avatar.png")  # 傳入照片
-pygame.display.set_icon(icon)  # 設定視窗的icon
-screen = pygame.display.set_mode((screen_width, screen_height))  # 建立視窗，RESIZABLE將視窗設為可調整
-font = pygame.font.SysFont(None, 50)  # 建立字型和字體大小
-actorIMG = pygame.image.load("images/racecar.png") # 匯入主角圖片
+# icon = pygame.image.load("images/avatar.png")  # 傳入照片
+# pygame.display.set_icon(icon)  # 設定視窗的icon
+# screen = pygame.display.set_mode((screen_width, screen_height))  # 建立視窗，RESIZABLE將視窗設為可調整
+# font = pygame.font.SysFont(None, 50)  # 建立字型和字體大小
+# actorIMG = pygame.image.load("images/racecar.png") # 匯入主角圖片
 
-bg = pygame.image.load("images/1.1-4d046d33a07490f813867425851deff9.jpg") # 匯入地圖image
-map_width, map_height = bg.get_width(), bg.get_height()  # 取得長寬資訊
+# bg = pygame.image.load("images/1.1-4d046d33a07490f813867425851deff9.jpg") # 匯入地圖image
+# map_width, map_height = bg.get_width(), bg.get_height()  # 取得長寬資訊
 
-convas = pygame.Surface(screen.get_size())#畫布
+# convas = pygame.Surface(screen.get_size())#畫布
 
 
-###############################################################
-'''設定背景音樂'''
-pygame.mixer.init()  # 啟動背景音樂
-bgm = "music/bgm.ogg"  # 讀取背景音樂
+# ###############################################################
+# '''設定背景音樂'''
+# pygame.mixer.init()  # 啟動背景音樂
+# bgm = "music/bgm.ogg"  # 讀取背景音樂
 
-pygame.mixer.music.load(bgm)
-pygame.mixer.music.set_volume(0.1)  # 來設定播放的音量，音量value的範圍為0.0到1.0
-pygame.mixer.music.play(-1)  # 若為-1則會無限輪迴播放
+# pygame.mixer.music.load(bgm)
+# pygame.mixer.music.set_volume(0.1)  # 來設定播放的音量，音量value的範圍為0.0到1.0
+# pygame.mixer.music.play(-1)  # 若為-1則會無限輪迴播放
 
-###############################################################
-# intial parameter 
-# 設定主角起始位置
-role_x, role_y = screen_width * 0.45, screen_height * 0.8
-x_change, y_change = 0, 0
+# ###############################################################
+# # intial parameter 
+# # 設定主角起始位置
+# role_x, role_y = screen_width * 0.45, screen_height * 0.8
+# x_change, y_change = 0, 0
 
-# turn click to true to start the game
-click = False
+# # turn click to true to start the game
+# click = False
 
-# 設定常用顏色色碼
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
+# # 設定常用顏色色碼
+# black = (0, 0, 0)
+# white = (255, 255, 255)
+# red = (255, 0, 0)
 
 # 子彈生成速度 印象中是毫秒
 
@@ -96,6 +96,7 @@ class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色�
         self.rect.x = self.x
         self.rect.y = self.y
 #######################################################
+
 class brick(pygame.sprite.Sprite): # 建立邊界 然後切記切記把它做成sprite
     def __init__(self,color,x,y):
         pygame.sprite.Sprite.__init__(self)
