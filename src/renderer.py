@@ -62,16 +62,17 @@ class Renderer:
             const.map_x = -(self.map_width - const.screen_width)
 
         else:
-            const.map_x = const.map_x = -(role_x - const.screen_width / 2)
+            const.map_x =  -(role_x - const.screen_width / 2)
 
           # y 方向
-        if role_y < const.screen_width / 2:
-            const.map_x = 0
+        if role_y < const.screen_height / 2:
+            const.map_y = 0
 
-        elif role_x > self.map_width - const.screen_width / 2:
-            const.map_x = -(self.map_width - const.screen_width)
+        elif role_y > self.map_height - const.screen_height / 2:
+            const.map_y = -(self.map_height - const.screen_height)
 
         else:
-            const.map_x = const.map_x = -(role_x - const.screen_width / 2)
+            const.map_y = -(role_y - const.screen_height / 2)
+
 
 

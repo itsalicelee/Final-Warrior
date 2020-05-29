@@ -133,7 +133,6 @@ class Menu():
 
 
             for event in pygame.event.get():
-                #hand.event_handler(self, event) #這行要做什麼？？
 
                 # if event.type == pygame.QUIT:  # 關閉視窗
                 #     pygame.quit()
