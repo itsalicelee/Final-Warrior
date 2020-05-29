@@ -23,7 +23,6 @@ class Menu():
     def main_menu(self):
         button = 0
         while True:
-
             pygame.mouse.set_visible(False)  # 隱藏原本的游標
             self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, 500, 200) # 畫上text，位置設定在(500,200)
@@ -190,26 +189,26 @@ class Menu():
         while True:
             self.renderer.screen.fill(const.color["black"])  # 設定option背景顏色
             self.renderer.draw_text('volume', self.renderer.font, const.color["white"], self.renderer.screen, 500, 50)
+            
 
-            for event in pygame.event.get():   
-                if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出volume
+
+                    
+                    """音量有七段"""
                     if event.key == const.key["left"]:  # 若按下left，音量減小
-                        self.bgm.set_bgm(self.bgm.get_volume()-0.1)
+                        if self.bgm.get_volume() < 0.1:
+                            self.bgm.set_bgm(0.0)
+                        else:
+                            self.bgm.set_bgm(float(self.bgm.get_volume())-0.1)
 
                     if event.key == const.key["right"]:  # 若按下right，音量增大
-                        self.bgm.set_bgm(self.bgm.get_volume()+0.1)
-                            
-                    if event.key == const.key["esc"]:
-                        self.options()
+                        if float(self.bgm.get_volume()) + 0.1 < 0.7:  # 不要讓音量太大 
+                            self.bgm.set_bgm(float(self.bgm.get_volume())+ 0.1)
 
-            self.renderer.draw_text('set', self.renderer.font, const.color["white"], self.renderer.screen, 500, 200)
+                    if event.key == const.key["esc"]:    # 若按下option，回到選單
+                        self.options()
+                    
+            self.renderer.draw_text('set volume', self.renderer.font, const.color["white"], self.renderer.screen, 500, 200)
             
             pygame.display.update()
-
-        
-
-
-
-
-            
-            
