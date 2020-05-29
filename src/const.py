@@ -44,5 +44,6 @@ key = {"left": pygame.K_LEFT,
 	   "up": pygame.K_UP,
 	   "down": pygame.K_DOWN,
 	   "esc": pygame.K_ESCAPE,
-	   "space": pygame.K_SPACE}
+	   "space": pygame.K_SPACE,
+	   "pause": pygame.K_p}
 
