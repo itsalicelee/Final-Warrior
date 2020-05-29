@@ -4,6 +4,9 @@ class Character:
         self.image = pygame.image.load("images/avatar.png")
         self.set_properties()
 
+        # 先設定人物起始有1000滴血
+        self.hp = 1000
+
 
     def set_properties(self):
         self.rect = self.image.get_rect()

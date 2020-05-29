@@ -54,6 +54,8 @@ class Renderer:
 
     # 滾動地圖
     def rolling_map(self, role_x, role_y):
+        self.role_x = role_x
+        self.role_y = role_y
         # x 方向
         if role_x < const.screen_width / 2:
             const.map_x = 0
@@ -73,6 +75,20 @@ class Renderer:
 
         else:
             const.map_y = -(role_y - const.screen_height / 2)
+    
+    def draw_hp(self):
+        # self.hit_box = (17, 11, 29, 52)
+        # 血條：绿色背景矩形
+        pygame.draw.rect(self.screen, const.color["blue"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
+        # # 血條：红色背景矩形，即：消耗的血）
+        # pygame.draw.rect(self.screen, const.color["red"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
+
+        self.draw_text("hp ...", self.font, const.color["black"], self.screen, 130, 70)
+
+    def draw_game_pause(self):
+        self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width/2, const.screen_height/2)
+
+
 
 
 
