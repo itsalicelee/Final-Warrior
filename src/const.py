@@ -1,15 +1,14 @@
 import pygame
-from renderer import Renderer
-# Renderer()
+# from renderer import Renderer
 
 ###########################################################
 # 螢幕長尺寸
 screen_width = 1000
 screen_height = 750
 
-# # 取得長寬資訊
-# map_width = Renderer.bg.get_width()
-# map_height = Renderer.bg.get_height()  
+map_x = 0
+map_y = 0
+
 
 # 設定常用顏色色碼
 color = {"black": (0, 0, 0),

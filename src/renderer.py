@@ -1,24 +1,38 @@
 import pygame
 import const
+
+
+# # 取得長寬資訊
+# map_width = Renderer.bg.get_width()
+# map_height = Renderer.bg.get_height() 
 class Renderer:
 	"""docstring for Render"""
 
 	def __init__(self):
 		pygame.init()
 
-		# 匯入程式icon 
-		self.icon = pygame.image.load("images/avatar.png")  
+		self.photo_dct = {
+							"icon": pygame.image.load("images/avatar.png"),
+							"actorIMG": pygame.image.load("images/racecar.png"),
+							"bg": pygame.image.load("images/background.jpg"),
+		}
+		
+		self.map_width = photo_dct["bg"].get_width()
+		self.map_height = photo_dct["bg"].get_height()
 
-		# 匯入主角圖片
-		self.actorIMG = pygame.image.load("images/racecar.png") 
+		# # 匯入程式icon 
+		# self.icon = pygame.image.load("images/avatar.png")  
 
-		# 地圖背景
-		self.bg = pygame.image.load("images/background.jpg")
+		# # 匯入主角圖片
+		# self.actorIMG = pygame.image.load("images/racecar.png") 
 
-		# 匯入 click 圖片
-		self.manual_cursor = pygame.image.load('images/click.png')
-		# self.manual_cursor = pygame.image.load('images/click.png').convert_alpha()
-		self.manual_cursor = pygame.transform.scale(self.manual_cursor, (40, 50))
+		# # 地圖背景
+		# self.bg = pygame.image.load("images/background.jpg")
+
+		# # 匯入 click 圖片
+		# self.manual_cursor = pygame.image.load('images/click.png')
+		# # self.manual_cursor = pygame.image.load('images/click.png').convert_alpha()
+		# self.manual_cursor = pygame.transform.scale(self.manual_cursor, (40, 50))
 
 
 
@@ -55,6 +69,28 @@ class Renderer:
 	    self.textrect = self.textobj.get_rect()
 	    self.textrect.center = (x, y)
 	    surface.blit(self.textobj, self.textrect)
+
+	# 滾動地圖
+	def rolling_map(self, role_x, role_y):
+		# x 方向
+		if role_x < const.screen_width / 2:
+			const.map_x = 0
+
+		elif role_x > self.map_width - const.screen_width / 2:
+        	const.map_x = -(self.map_width - const.screen_width)
+
+        else:
+        	const.map_x = const.map_x = -(role_x - const.screen_width / 2)
+
+        # y 方向
+        if role_y < const.screen_width / 2:
+			const.map_x = 0
+
+		elif role_x > self.map_width - const.screen_width / 2:
+        	const.map_x = -(self.map_width - const.screen_width)
+
+        else:
+        	const.map_x = const.map_x = -(role_x - const.screen_width / 2)
 
 
 

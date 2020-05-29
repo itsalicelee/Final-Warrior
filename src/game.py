@@ -7,11 +7,18 @@ from renderer import Renderer
 class Game:
     """docstring for game"""
     def __init__(self):
+        self.character_loc =  
         pygame.init()
 
         self.mainClock = pygame.time.Clock()
         self.renderer = Renderer()
         self.mainClock.tick(60)
+
+    def game_start(self):
+        self.character = Character()
+        self.now_x, self.now_y = self.character.get_loc()
+        self.renderer.rolling_map(self.now_x, self.now_y) 
+
 
     def event_handler(self, event):
         if event.type == pygame.QUIT:
@@ -50,3 +57,13 @@ class Game:
         if event.type ==  pygame.MOUSEBUTTONDOWN:  
             if event.button == 1:
                 click = True
+    
+
+
+
+
+
+
+
+
+

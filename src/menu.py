@@ -25,7 +25,7 @@ class Menu():
 
             if  self.renderer.button_1.collidepoint((mx, my)):  # 若游標在button_1內
                 if self.click:  # 若有點擊，進入遊戲
-            #       game()
+            #       
                     pass
             if  self.renderer.button_2.collidepoint((mx, my)):  # 若游標在button_2內
                 if self.click:  # 若有點擊，進入遊戲
