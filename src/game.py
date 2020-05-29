@@ -2,7 +2,6 @@ import pygame, sys
 import const
 from renderer import Renderer
 from character import Character
-# from menu import Menu
 
 
 class Game:
@@ -15,24 +14,31 @@ class Game:
         self.character = Character()
         self.mainClock.tick(60)
 
+    # game 的 main loop
     def game_start(self):
-        self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
+        # self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
+        
         while True:
+            # 在螢幕上方印出 game 字樣
             self.renderer.draw_text('game', self.renderer.font, const.color["black"], self.renderer.screen, 500, 50)
 
+            # 讀取使用者指令
             for event in pygame.event.get():
                 self.event_handler(event)
 
+            # 算出主角和地圖分別要怎麼顯示
             self.character.character_move(const.x_change, const.y_change)
             self.now_x, self.now_y = self.character.get_loc()
             self.renderer.rolling_map(self.now_x, self.now_y)
 
+            # 將 background 顯示在screen上
             self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
+            # 將主角顯示在screen上
             self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + self.now_x), int(const.map_y + self.now_y)))
-            print(self.now_x, self.now_y)
+            # print(self.now_x, self.now_y)
 
-
+            # 螢幕更新
             pygame.display.update()
 
 
