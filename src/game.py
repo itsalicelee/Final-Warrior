@@ -16,14 +16,20 @@ class Game:
         self.pause = False
         self.button = 0
 
-    # game 的 main loop
+
+    # 退出遊戲
+    def quit_game(self):
+        pygame.quit()
+        sys.exit()
+
+
+    # 主遊戲的 main loop
     def game_start(self):
-        # self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
         
+        # 建立無窮迴圈，開始進行遊戲
         while True:
+            # 當使用者沒有按下暫停：
             if not self.pause:  
-                # # 在螢幕上方印出 game 字樣
-                # self.renderer.draw_text('game', self.renderer.font, const.color["black"], self.renderer.screen, 500, 50)
 
                 # 讀取使用者指令
                 for event in pygame.event.get():
@@ -34,28 +40,34 @@ class Game:
                 const.now_x, const.now_y = self.character.get_loc()
                 self.renderer.rolling_map(const.now_x, const.now_y)
 
+                
+
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
                 # 將主角顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-                # print(self.now_x, self.now_y)
 
+                # 印血量、暫停按鈕
                 self.renderer.draw_hp()
                 self.renderer.draw_pasue_button()
+
                 # 螢幕更新
                 pygame.display.update()
 
+            # 當使用者按下暫停：
             else:
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
                 # 將主角顯示在screen上
-                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-                # print(self.now_x, self.now_y)
+                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"],
+                                         (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
 
+                # 畫血條
                 self.renderer.draw_hp()
-                # self.renderer.draw_pasue_button()
+
+                # 呼叫遊戲暫停的選單
                 self.game_pause()
 
                  # 螢幕更新
@@ -69,10 +81,10 @@ class Game:
 
         # 鍵盤：按下按鍵
         if event.type == pygame.KEYDOWN:  
+            
             # 若按下esc鍵，退出遊戲
             if event.key == const.key["esc"]:
-                pygame.quit()
-                sys.exit()
+                self.quit_game()
 
             # 若按下上下左右，改變人物方向
             if event.key == const.key["left"]: 
@@ -87,39 +99,38 @@ class Game:
             elif event.key == const.key["down"]:
                 const.y_change = 5
 
-            if event.key == const.key["pause"]:
-                # self.renderer.game_pause()
-                if self.pause == False:
-                    self.pause = True
-                else:
+            elif event.key == const.key["pause"]:
+                self.game_pause()
+
+                if self.pause:
                     self.pause = False
+                else:
+                    self.pause = True
+                    
 
         # 鍵盤：放掉按鍵
         if event.type == pygame.KEYUP:
             if event.key == const.key["left"] or event.key == const.key["right"]:
                 const.x_change = 0
 
-            if event.key == const.key["up"] or event.key == const.key["down"]:
+            elif event.key == const.key["up"] or event.key == const.key["down"]:
                  const.y_change = 0 
 
-        # 滑鼠：按下按鍵
-        if event.type ==  pygame.MOUSEBUTTONDOWN:  
-            if event.button == 1:
-                click = True
 
     # 按下暫停後，遊戲暫停並跳出選單，預設為 “繼續遊戲”
     def game_pause(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
-                # if event.key == pygame.K_ESCAPE:
-                #     self.pause = False
+                if event.key == const.key["esc"]:
+                    self.pause = False
 
-                if event.key == const.key["right"]:  # 若按下down
+                elif event.key == const.key["right"]:  # 若按下向右鍵
                     self.button += 1
-                if event.key == const.key["left"]:
+
+                elif event.key == const.key["left"]:   # 若按下向左鍵
                     self.button -= 1
 
-                if event.key == const.key["space"]:
+                elif event.key == const.key["space"]:
                     if self.button % 3 == 0:  # 進入 resume
                         self.pause = False
                     if self.button % 3 == 1:  # 進入theme
@@ -144,11 +155,23 @@ class Game:
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
+    # # def display_pause_button(self):
+    #     # option_lst = ["resume", "option", "quit"]
+    #     # for i in range(3):
+    #     #     if self.button % 3 == i:
+    #     pygame.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])
+    #     # else:
+        #     pygame.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button[option_lst[i]])
+                # pygame.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button[option_lst[i]])
 
-    def quit_game(self):
-        pass
-        
 
 
+
+    # def check_rect_collide(rect_a, rect_b):
+    #     if rect_a.bottom >= rect_b.top and rect_a.top <= rect_b.bottom and 
+    #        rect_a.right >= rect_b.left and rect_a.left <= rect_b.right:
+    #         return True
+    #     else:
+    #         return False
 
 

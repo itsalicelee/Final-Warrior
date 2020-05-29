@@ -1,9 +1,12 @@
-class boss:
+from game_object import Object
+class Boss(Object):
 	"""docstring for boss"""
-	def __init__(self):
-		self.boss_x = 100
-		self.boss_y = 100
+	def __init__(self, x, y, hp = 100):
+		super(Boss, self).__init__(x, y)
+		self.hp = hp
 
+
+		
 	def attack():
 		pass
 		

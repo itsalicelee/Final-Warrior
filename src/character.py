@@ -19,3 +19,6 @@ class Character:
         
     def get_loc(self):
         return self.rect.x, self.rect.y
+    
+
+    
