@@ -30,11 +30,11 @@ color = {
 ###########################################################
 
 # 設定Menu的選單位置，且button上的字可以隨著button位置置中
-# 矩形長200寬50，距離左邊邊界為400，距離上面邊界400
+# menu button using screen info
 menuButton = {
-				"game": (400, 400, 200, 50), 
-				"option": (400, 500, 200, 50), 
-				"quit": (400, 600, 200, 50),
+				"game": ( screen_width/2-0.5*200, screen_height*2/5, 200, 50), 
+				"option": ( screen_width/2-0.5*200, screen_height*3/5, 200, 50), 
+				"quit": ( screen_width/2-0.5*200, screen_height*4/5, 200, 50),
 } 
 
 
