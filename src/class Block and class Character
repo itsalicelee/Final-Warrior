@@ -44,7 +44,7 @@ class Character(pygame.sprite.Sprite):
     def set_position(self, x, y):
         self.rect.x = x
         self.rect.y = y   
-    # 角色位置設定
+    # 角色移動並顯示
     def move(self, x, y):
         window.blit(self.image,(self.rect.x, self.rect.y))
 
