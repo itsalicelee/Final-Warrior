@@ -1,13 +1,13 @@
 import pygame, renderer
-class Character(role_x, role_y):
-    def __init__():
-        self.image = pygame.image.loads('avatar')
+class Character:
+    def __init__(self):
+        self.image = pygame.image.load("images/avatar.png")
         self.set_properties()
 
     def set_properties(self):
-		self.rect = self.image.get_rect()
-		self.origin_x = self.rect.centerx
-		self.origin_y = self.rect.centery
+        self.rect = self.image.get_rect()
+        self.origin_x = self.rect.centerx
+        self.origin_y = self.rect.centery
 
     def charater_move(self, x_change, y_change):
         self.rect.x += x_change

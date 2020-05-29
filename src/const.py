@@ -1,10 +1,19 @@
 import pygame
-# from renderer import Renderer
+
+# Renderer()
 
 ###########################################################
 # 螢幕長尺寸
 screen_width = 1000
 screen_height = 750
+
+# # 取得長寬資訊
+# map_width = Renderer.bg.get_width()
+# map_height = Renderer.bg.get_height()  
+
+# 設定Menu的選單位置，且button上的字可以隨著button位置置中
+# 矩形長200寬50，距離左邊邊界為400，距離上面邊界400
+menuButton = {"game":(400, 400, 200, 50), "option":(400, 500, 200, 50), "quit":(400, 600, 200, 50)} 
 
 map_x = 0
 map_y = 0
@@ -34,5 +43,6 @@ key = {"left": pygame.K_LEFT,
 	   "right": pygame.K_RIGHT,
 	   "up": pygame.K_UP,
 	   "down": pygame.K_DOWN,
-	   "esc": pygame.K_ESCAPE}
+	   "esc": pygame.K_ESCAPE,
+	   "space": pygame.K_SPACE}
 

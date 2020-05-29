@@ -1,23 +1,36 @@
 import pygame, sys
 import const
 from renderer import Renderer
+from character import Character
 # from menu import Menu
 
 
 class Game:
     """docstring for game"""
     def __init__(self):
-        self.character_loc =  
         pygame.init()
 
         self.mainClock = pygame.time.Clock()
         self.renderer = Renderer()
+        self.character = Character()
         self.mainClock.tick(60)
 
     def game_start(self):
-        self.character = Character()
         self.now_x, self.now_y = self.character.get_loc()
-        self.renderer.rolling_map(self.now_x, self.now_y) 
+        self.renderer.rolling_map(self.now_x, self.now_y)
+        
+        while True:
+            self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
+            self.renderer.draw_text('game', self.renderer.font, const.color["black"], self.renderer.screen, 500, 50)
+
+            for event in pygame.event.get():
+                self.event_handler(event)
+            
+            self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
+
+            self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + self.now_x), int(const.map_y + self.now_y)))
+
+            pygame.display.update()
 
 
     def event_handler(self, event):
