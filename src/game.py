@@ -127,10 +127,6 @@ class Game:
                     if self.button % 3 == 2:  # 回到main menu
                         pass
 
-                    
-                        
-            print(self.button)
-
         if self.button % 3 == 1:  # 選到resume
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
             pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形

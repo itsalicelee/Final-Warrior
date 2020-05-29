@@ -18,8 +18,7 @@ class Renderer:
         self.map_height = self.photo_dct["bg"].get_height()
 
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)  # 顯示視窗
-        const.screen_width = self.screen.get_width()
-        const.screen_height = self.screen.get_height()
+
 ##########################################################################################
 # 各種按鈕們
         # 建立矩形_1，長200寬50，距離左邊邊界為400，距離上面邊界400
