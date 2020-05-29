@@ -1,5 +1,6 @@
 import pygame, sys
-import const
+import const, math
+from bullet_shot_and_disappear import bullet, brick
 from renderer import Renderer
 from character import Character
 
@@ -14,12 +15,38 @@ class Game:
         self.character = Character()
         self.mainClock.tick(60)
         self.pause = False
-        self.button = 0
+        self.button = 1
 
     # game 的 main loop
     def game_start(self):
         # self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
-        
+        self.allsprite = pygame.sprite.Group()#角色群組變數
+        self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
+        self.bulletsprite = pygame.sprite.Group() 
+        self.tick = 0
+        for i in range(0, const.screen_width // 10):
+            up = 0
+            thebrick = brick((0, 0, 0), i * 10 + 1, up * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick) 
+
+        for i in range(0, const.screen_width // 10):
+            down = const.screen_height // 10 - 1
+            thebrick = brick((0, 0, 0),i * 10 + 1, down * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
+
+        for j in range(0, const.screen_height // 10):
+            left = 0
+            thebrick = brick((0, 0, 0), left * 10 + 1, j * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
+
+        for j in range(0, const.screen_height // 10):
+            right = const.screen_width // 10 - 1
+            thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
         while True:
             if not self.pause:  
                 # # 在螢幕上方印出 game 字樣
@@ -43,7 +70,16 @@ class Game:
 
                 self.renderer.draw_hp()
                 self.renderer.draw_pasue_button()
+
+                
+                if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
+                    new_bul =(bullet(6,300,200,8,(0,0,255))) #子彈格式 ，這邊如果多弄幾個東東 就可以每隔多少秒弄出不同大小速度形狀的子彈
+                    self.bulletsprite.add(new_bul)  # 更新敵機組
+                self.bulletsprite.update() #刷新新的bulletgroup
+                self.bulletsprite.draw(self.renderer.screen)#畫到螢幕上
+                hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) #改動TRUE，FALSE就可
                 # 螢幕更新
+                self.tick += 1
                 pygame.display.update()
 
             else:
@@ -115,44 +151,39 @@ class Game:
                 #     self.pause = False
 
                 if event.key == const.key["right"]:  # 若按下down
-                    self.button += 1
-                if event.key == const.key["left"]:
                     self.button -= 1
+                if event.key == const.key["left"]:
+                    self.button += 1
 
                 if event.key == const.key["space"]:
-                    if self.button % 3 == 0:  # 進入 resume
-                        self.pause = False
+                   
                     if self.button % 3 == 1:  # 進入theme
-                        pass
+                        self.pause = False
+
                     if self.button % 3 == 2:  # 回到main menu
                         pass
 
-                    
-                        
-            print(self.button)
+                    if self.button % 3 == 0:  # 進入 resume
+                        pass
 
         if self.button % 3 == 1:  # 選到resume
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
 
 
         if self.button % 3 == 2:  # 選到quit
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
         if self.button % 3 == 0:  # 選到option
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
 
     def quit_game(self):
         pass
-        
-
-
-
-
+ 
