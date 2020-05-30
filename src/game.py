@@ -1,5 +1,6 @@
 import pygame, sys
 import const
+from bullet_shot_and_disappear import bullet, brick
 from renderer import Renderer
 from character import Character
 
