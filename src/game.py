@@ -15,7 +15,35 @@ class Game:
         self.mainClock.tick(60)
         self.pause = False
         self.button = 0
+        # self.renderer.screen.fill(const.color["black"])  # 遊戲的底圖顏色預設為黑色
+        self.allsprite = pygame.sprite.Group()#角色群組變數
+        self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
+        self.bulletsprite = pygame.sprite.Group() # 子彈群組
+        self.tick = 0
+        # 製造周圍 Brick
+        for i in range(0, const.screen_width // 10):
+            up = 0
+            thebrick = brick((0, 0, 0), i * 10 + 1, up * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick) 
 
+        for i in range(0, const.screen_width // 10):
+            down = const.screen_height // 10 - 1
+            thebrick = brick((0, 0, 0),i * 10 + 1, down * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
+
+        for j in range(0, const.screen_height // 10):
+            left = 0
+            thebrick = brick((0, 0, 0), left * 10 + 1, j * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
+
+        for j in range(0, const.screen_height // 10):
+            right = const.screen_width // 10 - 1
+            thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
+            self.bricksprite.add(thebrick)
+            self.allsprite.add(thebrick)
 
     # 退出遊戲
     def quit_game(self):
@@ -45,13 +73,21 @@ class Game:
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
-                # 將主角顯示在screen上
+                # 將主角顯示在 screen 上
                 self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
 
                 # 印血量、暫停按鈕
                 self.renderer.draw_hp()
                 self.renderer.draw_pasue_button()
-
+                # 子彈出現
+                if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
+                    new_bul =(bullet(6,300,200,8,(0,0,255))) # 子彈格式
+                    self.bulletsprite.add(new_bul)  # 更新敵機組
+                self.bulletsprite.update() # 刷新新的bulletgroup
+                self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
+                hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
+                # 螢幕更新
+                self.tick += 1
                 # 螢幕更新
                 pygame.display.update()
 
