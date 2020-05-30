@@ -3,7 +3,9 @@ import const
 from bullet_shot_and_disappear import bullet, brick
 from renderer import Renderer
 from character import Character
+from block import Block
 
+import area_setting as boundary
 
 class Game:
     """docstring for game"""
@@ -14,6 +16,7 @@ class Game:
         self.renderer = Renderer()
         self.character = Character()
         self.mainClock.tick(60)
+
         self.pause = False
         self.pause_button = 0
         self.game_over_button = 0
@@ -21,9 +24,11 @@ class Game:
         self.allsprite = pygame.sprite.Group()#角色群組變數
         self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
+
         self.tick = 0
         self.map_changex = 0
         self.map_changey = 0
+
         # 製造周圍 Brick
         for i in range(0, const.screen_width // 10):
             up = 0
@@ -49,6 +54,7 @@ class Game:
             self.bricksprite.add(thebrick)
             self.allsprite.add(thebrick)
 
+        
     # 退出遊戲
     def quit_game(self):
         pygame.quit()
@@ -67,12 +73,14 @@ class Game:
                 for event in pygame.event.get():
                     self.event_handler(event)
 
+
                 # 算出主角和地圖分別要怎麼顯示
                 self.character.character_move(const.x_change, const.y_change)
                 const.now_x, const.now_y = self.character.get_loc()
                 map_change_x, map_change_y = self.renderer.rolling_map(const.now_x, const.now_y)
                 self.map_changex += map_change_x
                 self.map_changey += map_change_y
+
 
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
@@ -94,6 +102,12 @@ class Game:
                 hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
                 # 螢幕更新
                 self.tick += 1
+
+                # 畫出不能走的區域方便觀察，之後可以註解掉
+                self.renderer.draw_block(boundary.block_1)
+                self.renderer.draw_block(boundary.block_2)
+                self.renderer.draw_block(boundary.block_3)
+
 
                 # 螢幕更新
                 pygame.display.update()
@@ -204,6 +218,8 @@ class Game:
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
             pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
+
+    # 定義game over 後，畫面要跳出的選單內容
     def game_over(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:

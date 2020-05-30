@@ -53,6 +53,7 @@ class Renderer:
         # 設定視窗的icon
         self.set_icon()
 
+
     def set_caption(self):
         pygame.display.set_caption('menu test')
 
@@ -110,10 +111,12 @@ class Renderer:
         pygame.draw.rect(self.screen, const.color["blue"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
         self.draw_text("hp ...", self.font, const.color["black"], self.screen, 100, 100)
 
+
     # 先畫出暫停的位置，之後要改成暫停鍵的圖片
     def draw_pasue_button(self):
         pygame.draw.rect(self.screen, const.color["red"], (const.screen_width -100, 50, 50, 50)) # [x坐標, y坐標, 寬度, 高度]
         self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width -100, 60)
+
 
     # 畫出game over 的選單，預設為回到主選單
     def draw_game_over(self):
@@ -125,6 +128,7 @@ class Renderer:
         self.screen.blit(replay_red, (const.screen_width/2 -100, const.screen_height/2))
         self.screen.blit(back_to_menu, (const.screen_width/2 + 100, const.screen_height/2))
 
+    # game over 選單中，replay 被選中
     def draw_replay_chosen(self):
         chosen = pygame.transform.scale(self.photo_dct["replay_red"], (80, 80))
         other = pygame.transform.scale(self.photo_dct["back_to_menu"], (80, 80))
@@ -132,12 +136,17 @@ class Renderer:
         self.screen.blit(chosen, (const.screen_width/2 -100, const.screen_height/2))
         self.screen.blit(other, (const.screen_width/2 + 100, const.screen_height/2))
 
+    # game over 選單中，回到主選單被選中
     def draw_back_to_menu_chosen(self):
         chosen = pygame.transform.scale(self.photo_dct["back_to_menu_red"], (80, 80))
         other = pygame.transform.scale(self.photo_dct["replay"], (80, 80))
 
         self.screen.blit(other, (const.screen_width/2 -100, const.screen_height/2))
         self.screen.blit(chosen, (const.screen_width/2 + 100, const.screen_height/2))
+
+    def draw_block(self, block):
+        pygame.draw.rect(self.photo_dct["bg"], const.color["blue"], block.rect)
+        
 
 
     

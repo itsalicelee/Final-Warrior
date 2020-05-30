@@ -1,12 +1,6 @@
 import pygame,random,math,time
 
 class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色類別
-    # direction=0
-    # speed=0
-    # x=0
-    # y=0
-    # dx=0
-    # dy=0
 
     def __init__(self,inputspeed,inputx,inputy,radius,color):
         pygame.sprite.Sprite.__init__(self)#一定要有這行，但不要問我為啥 我也不知道
