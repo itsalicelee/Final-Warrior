@@ -21,6 +21,8 @@ class Game:
         self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
         self.tick = 0
+        self.map_changex = 0
+        self.map_changey = 0
         # 製造周圍 Brick
         for i in range(0, const.screen_width // 10):
             up = 0
@@ -67,9 +69,9 @@ class Game:
                 # 算出主角和地圖分別要怎麼顯示
                 self.character.character_move(const.x_change, const.y_change)
                 const.now_x, const.now_y = self.character.get_loc()
-                self.renderer.rolling_map(const.now_x, const.now_y)
-
-                
+                map_change_x, map_change_y = self.renderer.rolling_map(const.now_x, const.now_y)
+                self.map_changex += map_change_x
+                self.map_changey += map_change_y
 
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
@@ -82,7 +84,7 @@ class Game:
                 self.renderer.draw_pasue_button()
                 # 子彈出現
                 if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
-                    new_bul =(bullet(6,300,200,8,(0,0,255))) # 子彈格式
+                    new_bul =(bullet(6, (300 + self.map_changex), (200 + self.map_changey), 8, (0, 0, 255))) # 子彈格式
                     self.bulletsprite.add(new_bul)  # 更新敵機組
                 self.bulletsprite.update() # 刷新新的bulletgroup
                 self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
@@ -210,5 +212,3 @@ class Game:
     #         return True
     #     else:
     #         return False
-
-
