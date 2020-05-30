@@ -118,6 +118,31 @@ class Renderer:
         self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width -100, 60)
 
 
+    '''
+    pause 選單
+    '''
+    # 選到 option
+    def draw_option_chosen(self):
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+    # 選到 quit
+    def draw_quit_chosen(self):
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+    # 選到 resume
+    def draw_resume_chosen(self):
+        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["option"])  # 畫上藍色矩形，傳
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+
+    '''
+    game over 選單
+    '''
     # 畫出game over 的選單，預設為回到主選單
     def draw_game_over(self):
         game_over = pygame.transform.scale(self.photo_dct["game_over"], (400, 200))

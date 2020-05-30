@@ -10,13 +10,16 @@ import area_setting as boundary
 class Game:
     """docstring for game"""
     def __init__(self):
+        # 初始化 pygame
         pygame.init()
 
+        # 初始化時間，並呼叫「繪圖」和「主角」兩個class
         self.mainClock = pygame.time.Clock()
         self.renderer = Renderer()
         self.character = Character()
         self.mainClock.tick(60)
 
+        # 預設為「遊戲進行中」
         self.pause = False
         self.pause_button = 0
         self.game_over_button = 0
@@ -29,6 +32,11 @@ class Game:
         self.map_changex = 0
         self.map_changey = 0
 
+        self.create_brick()
+        
+
+
+    def create_brick(self):
         # 製造周圍 Brick
         for i in range(0, const.screen_width // 10):
             up = 0
@@ -53,7 +61,7 @@ class Game:
             thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
             self.bricksprite.add(thebrick)
             self.allsprite.add(thebrick)
-
+        
         
     # 退出遊戲
     def quit_game(self):
@@ -81,7 +89,9 @@ class Game:
                 self.map_changex += map_change_x
                 self.map_changey += map_change_y
 
-
+                '''
+                開始顯示地圖、主角、血量、子彈
+                '''
                 # 將 background 顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
@@ -100,10 +110,11 @@ class Game:
 
                 self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
                 hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
+
                 # 螢幕更新
                 self.tick += 1
 
-                # 畫出不能走的區域方便觀察，之後可以註解掉
+                # 畫出不能走的區域方便觀察，這段之後可以註解掉
                 self.renderer.draw_block(boundary.block_1)
                 self.renderer.draw_block(boundary.block_2)
                 self.renderer.draw_block(boundary.block_3)
@@ -148,7 +159,7 @@ class Game:
             if event.key == const.key["esc"]:
                 self.quit_game()
 
-            # 若按下上下左右，改變人物方向
+            # 按「上、下、左、右」：改變人物方向
             if event.key == const.key["left"]: 
                 const.x_change = -5
 
@@ -161,11 +172,9 @@ class Game:
             elif event.key == const.key["down"]:
                 const.y_change = 5
 
+            # 按 p ，遊戲暫停，
             elif event.key == const.key["pause"]:
-                if self.pause:
-                    self.pause = False
-                else:
-                    self.pause = True
+                self.pause = True
                 self.game_pause()
 
             elif event.key == const.key["game_over"]:
@@ -194,29 +203,23 @@ class Game:
                 elif event.key == const.key["left"]:   # 若按下向左鍵
                     self.pause_button -= 1
 
+                # 畫面上的排列順序，由左至右分別是：「resume、option、quit」
                 elif event.key == const.key["space"]:
                     if self.pause_button % 3 == 0:  # 進入 resume
                         self.pause = False
-                    if self.pause_button % 3 == 1:  # 進入theme
+                    elif self.pause_button % 3 == 1:  # 進入option
                         pass
-                    if self.pause_button % 3 == 2:  # 回到main menu
+                    elif self.pause_button % 3 == 2:  # 回到quit
                         pass
 
-        if self.pause_button % 3 == 1:  # 選到resume
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        if self.pause_button % 3 == 0:  # 選到resume
+            self.renderer.draw_resume_chosen()
 
+        elif self.pause_button % 3 == 1:  # 選到option
+           self.renderer.draw_option_chosen()
 
-        if self.pause_button % 3 == 2:  # 選到quit
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-
-        if self.pause_button % 3 == 0:  # 選到option
-            pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        elif self.pause_button % 3 == 2:  # 選到quit
+            self.renderer.draw_quit_chosen()
 
 
     # 定義game over 後，畫面要跳出的選單內容
@@ -234,7 +237,7 @@ class Game:
                         pass
                     elif self.game_over_button % 2 == 1:  # 進入 back_to_menu
                         self.quit_game()
-
+        
         if self.game_over_button % 2 == 0:
             self.renderer.draw_replay_chosen()
 
