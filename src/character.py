@@ -1,11 +1,12 @@
 import pygame, renderer
 class Character:
-    def __init__(self):
+    def __init__(self, hp = 1000, alive = True):
         self.image = pygame.image.load("images/avatar.png")
         self.set_properties()
 
         # 先設定人物起始有1000滴血
-        self.hp = 1000
+        self.hp = hp
+        self.alive = alive
 
 
     def set_properties(self):

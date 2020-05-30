@@ -78,6 +78,7 @@ key = {
 		"down": pygame.K_DOWN,
 		"esc": pygame.K_ESCAPE,
 		"space": pygame.K_SPACE,
-		"pause": pygame.K_p
+		"pause": pygame.K_p,
+		"game_over": pygame.K_g
 }
 

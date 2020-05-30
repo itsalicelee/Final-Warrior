@@ -5,13 +5,17 @@ class Renderer:
 
     def __init__(self):
         pygame.init()
-        # pygame.display.set_caption('menu test')
-        # pygame.display.set_icon(self.photo_dct["icon"])
 
         self.photo_dct = {
                             "icon": pygame.image.load("images/avatar.png"),
                             "actorIMG": pygame.image.load("images/racecar.png"),
                             "bg": pygame.image.load("images/background.jpg"),
+                            "game_over": pygame.image.load("images/game_over.jpeg"),
+                            "replay": pygame.image.load("images/play_again.png"),
+                            "replay_red": pygame.image.load("images/play_again_red.png"),
+                            "back_to_menu": pygame.image.load("images/back_to_menu.png"),
+                            "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png")
+
         }
 
         self.map_width = self.photo_dct["bg"].get_width()
@@ -97,46 +101,44 @@ class Renderer:
             self.map_y = -(role_y - const.screen_height / 2)
             self.y_change = self.map_y - const.map_y
             const.map_y = self.map_y
+
         return self.x_change, self.y_change
-    
-
-    # def game_pause(self):
-    #     # 將 background 顯示在screen上
-    #     self.screen.blit(self.photo_dct["bg"], (const.map_x, const.map_y))
-
-    #     # 將主角顯示在screen上
-    #     self.screen.blit(self.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-    #     # print(self.now_x, self.now_y)
-
-    #     self.draw_hp()
-    #     self.draw_pasue_button()
-
-    #     self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width/2, const.screen_height/2)
-
-    #     # 螢幕更新
-    #     pygame.display.update()
-
-
-
-
-
-
 
 
     # 先畫出hp的位置，之後要改成 hp 血條的圖片
     def draw_hp(self):
-        # self.hit_box = (17, 11, 29, 52)
-        # 血條：绿色背景矩形
         pygame.draw.rect(self.screen, const.color["blue"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
-        # # 血條：红色背景矩形，即：消耗的血）
-        # pygame.draw.rect(self.screen, const.color["red"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
-
-        self.draw_text("hp ...", self.font, const.color["black"], self.screen, 130, 70)
+        self.draw_text("hp ...", self.font, const.color["black"], self.screen, 100, 100)
 
     # 先畫出暫停的位置，之後要改成暫停鍵的圖片
     def draw_pasue_button(self):
-        pygame.draw.rect(self.screen, const.color["red"], (900, 50, 50, 50)) # [x坐標, y坐標, 寬度, 高度]
-        self.draw_text("pause", self.font, const.color["black"], self.screen, 900, 60)
+        pygame.draw.rect(self.screen, const.color["red"], (const.screen_width -100, 50, 50, 50)) # [x坐標, y坐標, 寬度, 高度]
+        self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width -100, 60)
+
+    # 畫出game over 的選單，預設為回到主選單
+    def draw_game_over(self):
+        game_over = pygame.transform.scale(self.photo_dct["game_over"], (400, 200))
+        replay_red = pygame.transform.scale(self.photo_dct["replay_red"], (80, 80))
+        back_to_menu = pygame.transform.scale(self.photo_dct["back_to_menu"], (80,80))
+
+        self.screen.blit(game_over, (const.screen_width/2 -150, const.screen_height/2 - 200))
+        self.screen.blit(replay_red, (const.screen_width/2 -100, const.screen_height/2))
+        self.screen.blit(back_to_menu, (const.screen_width/2 + 100, const.screen_height/2))
+
+    def draw_replay_chosen(self):
+        chosen = pygame.transform.scale(self.photo_dct["replay_red"], (80, 80))
+        other = pygame.transform.scale(self.photo_dct["back_to_menu"], (80, 80))
+
+        self.screen.blit(chosen, (const.screen_width/2 -100, const.screen_height/2))
+        self.screen.blit(other, (const.screen_width/2 + 100, const.screen_height/2))
+
+    def draw_back_to_menu_chosen(self):
+        chosen = pygame.transform.scale(self.photo_dct["back_to_menu_red"], (80, 80))
+        other = pygame.transform.scale(self.photo_dct["replay"], (80, 80))
+
+        self.screen.blit(other, (const.screen_width/2 -100, const.screen_height/2))
+        self.screen.blit(chosen, (const.screen_width/2 + 100, const.screen_height/2))
+
 
     
 
