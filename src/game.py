@@ -52,7 +52,7 @@ class Game:
         self.bonussprite = pygame.sprite.Group()
         self.bonussprite.add(self.bonus_1, self.bonus_2)
 
-        self.bgm = Sound()
+        self.sound = Sound()
         
 
 
@@ -255,12 +255,15 @@ class Game:
 
                 elif event.key == const.key["right"]:  # 若按下向右鍵
                     self.pause_button += 1
+                    self.sound.switchSound.play()
 
                 elif event.key == const.key["left"]:   # 若按下向左鍵
                     self.pause_button -= 1
+                    self.sound.switchSound.play()
 
                 # 畫面上的排列順序，由左至右分別是：「resume、volume、menu」
                 elif event.key == const.key["space"]:
+                    self.sound.selectSound.play()
                     if self.pause_button % 3 == 0:  # 進入 resume
                         self.pause = False
                     elif self.pause_button % 3 == 1:  # 進入volume
@@ -316,11 +319,12 @@ class Game:
             if event.type == pygame.KEYDOWN:
                 if event.key == const.key["right"]:  # 若按下向右鍵
                     self.game_over_button += 1
-
+                    self.sound.switchSound.play()
                 elif event.key == const.key["left"]:   # 若按下向左鍵
                     self.game_over_button -= 1
-
+                    self.sound.switchSound.play()
                 elif event.key == const.key["space"]:
+                    self.sound.selectSound.play()
                     if self.game_over_button % 2 == 0:  # 進入 replay
                         pass
                     elif self.game_over_button % 2 == 1:  # 進入 back_to_menu
