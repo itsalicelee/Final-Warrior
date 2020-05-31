@@ -16,7 +16,14 @@ class Renderer:
                             "back_to_menu": pygame.image.load("images/back_to_menu.png"),
                             "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
                             "bonus" : pygame.image.load("images/bonus.png"),
-                            "yes_start" : pygame.image.load("images/yesstart.png")
+                             ############ buttons ####################
+                            "yes_start" : pygame.image.load("images/button/yes_start.png"),
+                            "yes_about" : pygame.image.load("images/button/yes_about.png"),
+                            "yes_quit" : pygame.image.load("images/button/yes_quit.png"),
+                            "no_start" : pygame.image.load("images/button/no_start.png"),
+                            "no_about" : pygame.image.load("images/button/no_about.png"),
+                            "no_quit" : pygame.image.load("images/button/no_quit.png"),
+
                             
 
         }
@@ -30,14 +37,23 @@ class Renderer:
 ##########################################################################################
 # 各種按鈕們
         # 建立矩形_1，長200寬50，距離左邊邊界為400，距離上面邊界400
-        self.button_1 = pygame.Rect(const.menuButton["game"])
+        self.no_start = pygame.transform.scale(self.photo_dct["no_start"], (400, 200))
+        self.yes_start = pygame.transform.scale(self.photo_dct["yes_start"], (400, 200))
+        self.rect = self.no_start.get_rect()
+        self.rect = self.yes_start.get_rect()
+
 
         # 建立矩形_2，長200寬50，距離左邊邊界為400，距離上面邊界500
-        self.button_2 = pygame.Rect(const.menuButton["option"])
+        self.no_about = pygame.transform.scale(self.photo_dct["no_about"], (400, 200))
+        self.yes_about = pygame.transform.scale(self.photo_dct["yes_about"], (400, 200))
+        self.rect = self.no_about.get_rect()
+        self.rect = self.yes_start.get_rect()
 
         # 建立矩形_3，長200寬50，距離左邊邊界為400，距離上面邊界600
-        self.button_3 = pygame.Rect(const.menuButton["quit"])
-
+        self.no_quit = pygame.transform.scale(self.photo_dct["no_quit"], (400, 200))
+        self.yes_quit = pygame.transform.scale(self.photo_dct["yes_quit"], (400, 200))
+        self.rect = self.no_quit.get_rect()
+        self.rect = self.yes_quit.get_rect()
 
         self.pause_button = {
                                 "quit": pygame.Rect(const.pauseButton["quit"]),
@@ -180,6 +196,16 @@ class Renderer:
  ###########################################       
     def draw_bonus(self,bonus):  # 繪出bonus的圖案
         self.screen.blit(bonus.image, (bonus.x + const.map_x, bonus.y + const.map_y))
+
+    # def draw_menu_button(self,imagex,imagey,endy):
+    #     startButton = pygame.transform.scale(self.photo_dct["yes_start"], (400, 200))
+              
+    #     if imagey > endy:
+    #         delta = (imagey - endy)*0.05
+    #         imagey -= delta
+
+    #     self.screen.blit(startButton, (imagex, imagey))
+        
 
 
     

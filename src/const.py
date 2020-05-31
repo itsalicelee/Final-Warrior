@@ -32,9 +32,9 @@ color = {
 # 設定Menu的選單位置，且button上的字可以隨著button位置置中
 # menu button using screen info
 menuButton = {
-				"game": ( screen_width/2-180, screen_height*2/5, 200, 50), 
-				"option": ( screen_width/2-180, screen_height*3/5, 200, 50), 
-				"quit": ( screen_width/2-180, screen_height*4/5, 200, 50),
+				"game": ( screen_width/2-200, screen_height*2/5, 400, 200), 
+				"option": ( screen_width/2-200, screen_height*3/5, 400, 200), 
+				"quit": ( screen_width/2-200, screen_height*4/5, 400, 200),
 } 
 
 
