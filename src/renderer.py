@@ -57,8 +57,8 @@ class Renderer:
 
         self.pause_button = {
                                 "quit": pygame.Rect(const.pauseButton["quit"]),
-                                "option": pygame.Rect(const.pauseButton["option"]),
-                                "resume": pygame.Rect(const.pauseButton["resume"])
+                                "volume": pygame.Rect(const.pauseButton["volume"]),
+                                "menu": pygame.Rect(const.pauseButton["menu"])
         }
 ##########################################################################################
 
@@ -141,23 +141,23 @@ class Renderer:
     '''
     pause 選單
     '''
-    # 選到 option
+    # 選到 volume
     def draw_option_chosen(self):
         pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["volume"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["menu"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
-    # 選到 quit
+    # 選到 menu
     def draw_quit_chosen(self):
         pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["option"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
-        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["volume"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["red"], self.pause_button["menu"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
     # 選到 resume
     def draw_resume_chosen(self):
         pygame.draw.rect(self.screen, const.color["red"], self.pause_button["resume"])  # 一開始預設畫出start紅色矩形
-        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["option"])  # 畫上藍色矩形，傳
-        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["quit"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["volume"])  # 畫上藍色矩形，傳
+        pygame.draw.rect(self.screen, const.color["blue"], self.pause_button["menu"])  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
 
     '''
@@ -206,10 +206,3 @@ class Renderer:
 
     #     self.screen.blit(startButton, (imagex, imagey))
         
-
-
-    
-
-
-
-
