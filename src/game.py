@@ -121,10 +121,14 @@ class Game:
                     self.bulletsprite.add(new_bul)  # 更新敵機組
                 self.bulletsprite.update() # 刷新新的bulletgroup
 
-                self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
+                # self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
                 hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
                 
+                for sprite in self.bulletsprite.sprites():
+                    self.renderer.screen.blit(sprite.image, (sprite.x+const.map_x, sprite.y+const.map_y))
+
                 self.bullet_hit_actor()
+
                 # 檢查死亡
                 if self.character.hp == 0:
                     self.pause = True

@@ -13,6 +13,10 @@ class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色�
         self.image.fill((255,255,255,0))#畫布塗上背景色
         pygame.draw.circle(self.image, color, (radius,radius), radius, 0)#在畫布上畫圓
         self.rect = self.image.get_rect()#取得畫布的區塊
+
+        self.rect.x = self.x
+        self.rect.y = self.y
+
         self.rect.center = (inputx, inputy)#設置畫布區塊的中心點
         self.direction = random.randint(-180, 180)#初始化角度 讓他是一個隨機生成 這樣就會亂跑惹
         
