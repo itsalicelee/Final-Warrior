@@ -19,6 +19,10 @@ class Menu():
 
     def main_menu(self):
         button = 0
+        imagey = 1000
+        imagex = const.menuButton["game"][0]
+        endx = const.menuButton["game"][0]
+        endy = const.menuButton["game"][1]
         while True:
 
 
@@ -26,9 +30,19 @@ class Menu():
             self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, const.screen_width/2, const.screen_height/5) # 畫上text，位置設定在螢幕的中間
             
-            pygame.draw.rect(self.renderer.screen, const.color["red"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
-            pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
+
+            startButton = pygame.transform.scale(self.renderer.photo_dct["yes_start"], (400, 200))
+            
+            
+            if imagey > endy:
+                delta = (imagey - endy)*0.05
+                imagey -= delta
+            self.renderer.screen.blit(startButton, (imagex, imagey))
+
+
+            # pygame.draw.rect(self.renderer.screen, const.color["red"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
+            # pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            # pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
             
             
             
@@ -51,10 +65,10 @@ class Menu():
                             pygame.quit()
                             sys.exit()
 
-            if button % 3 == 0:  # 選到start
-                pygame.draw.rect(self.renderer.screen, const.color["red"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
-                pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
-                pygame.draw.rect(self.renderer.screen, const.color["blue"],  self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            # if button % 3 == 0:  # 選到start
+            #     pygame.draw.rect(self.renderer.screen, const.color["red"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
+            #     pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
+            #     pygame.draw.rect(self.renderer.screen, const.color["blue"],  self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
             if button % 3 == 1:  # 選到option  
                 pygame.draw.rect(self.renderer.screen, const.color["blue"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
