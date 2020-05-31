@@ -331,3 +331,7 @@ class Game:
 
         elif self.game_over_button %2 == 1:
             self.renderer.draw_back_to_menu_chosen()
+
+
+
+

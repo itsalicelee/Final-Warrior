@@ -35,36 +35,35 @@ class Menu():
         yes_quitBtn = self.renderer.yes_quit
         cnt = 0 
 
+        click = False
+
 
 
         while True:
-
 
             pygame.mouse.set_visible(False)  # 隱藏原本的游標
             self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, const.screen_width/2, const.screen_height/5) # 畫上text，位置設定在螢幕的中間
           
 
-        
-
             ''' 按鈕的動畫，但目前無法跟變色同時出現，所以先註解掉'''
-            # if start_y > start_btn_pos:
-            #     delta = (start_y - start_btn_pos)*0.05
-            #     start_y -= delta
+            if start_y > start_btn_pos:
+                delta = (start_y - start_btn_pos)*0.05
+                start_y -= delta
             
 
-            # if about_y > about_btn_pos:
-            #     delta = (about_y - about_btn_pos)*0.05
-            #     about_y -= delta
+            if about_y > about_btn_pos:
+                delta = (about_y - about_btn_pos)*0.05
+                about_y -= delta
 
-            # if quit_y > quit_btn_pos:
-            #     delta = (about_y - about_btn_pos)*0.05
-            #     quit_y -= delta
+            if quit_y > quit_btn_pos:
+                delta = (about_y - about_btn_pos)*0.05
+                quit_y -= delta
 
-            # # 顯示按鈕動畫
-            # self.renderer.screen.blit(no_startBtn, (imagex, start_y))
-            # self.renderer.screen.blit(no_aboutBtn, (imagex, about_y))
-            # self.renderer.screen.blit(no_quitBtn, (imagex, quit_y))
+            # 顯示按鈕動畫
+            self.renderer.screen.blit(yes_startBtn, (imagex, start_y))
+            self.renderer.screen.blit(no_aboutBtn, (imagex, about_y))
+            self.renderer.screen.blit(no_quitBtn, (imagex, quit_y))
 
 
 
@@ -74,8 +73,11 @@ class Menu():
 
                     if event.key == const.key["down"]:  # 若按下down
                         button += 1
+                        click = True
                     if event.key == const.key["up"]:
                         button -= 1
+                        click = True
+
                     if event.key == const.key["space"]:
                         if button % 3 == 0:
                             self.game = Game()
@@ -88,19 +90,19 @@ class Menu():
                             sys.exit()
             
 
-
-            if button % 3 == 0:  # 選到start
-                self.renderer.screen.blit(yes_startBtn, (imagex, start_btn_pos))
-                self.renderer.screen.blit(no_aboutBtn, (imagex,about_btn_pos))
-                self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
-            if button % 3 == 1:  # 選到intro(about)
-                self.renderer.screen.blit(no_startBtn, (imagex, start_btn_pos))  
-                self.renderer.screen.blit(yes_aboutBtn, (imagex,about_btn_pos))
-                self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
-            if button % 3 == 2:  # 選到quit
-                self.renderer.screen.blit(no_startBtn, (imagex, start_btn_pos))  
-                self.renderer.screen.blit(no_aboutBtn, (imagex, about_btn_pos))
-                self.renderer.screen.blit(yes_quitBtn, (imagex, quit_btn_pos))
+            if click:
+                if button % 3 == 0:  # 選到start
+                    self.renderer.screen.blit(yes_startBtn, (imagex, start_btn_pos))
+                    self.renderer.screen.blit(no_aboutBtn, (imagex,about_btn_pos))
+                    self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
+                if button % 3 == 1:  # 選到intro(about)
+                    self.renderer.screen.blit(no_startBtn, (imagex, start_btn_pos))  
+                    self.renderer.screen.blit(yes_aboutBtn, (imagex,about_btn_pos))
+                    self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
+                if button % 3 == 2:  # 選到quit
+                    self.renderer.screen.blit(no_startBtn, (imagex, start_btn_pos))  
+                    self.renderer.screen.blit(no_aboutBtn, (imagex, about_btn_pos))
+                    self.renderer.screen.blit(yes_quitBtn, (imagex, quit_btn_pos))
 
             pygame.display.update()  # 更新畫布
 
