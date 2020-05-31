@@ -82,7 +82,7 @@ class Menu():
                             self.game.game_start()
 
                         if button % 3 == 1:
-                            self.options()  # 進入option
+                            self.intro()  # 進入intro
                         if button % 3 == 2:
                             pygame.quit()
                             sys.exit()
@@ -93,7 +93,7 @@ class Menu():
                 self.renderer.screen.blit(yes_startBtn, (imagex, start_btn_pos))
                 self.renderer.screen.blit(no_aboutBtn, (imagex,about_btn_pos))
                 self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
-            if button % 3 == 1:  # 選到option  
+            if button % 3 == 1:  # 選到intro(about)
                 self.renderer.screen.blit(no_startBtn, (imagex, start_btn_pos))  
                 self.renderer.screen.blit(yes_aboutBtn, (imagex,about_btn_pos))
                 self.renderer.screen.blit(no_quitBtn, (imagex, quit_btn_pos))
@@ -163,34 +163,16 @@ class Menu():
                             self.main_menu()
 
             pygame.display.update()
+    
+    def intro(self):
 
-    def volume(self):
-        
         while True:
-            self.renderer.screen.fill(const.color["black"])  # 設定option背景顏色
-            self.renderer.draw_text('volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/4)
-            
+            self.renderer.screen.fill(const.color["black"])  # 設定背景顏色
+            self.renderer.draw_text('add pic here', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/4)
 
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出volume
-
-                    
-                    """音量有七段"""
-                    if event.key == const.key["left"]:  # 若按下left，音量減小
-                        if self.bgm.get_volume() < 0.1:
-                            self.bgm.set_bgm(0.0)
-                        else:
-                            self.bgm.set_bgm(float(self.bgm.get_volume())-0.1)
-
-                    if event.key == const.key["right"]:  # 若按下right，音量增大
-                        if float(self.bgm.get_volume()) + 0.1 < 0.7:  # 不要讓音量太大 
-                            self.bgm.set_bgm(float(self.bgm.get_volume())+ 0.1)
-
-                    if event.key == const.key["esc"]:    # 若按下option，回到選單
-                        self.options()
-                    
-            self.renderer.draw_text('set volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/5)
+                if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出
+                    if event.key == const.key["esc"]:    # 若按下esc，回到選單
+                        self.main_menu()
             
             pygame.display.update()
-
-            
