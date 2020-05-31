@@ -173,6 +173,10 @@ class Renderer:
     def draw_block(self, block):
         pygame.draw.rect(self.photo_dct["bg"], const.color["blue"], block.rect)
         
+        
+ ###########################################       
+    def draw_bonus(self,bonus):  # 繪出bonus的圖案
+        self.screen.blit(bonus.image, (bonus.x, bonus.y))
 
 
     
