@@ -2,9 +2,8 @@ import pygame, renderer
 import area_setting as boundary
 import const
 
-
 class Character(pygame.sprite.Sprite):
-    def __init__(self, hp = 30, alive = True):
+    def __init__(self, hp = 1000, alive = True):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("images/racecar.png")
         self.set_properties()
@@ -35,7 +34,6 @@ class Character(pygame.sprite.Sprite):
         # # 判斷 y 方向有沒有碰到
         if pygame.sprite.spritecollide(self, boundary.group, False):
             self.rect.y -= y_change
-
 
     # 取得角色的位置
     def get_loc(self):

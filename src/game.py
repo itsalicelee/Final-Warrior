@@ -110,15 +110,12 @@ class Game:
 
                 self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
                 hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
-
-
-
+                
                 self.bullet_hit_actor()
                 # 檢查死亡
                 if self.character.hp == 0:
                     self.pause = True
                     self.character.alive = False
-
 
                 # 螢幕更新
                 self.tick += 1
@@ -141,7 +138,7 @@ class Game:
                 # 將主角顯示在screen上
                 self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"],
                                          (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-
+                
                 # 畫血條
                 self.renderer.draw_hp()
 
@@ -190,9 +187,9 @@ class Game:
                 self.pause = True
                 self.game_pause()
 
-            # elif event.key == const.key["game_over"]:
-            #     self.pause = True
-            #     self.character.alive = False
+            elif event.key == const.key["game_over"]:
+                self.pause = True
+                self.character.alive = False
 
         # 鍵盤：放掉按鍵
         if event.type == pygame.KEYUP:
