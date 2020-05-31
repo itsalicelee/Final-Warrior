@@ -26,7 +26,7 @@ class Game:
         self.pause_button = 0
         self.game_over_button = 0
 
-        self.allsprite = pygame.sprite.Group()#角色群組變數
+        self.allsprite = pygame.sprite.Group() #角色群組變數
         self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
 
@@ -35,8 +35,14 @@ class Game:
         self.map_changey = 0
 
         self.create_brick()
-        self.bonus = Bonus()
-        self.bonusLst = []
+
+        # 突發事件
+        self.bonus_1 = Bonus()
+        self.bonus_2 = Bonus()
+        self.bonussprite = pygame.sprite.Group()
+        self.bonussprite.add(self.bonus_1, self.bonus_2)
+
+
         
 
 
@@ -136,13 +142,18 @@ class Game:
                 #     self.bonus.y = random.randint(0, self.renderer.map_height)
                 #     self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
                 #self.bonus = Bonus()
-                self.renderer.draw_bonus(self.bonus)
-                print(self.bonus.type)
+
+                # 檢查碰撞，碰撞到就消除：
+                pygame.sprite.spritecollide(self.character, self.bonussprite, True)
+
+                # 用這個作法，把未消除的bonus印出來，除了人物本身的座標再加上地圖的座標，這樣bonus 就不會隨著地圖動了
+                for sprite in self. bonussprite.sprites():
+                    self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
 ###########################
                 
                 
-
+       
 
                 # 螢幕更新
                 pygame.display.update()

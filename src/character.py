@@ -3,7 +3,7 @@ import area_setting as boundary
 import const
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, hp = 1000, alive = True):
+    def __init__(self, hp = 30, alive = True):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("images/racecar.png")
         self.set_properties()

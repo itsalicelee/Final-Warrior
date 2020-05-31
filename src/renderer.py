@@ -178,7 +178,7 @@ class Renderer:
         
  ###########################################       
     def draw_bonus(self,bonus):  # 繪出bonus的圖案
-        self.screen.blit(bonus.image, (bonus.x, bonus.y))
+        self.screen.blit(bonus.image, (bonus.x + const.map_x, bonus.y + const.map_y))
 
 
     
