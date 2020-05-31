@@ -4,6 +4,8 @@ from bullet_shot_and_disappear import bullet, brick
 from renderer import Renderer
 from character import Character
 from block import Block
+from bonus import Bonus
+import random
 
 import area_setting as boundary
 
@@ -33,6 +35,8 @@ class Game:
         self.map_changey = 0
 
         self.create_brick()
+        self.bonus = Bonus()
+        self.bonusLst = []
         
 
 
@@ -124,6 +128,20 @@ class Game:
                 self.renderer.draw_block(boundary.block_1)
                 self.renderer.draw_block(boundary.block_2)
                 self.renderer.draw_block(boundary.block_3)
+                
+                
+###########################
+                # if self.tick % 5 == 0:  # 多久出現一次隨機事件
+                #     self.bonus.x = random.randint(0, self.renderer.map_width)
+                #     self.bonus.y = random.randint(0, self.renderer.map_height)
+                #     self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
+                #self.bonus = Bonus()
+                self.renderer.draw_bonus(self.bonus)
+                print(self.bonus.type)
+
+###########################
+                
+                
 
 
                 # 螢幕更新
