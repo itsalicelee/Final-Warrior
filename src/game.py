@@ -6,6 +6,8 @@ from character import Character
 from block import Block
 from bonus import Bonus
 import random
+from sound import Sound
+
 
 import area_setting as boundary
 
@@ -45,7 +47,7 @@ class Game:
         self.bonussprite = pygame.sprite.Group()
         self.bonussprite.add(self.bonus_1, self.bonus_2)
 
-
+        self.bgm = Sound()
         
 
 
@@ -248,24 +250,56 @@ class Game:
                 elif event.key == const.key["left"]:   # 若按下向左鍵
                     self.pause_button -= 1
 
-                # 畫面上的排列順序，由左至右分別是：「resume、option、quit」
+                # 畫面上的排列順序，由左至右分別是：「resume、volume、menu」
                 elif event.key == const.key["space"]:
                     if self.pause_button % 3 == 0:  # 進入 resume
                         self.pause = False
-                    elif self.pause_button % 3 == 1:  # 進入option
-                        pass
-                    elif self.pause_button % 3 == 2:  # 回到quit
+                    elif self.pause_button % 3 == 1:  # 進入volume
+                        self.volume()
+                    elif self.pause_button % 3 == 2:  # 回到menu
                         self.quit = True
 
         if self.pause_button % 3 == 0:  # 選到resume
             self.renderer.draw_resume_chosen()
 
-        elif self.pause_button % 3 == 1:  # 選到option
+        elif self.pause_button % 3 == 1:  # 選到volume
            self.renderer.draw_option_chosen()
 
-        elif self.pause_button % 3 == 2:  # 選到quit
+        elif self.pause_button % 3 == 2:  # 選到menu
             self.renderer.draw_quit_chosen()
 
+    def volume(self):
+        
+        while True:
+            self.renderer.screen.fill(const.color["black"])  # 設定option背景顏色
+            self.renderer.draw_text('volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/4)
+            
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出volume
+                    
+                    """音量有七段"""
+                    if event.key == const.key["left"]:  # 若按下left，音量減小
+                        if self.bgm.get_volume() < 0.1:
+                            self.bgm.set_bgm(0.0)
+                        else:
+                            self.bgm.set_bgm(float(self.bgm.get_volume())-0.1)
+
+                    if event.key == const.key["right"]:  # 若按下right，音量增大
+                        if float(self.bgm.get_volume()) + 0.1 < 0.7:  # 不要讓音量太大 
+                            self.bgm.set_bgm(float(self.bgm.get_volume())+ 0.1)
+
+                    if event.key == const.key["esc"]:    # 若按下esc
+                        
+                        #以下兩個指令都需要重開機千萬別嘗試
+                        self.pause = True
+                        #self.game_pause()
+                    if event.key == const.key["up"]: # 防止卡死備用的：按上可以quit整個遊戲
+                        self.quit_game()
+
+            self.renderer.draw_text('set volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/5)
+            
+            pygame.display.update()
 
     # 定義game over 後，畫面要跳出的選單內容
     def game_over(self):
@@ -288,4 +322,3 @@ class Game:
 
         elif self.game_over_button %2 == 1:
             self.renderer.draw_back_to_menu_chosen()
-
