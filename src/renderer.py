@@ -56,7 +56,7 @@ class Renderer:
         self.rect = self.yes_quit.get_rect()
 
         self.pause_button = {
-                                "quit": pygame.Rect(const.pauseButton["quit"]),
+                                "resume": pygame.Rect(const.pauseButton["resume"]),
                                 "volume": pygame.Rect(const.pauseButton["volume"]),
                                 "menu": pygame.Rect(const.pauseButton["menu"])
         }
