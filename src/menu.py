@@ -45,25 +45,25 @@ class Menu():
             self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, const.screen_width/2, const.screen_height/5) # 畫上text，位置設定在螢幕的中間
           
+            if not click:
+                ''' 按鈕的動畫，但目前無法跟變色同時出現，所以先註解掉'''
+                if start_y > start_btn_pos:
+                    delta = (start_y - start_btn_pos)*0.05
+                    start_y -= delta
+                
 
-            ''' 按鈕的動畫，但目前無法跟變色同時出現，所以先註解掉'''
-            if start_y > start_btn_pos:
-                delta = (start_y - start_btn_pos)*0.05
-                start_y -= delta
-            
+                if about_y > about_btn_pos:
+                    delta = (about_y - about_btn_pos)*0.05
+                    about_y -= delta
 
-            if about_y > about_btn_pos:
-                delta = (about_y - about_btn_pos)*0.05
-                about_y -= delta
+                if quit_y > quit_btn_pos:
+                    delta = (about_y - about_btn_pos)*0.05
+                    quit_y -= delta
 
-            if quit_y > quit_btn_pos:
-                delta = (about_y - about_btn_pos)*0.05
-                quit_y -= delta
-
-            # 顯示按鈕動畫
-            self.renderer.screen.blit(yes_startBtn, (imagex, start_y))
-            self.renderer.screen.blit(no_aboutBtn, (imagex, about_y))
-            self.renderer.screen.blit(no_quitBtn, (imagex, quit_y))
+                # 顯示按鈕動畫
+                self.renderer.screen.blit(yes_startBtn, (imagex, start_y))
+                self.renderer.screen.blit(no_aboutBtn, (imagex, about_y))
+                self.renderer.screen.blit(no_quitBtn, (imagex, quit_y))
 
 
 

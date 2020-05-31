@@ -7,6 +7,7 @@ from block import Block
 from bonus import Bonus
 import random
 from sound import Sound
+from boss import Boss
 
 
 import area_setting as boundary
@@ -34,6 +35,10 @@ class Game:
         self.allsprite = pygame.sprite.Group() #角色群組變數
         self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
+        self.bosssprite = pygame.sprite.Group() # 魔王群組
+        # 魔王加群組
+        boss = Boss(const.screen_width // 2, const.screen_height // 2)
+        self.bosssprite.add(boss)
 
         self.tick = 0
         self.map_changex = 0
@@ -117,9 +122,13 @@ class Game:
                 self.renderer.draw_hp()
                 self.renderer.draw_pasue_button()
 
+                # 魔王出現
+                for sprite in self.bosssprite.sprites():
+                    self.renderer.screen.blit(sprite.image, (const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey))
+
                 # 子彈出現
                 if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
-                    new_bul =(bullet(6, (300 + self.map_changex), (200 + self.map_changey), 8, (0, 0, 255))) # 子彈格式
+                    new_bul =(bullet(6, (const.screen_width // 2 + self.map_changex), (const.screen_height // 2 + self.map_changey), 8, (0, 0, 255))) # 子彈格式
                     self.bulletsprite.add(new_bul)  # 更新敵機組
                 self.bulletsprite.update() # 刷新新的bulletgroup
 
