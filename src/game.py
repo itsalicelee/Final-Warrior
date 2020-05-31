@@ -26,6 +26,9 @@ class Game:
         self.pause_button = 0
         self.game_over_button = 0
 
+        # 
+        self.quit = False
+
         self.allsprite = pygame.sprite.Group() #角色群組變數
         self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
@@ -83,7 +86,7 @@ class Game:
     def game_start(self):
         
         # 建立無窮迴圈，開始進行遊戲
-        while True:
+        while not self.quit :
             # 當使用者沒有按下暫停：
             if not self.pause:  
 
@@ -184,7 +187,6 @@ class Game:
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
             self.character.hp -= 1
-            print(self.character.hp)
 
     def event_handler(self, event):
         if event.type == pygame.QUIT:
@@ -249,7 +251,7 @@ class Game:
                     elif self.pause_button % 3 == 1:  # 進入option
                         pass
                     elif self.pause_button % 3 == 2:  # 回到quit
-                        pass
+                        self.quit = True
 
         if self.pause_button % 3 == 0:  # 選到resume
             self.renderer.draw_resume_chosen()
@@ -275,7 +277,7 @@ class Game:
                     if self.game_over_button % 2 == 0:  # 進入 replay
                         pass
                     elif self.game_over_button % 2 == 1:  # 進入 back_to_menu
-                        self.quit_game()
+                        self.quit = True
         
         if self.game_over_button % 2 == 0:
             self.renderer.draw_replay_chosen()

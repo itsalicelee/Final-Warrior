@@ -12,7 +12,7 @@ class Menu():
         pygame.init()
         self.click = False
         self.renderer = Renderer()
-        self.game = Game()
+        # self.game = Game()
         self.bgm = Sound()
         self.main_menu()
         
@@ -20,6 +20,8 @@ class Menu():
     def main_menu(self):
         button = 0
         while True:
+
+
             pygame.mouse.set_visible(False)  # 隱藏原本的游標
             self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, const.screen_width/2, const.screen_height/5) # 畫上text，位置設定在螢幕的中間
@@ -40,19 +42,21 @@ class Menu():
                         button -= 1
                     if event.key == const.key["space"]:
                         if button % 3 == 0:
+                            self.game = Game()
                             self.game.game_start()
+
                         if button % 3 == 1:
                             self.options()  # 進入option
                         if button % 3 ==  2:
                             pygame.quit()
                             sys.exit()
-                    
+
             if button % 3 == 0:  # 選到start
                 pygame.draw.rect(self.renderer.screen, const.color["red"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
                 pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
-                pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
+                pygame.draw.rect(self.renderer.screen, const.color["blue"],  self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
 
-            if button % 3 == 1:  # 選到option 
+            if button % 3 == 1:  # 選到option  
                 pygame.draw.rect(self.renderer.screen, const.color["blue"],  self.renderer.button_1)  # 一開始預設畫出start紅色矩形
                 pygame.draw.rect(self.renderer.screen, const.color["red"], self.renderer.button_2)  # 畫上藍色矩形，傳入畫布、顏色、矩形
                 pygame.draw.rect(self.renderer.screen, const.color["blue"], self.renderer.button_3)  # 畫上藍色矩形，傳入畫布、顏色、矩形
