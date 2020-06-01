@@ -1,12 +1,10 @@
 import pygame
 import const 
-import random 
-from  renderer import Renderer
+import random
 
 class Bonus(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        # self.renderer = Renderer()
         
         self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
         self.surface = pygame.Surface([200, 200])
