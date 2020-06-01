@@ -184,10 +184,10 @@ class Game:
                     self.sound.bonusSound.play()
                 elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
                     print("加速")
-                    self.sound.bonusSound.play()
+                    self.sound.speedSound.play()
                 elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
                     self.character.hp += 1
-                    self.sound.bonusSound.play()
+                    self.sound.hpSound.play()
 
 
                 # 把未消除的bonus印出來
@@ -227,6 +227,7 @@ class Game:
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
             self.character.hp -= 1
+            self.sound.shotSound.play()
 
     def event_handler(self, event):
         if event.type == pygame.QUIT:
