@@ -1,8 +1,6 @@
 import sys
 import time
-
 import pygame
-
 import const
 from game import Game
 from renderer import Renderer
