@@ -9,9 +9,17 @@ class Bonus(pygame.sprite.Sprite):
         self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
         self.surface = pygame.Surface([200, 200])
         
+        if self.type == "score":
+            self.image = pygame.image.load("images/bonus/bonus_score.png")
 
-        bonus = pygame.image.load("images/bonus.png")  
-        self.image = pygame.transform.scale(bonus, (150, 150))
+        elif self.type == "shoes":
+            self.image = pygame.image.load("images/bonus/bonus_shoe.png")
+
+        elif self.type == "heart":
+            self.image = pygame.image.load("images/bonus/bonus_heart.png")
+
+        else:
+            pass
 
         #self.surface = pygame.Surface([40,40]) # 繪製畫布
         #self.surface.fill((255,255,255,0))
