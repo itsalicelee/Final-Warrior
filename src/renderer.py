@@ -15,7 +15,7 @@ class Renderer:
                             "replay_red": pygame.image.load("images/play_again_red.png"),
                             "back_to_menu": pygame.image.load("images/back_to_menu.png"),
                             "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
-                            "bonus" : pygame.image.load("images/bonus.png"),
+                            
                              ############ buttons ####################
                             "yes_start" : pygame.image.load("images/button/yes_start.png"),
                             "yes_about" : pygame.image.load("images/button/yes_about.png"),

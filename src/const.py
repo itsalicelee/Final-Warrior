@@ -71,7 +71,7 @@ y_change = 0
 bullet_add_speed = 5
 ############################################################
 
-bonus_type = ["type1", "type2", "type3"]
+bonus_type = ["score", "shoes", "heart"]
 ###########################################################
 key = {
 		"left": pygame.K_LEFT,
