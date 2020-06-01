@@ -33,7 +33,6 @@ class Menu():
         yes_startBtn = self.renderer.yes_start
         yes_aboutBtn = self.renderer.yes_about
         yes_quitBtn = self.renderer.yes_quit
-        cnt = 0 
 
         click = False
 
