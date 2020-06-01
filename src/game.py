@@ -46,14 +46,29 @@ class Game:
 
         self.create_brick()
 
-        # 突發事件
-        self.bonus_1 = Bonus()
-        self.bonus_2 = Bonus()
-        self.bonussprite = pygame.sprite.Group()
-        self.bonussprite.add(self.bonus_1, self.bonus_2)
+        # 突發事件群組
+        self.score_sprite = pygame.sprite.Group()
+        self.shoes_sprite = pygame.sprite.Group()
+        self.heart_sprite = pygame.sprite.Group()
+        self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]
 
         self.sound = Sound()
         
+    def bonus_event(self):
+        self.bonus = Bonus()
+
+        if self.bonus.type == "score":
+            self.score_sprite.add(self.bonus)
+            self.bonus_remove_lst.append(self.bonus)
+
+        elif self.bonus.type == "shoes":
+            self.shoes_sprite.add(self.bonus)
+            self.bonus_remove_lst.append(self.bonus)
+
+        elif self.bonus.type == "heart":
+            self.heart_sprite.add(self.bonus)
+            self.bonus_remove_lst.append(self.bonus)
+
 
 
     def create_brick(self):
@@ -126,6 +141,9 @@ class Game:
                 for sprite in self.bosssprite.sprites():
                     self.renderer.screen.blit(sprite.image, (const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey))
 
+                '''
+                子彈區
+                '''
                 # 子彈出現
                 if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
                     new_bul =(bullet(6, (const.screen_width // 2 + self.map_changex), (const.screen_height // 2 + self.map_changey), 8, (0, 0, 255))) # 子彈格式
@@ -152,26 +170,29 @@ class Game:
                 self.renderer.draw_block(boundary.block_1)
                 self.renderer.draw_block(boundary.block_2)
                 self.renderer.draw_block(boundary.block_3)
-                
-                
-###########################
-                # if self.tick % 5 == 0:  # 多久出現一次隨機事件
-                #     self.bonus.x = random.randint(0, self.renderer.map_width)
-                #     self.bonus.y = random.randint(0, self.renderer.map_height)
-                #     self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
-                #self.bonus = Bonus()
+
+                '''
+                bonus 事件區
+                '''
+                # 多久出現一次隨機事件
+                if self.tick % 100 == 0: 
+                    self.bonus_event()
 
                 # 檢查碰撞，碰撞到就消除：
-                pygame.sprite.spritecollide(self.character, self.bonussprite, True)
+                if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
+                    self.character.score += 1
+                elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
+                    print("加速")
+                elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
+                    self.character.hp += 1
 
-                # 用這個作法，把未消除的bonus印出來，除了人物本身的座標再加上地圖的座標，這樣bonus 就不會隨著地圖動了
-                for sprite in self. bonussprite.sprites():
-                    self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
+                # 把未消除的bonus印出來
+                for group in self.bonus_lst:
+                    for sprite in group.sprites():
+                        self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
-###########################
-                
-                
-       
+                self.renderer.draw_score(str(self.character.score))
+
 
                 # 螢幕更新
                 pygame.display.update()
@@ -335,7 +356,5 @@ class Game:
 
         elif self.game_over_button %2 == 1:
             self.renderer.draw_back_to_menu_chosen()
-
-
 
 

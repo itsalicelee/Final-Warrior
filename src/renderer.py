@@ -15,7 +15,7 @@ class Renderer:
                             "replay_red": pygame.image.load("images/play_again_red.png"),
                             "back_to_menu": pygame.image.load("images/back_to_menu.png"),
                             "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
-                            
+
                              ############ buttons ####################
                             "yes_start" : pygame.image.load("images/button/yes_start.png"),
                             "yes_about" : pygame.image.load("images/button/yes_about.png"),
@@ -131,6 +131,8 @@ class Renderer:
         pygame.draw.rect(self.screen, const.color["blue"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
         self.draw_text("hp ...", self.font, const.color["black"], self.screen, 100, 100)
 
+    def draw_score(self, score):
+        self.draw_text(score, self.font, const.color["blue"], self.screen, 900, 100)
 
     # 先畫出暫停的位置，之後要改成暫停鍵的圖片
     def draw_pasue_button(self):
