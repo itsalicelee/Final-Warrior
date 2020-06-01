@@ -181,10 +181,14 @@ class Game:
                 # 檢查碰撞，碰撞到就消除：
                 if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
                     self.character.score += 1
+                    self.sound.bonusSound.play()
                 elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
                     print("加速")
+                    self.sound.bonusSound.play()
                 elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
                     self.character.hp += 1
+                    self.sound.bonusSound.play()
+
 
                 # 把未消除的bonus印出來
                 for group in self.bonus_lst:

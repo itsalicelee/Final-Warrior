@@ -5,6 +5,9 @@ class Sound:
 	pygame.mixer.init()
 	switchSound = pygame.mixer.Sound("music/switch.ogg")
 	selectSound = pygame.mixer.Sound("music/select.wav")
+	bonusSound = pygame.mixer.Sound("music/got_bonus.wav")
+	#hpSound = pygame.mixer.Sound("music/hpSound.wav") 還沒找到適合的音效
+	
 
 	def __init__(self):
 		# 啟動背景音樂
