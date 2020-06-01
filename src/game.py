@@ -59,15 +59,15 @@ class Game:
 
         if self.bonus.type == "score":
             self.score_sprite.add(self.bonus)
-            self.bonus_remove_lst.append(self.bonus)
+            #self.bonus_remove_lst.append(self.bonus)
 
         elif self.bonus.type == "shoes":
             self.shoes_sprite.add(self.bonus)
-            self.bonus_remove_lst.append(self.bonus)
+            #self.bonus_remove_lst.append(self.bonus)
 
         elif self.bonus.type == "heart":
             self.heart_sprite.add(self.bonus)
-            self.bonus_remove_lst.append(self.bonus)
+            #self.bonus_remove_lst.append(self.bonus)
 
 
 
@@ -273,7 +273,7 @@ class Game:
             if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
                 if event.key == const.key["esc"]:
                     self.pause = False
-
+                    
                 elif event.key == const.key["right"]:  # 若按下向右鍵
                     self.pause_button += 1
                     self.sound.switchSound.play()
