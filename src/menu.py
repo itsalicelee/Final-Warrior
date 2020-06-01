@@ -13,7 +13,7 @@ class Menu():
         self.click = False
         self.renderer = Renderer()
         # self.game = Game()
-        self.bgm = Sound()
+        self.sound = Sound()
         self.main_menu()
         
 
@@ -74,15 +74,16 @@ class Menu():
                     if event.key == const.key["down"]:  # 若按下down
                         button += 1
                         click = True
+                        self.sound.switchSound.play()
                     if event.key == const.key["up"]:
                         button -= 1
                         click = True
-
+                        self.sound.switchSound.play()
                     if event.key == const.key["space"]:
                         if button % 3 == 0:
                             self.game = Game()
                             self.game.game_start()
-
+                            self.sound.selectSound.play()
                         if button % 3 == 1:
                             self.intro()  # 進入intro
                         if button % 3 == 2:
