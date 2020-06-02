@@ -53,22 +53,51 @@ class Game:
         self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]
 
         self.sound = Sound()
-        
+
+
+# bonus 隨機出現
     def bonus_event(self):
         self.bonus = Bonus()
 
         if self.bonus.type == "score":
             self.score_sprite.add(self.bonus)
-            #self.bonus_remove_lst.append(self.bonus)
 
         elif self.bonus.type == "shoes":
             self.shoes_sprite.add(self.bonus)
-            #self.bonus_remove_lst.append(self.bonus)
 
         elif self.bonus.type == "heart":
             self.heart_sprite.add(self.bonus)
-            #self.bonus_remove_lst.append(self.bonus)
 
+
+# bonus 效果觸發
+    def bonus_triggered(self):
+        if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
+            self.character.score += 1
+            self.sound.bonusSound.play()
+
+        elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
+            print("加速")
+            self.sound.speedSound.play()
+
+        elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
+            self.character.hp += 1
+            self.sound.hpSound.play()
+        else:
+            print("there is an error.")
+
+# 將 bonus 畫到螢幕上
+    def draw_bonus(self):
+        # 把未消除的bonus印出來
+        for group in self.bonus_lst:
+
+            for sprite in group.sprites():
+                sprite.expire_time += 1
+
+                # 檢查每個 bonus 存在的時間，超過上限就消除
+                if sprite.expire_time < 100:
+                    self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
+                else:
+                    sprite.kill()
 
 
     def create_brick(self):
@@ -116,7 +145,6 @@ class Game:
                 for event in pygame.event.get():
                     self.event_handler(event)
 
-
                 # 算出主角和地圖分別要怎麼顯示
                 self.character.character_move(const.x_change, const.y_change)
                 const.now_x, const.now_y = self.character.get_loc()
@@ -158,11 +186,6 @@ class Game:
 
                 self.bullet_hit_actor()
 
-                # 檢查死亡
-                if self.character.hp == 0:
-                    self.pause = True
-                    self.character.alive = False
-
                 # 螢幕更新
                 self.tick += 1
 
@@ -171,32 +194,24 @@ class Game:
                 self.renderer.draw_block(boundary.block_2)
                 self.renderer.draw_block(boundary.block_3)
 
-                '''
-                bonus 事件區
-                '''
-                # 多久出現一次隨機事件
+                '''bonus 事件區'''
+                # 出現隨機事件
                 if self.tick % 100 == 0: 
                     self.bonus_event()
 
-                # 檢查碰撞，碰撞到就消除：
-                if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
-                    self.character.score += 1
-                    self.sound.bonusSound.play()
-                elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
-                    print("加速")
-                    self.sound.speedSound.play()
-                elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
-                    self.character.hp += 1
-                    self.sound.hpSound.play()
+                # 隨機事件被觸發
+                self.bonus_triggered()
 
+                # 印出未消除的bonus
+                self.draw_bonus()
+                '''bonus 事件區結束'''
 
-                # 把未消除的bonus印出來
-                for group in self.bonus_lst:
-                    for sprite in group.sprites():
-                        self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
                 self.renderer.draw_score(str(self.character.score))
 
+
+                # 檢查死亡
+                self.check_whether_die()
 
                 # 螢幕更新
                 pygame.display.update()
@@ -338,6 +353,14 @@ class Game:
             self.renderer.draw_text('set volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/5)
             
             pygame.display.update()
+
+
+    # 檢查死亡
+    def check_whether_die(self):
+        if self.character.hp == 0:
+            self.pause = True
+            self.character.alive = False
+
 
     # 定義game over 後，畫面要跳出的選單內容
     def game_over(self):

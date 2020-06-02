@@ -1,14 +1,16 @@
-import pygame
-import const 
-import random
+import pygame, random
+import const
 
 class Bonus(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         
-        self.type = const.bonus_type[random.randint(0,len(const.bonus_type)-1)]
+        # 隨機挑選 bonus 種類
+        self.type = const.bonus_type[random.randint(0, len(const.bonus_type)-1)]
+        # bonus 的畫布大小
         self.surface = pygame.Surface([200, 200])
         
+        # 根據不同的 bonus 載入對應的圖片
         if self.type == "score":
             self.image = pygame.image.load("images/bonus/bonus_score.png")
 
@@ -21,12 +23,7 @@ class Bonus(pygame.sprite.Sprite):
         else:
             pass
 
-        #self.surface = pygame.Surface([40,40]) # 繪製畫布
-        #self.surface.fill((255,255,255,0))
-
-
-        # self.x = random.randint(0, self.renderer.map_width)
-        # self.y = random.randint(0, self.renderer.map_height)
+        # bonus 隨機出現的位置
         self.x = random.randint(0, 1200)               
         self.y = random.randint(0, 1200)
 
@@ -34,5 +31,8 @@ class Bonus(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+
+
+        self.expire_time = 0
         
 
