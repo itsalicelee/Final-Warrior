@@ -170,7 +170,7 @@ class Game:
                 self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
 
                 # 印血量、暫停按鈕
-                self.renderer.draw_hp()
+                self.renderer.draw_hp(self.character.hp)
                 self.renderer.draw_pasue_button()
 
                 # 魔王出現
@@ -235,7 +235,7 @@ class Game:
                                          (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 
                 # 畫血條
-                self.renderer.draw_hp()
+                self.renderer.draw_hp(self.character.hp)
 
                 # 使用者按下 p 鍵或是死亡都會觸發暫停，由主角的血量屬性來判斷有沒有死亡，在此先以按下g鍵表示死亡事件
                 if self.character.alive:

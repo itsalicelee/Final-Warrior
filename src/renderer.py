@@ -28,7 +28,8 @@ class Renderer:
                             
 
         }
-
+        ###########英雄血量圖片#############
+        self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0hp.png")]
         self.map_width = self.photo_dct["bg"].get_width()
         self.map_height = self.photo_dct["bg"].get_height()
 
@@ -128,10 +129,18 @@ class Renderer:
 
 
     # 先畫出hp的位置，之後要改成 hp 血條的圖片
-    def draw_hp(self):
-        pygame.draw.rect(self.screen, const.color["blue"], (20, 20, 240, 120)) # [x坐標, y坐標, 寬度, 高度]
-        self.draw_text("hp ...", self.font, const.color["black"], self.screen, 100, 100)
-
+    def draw_hp(self, hp):
+        #如果放在game裡面的話
+       # hp_point = "hp"+":"+ str(hp)
+        #self.draw_text(hp_point, self.font, const.color["blue"], self.screen, 50, 20)
+        if 20<hp<=30:
+            self.screen.blit(pygame.transform.scale(self.hp_image[0], (250, 150)), (65, 20))
+        if 10<hp<=20:
+            self.screen.blit(pygame.transform.scale(self.hp_image[1], (250, 150)), (65, 20))
+        if 0<hp<= 10:
+            self.screen.blit(pygame.transform.scale(self.hp_image[2], (250, 150)), (65, 20))
+        elif hp==0:
+            self.screen.blit(pygame.transform.scale(self.hp_image[3], (250, 150)), (65, 20))
     def draw_score(self, score):
         self.draw_text(score, self.font, const.color["blue"], self.screen, 900, 100)
 
