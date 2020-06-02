@@ -97,6 +97,7 @@ class Game:
                 if 0 <= sprite.expire_time <= 200:
                     self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
+                # 在某個時間後開始閃爍
                 elif 200 < sprite.expire_time < 500:
                     if sprite.expire_time % 30 == 0 or sprite.expire_time % 30 ==1:
                         pass
