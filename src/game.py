@@ -239,10 +239,12 @@ class Game:
                  # 螢幕更新
                 pygame.display.update()
 
+
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
             self.character.hp -= 1
             self.sound.shotSound.play()
+
 
     def event_handler(self, event):
         if event.type == pygame.QUIT:
