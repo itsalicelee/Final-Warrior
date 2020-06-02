@@ -1,111 +1,125 @@
-import pygame, sys
+'''匯入模組'''
+import pygame, sys, random
 import const
+import area_setting as boundary
+
 from bullet_shot_and_disappear import bullet, brick
 from renderer import Renderer
 from character import Character
 from block import Block
 from bonus import Bonus
-import random
 from sound import Sound
 from boss import Boss
+'''匯入模組結束'''
 
 
-import area_setting as boundary
-
+# Game Class
 class Game:
-    """docstring for game"""
+
+
     def __init__(self):
+
         # 初始化 pygame
         pygame.init()
 
-        # 初始化時間，並呼叫「繪圖」和「主角」兩個class
+
+        # 初始化時間，遊戲幀數為每秒60幀
         self.mainClock = pygame.time.Clock()
+        self.mainClock.tick(60)
+        self.tick = 0
+
+
+        # 初始化「繪圖」、「聲音」、「主角」
         self.renderer = Renderer()
         self.character = Character()
-        self.mainClock.tick(60)
+        self.sound = Sound()
 
-        # 預設為「遊戲進行中」
-        self.pause = False
-        self.pause_button = 0
-        self.game_over_button = 0
 
-        # 
-        self.quit = False
+        '''遊戲參數初始化設定'''
+        self.pause = False  # 可控制遊戲暫停
+        self.quit = False  # 可退出當前遊戲
+        self.pause_button = 0  # 遊戲暫停選單按鍵 
+        self.game_over_button = 0  # 遊戲死亡選單按鍵 
+        '''遊戲參數初始化設定結束'''
 
-        self.allsprite = pygame.sprite.Group() #角色群組變數
-        self.bricksprite = pygame.sprite.Group()# 一定要阿!!!不然沒辦法碰撞測試
+
+        '''遊戲精靈群組初始化'''
+        self.allsprite = pygame.sprite.Group()  # 精靈群組的總群組
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
+        self.bricksprite = pygame.sprite.Group()  # 子彈邊界群組
         self.bosssprite = pygame.sprite.Group() # 魔王群組
+
+        self.score_sprite = pygame.sprite.Group()
+        self.shoes_sprite = pygame.sprite.Group()
+        self.heart_sprite = pygame.sprite.Group()
+        self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]  # 突發class清單
+
         # 魔王加群組
         boss = Boss(const.screen_width // 2, const.screen_height // 2)
         self.bosssprite.add(boss)
+        '''遊戲精靈群組初始化結束'''
 
-        self.tick = 0
+
         self.map_changex = 0
         self.map_changey = 0
 
         self.create_brick()
 
-        # 突發事件群組
-        self.score_sprite = pygame.sprite.Group()
-        self.shoes_sprite = pygame.sprite.Group()
-        self.heart_sprite = pygame.sprite.Group()
-        self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]
 
-        self.sound = Sound()
-
-
-# bonus 隨機出現
+    '''bonus 函數區'''
+    # 出現 bonus 事件
     def bonus_event(self):
         self.bonus = Bonus()
 
+        # 添加分數bonus
         if self.bonus.type == "score":
             self.score_sprite.add(self.bonus)
 
+        # 添加加速bonus
         elif self.bonus.type == "shoes":
             self.shoes_sprite.add(self.bonus)
 
+        # 添加回血bonus
         elif self.bonus.type == "heart":
             self.heart_sprite.add(self.bonus)
 
 
-# bonus 效果觸發
+    # 觸發 bonus 效果
     def bonus_triggered(self):
+
+        # 觸發分數bonus
         if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
             self.character.score += 1
             self.sound.bonusSound.play()
 
+        # 觸發加速bonus
         elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
             print("加速")
             self.sound.speedSound.play()
 
+        # 觸發回血bonus
         elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
             self.character.hp += 1
             self.sound.hpSound.play()
-        else:
-            print("there is an error.")
 
-# 將 bonus 畫到螢幕上
+    # 顯示 bonus 到螢幕上
     def draw_bonus(self):
-        # 把未消除的bonus印出來
         for group in self.bonus_lst:
-
             for sprite in group.sprites():
                 sprite.expire_time += 1
 
-                # 檢查每個 bonus 存在的時間，超過上限就消除
-                if 0 <= sprite.expire_time <= 200:
+                if 0 <= sprite.expire_time <= 200:  # 檢查每個 bonus 存在的時間，超過上限就消除
                     self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
-                # 在某個時間後開始閃爍
-                elif 200 < sprite.expire_time < 500:
-                    if sprite.expire_time % 30 == 0 or sprite.expire_time % 30 ==1:
+                elif 200 < sprite.expire_time < 500:  # 在某個時間後開始閃爍
+                    if sprite.expire_time % 30 == 0:
                         pass
                     else:
                         self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
                 else:
                     sprite.kill()
+    '''bonus 函數區結束'''
 
 
     def create_brick(self):
@@ -216,6 +230,8 @@ class Game:
 
 
                 self.renderer.draw_score(str(self.character.score))
+                # self.renderer.draw_score(str(120))
+
 
 
                 # 檢查死亡

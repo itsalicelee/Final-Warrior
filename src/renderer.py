@@ -23,11 +23,23 @@ class Renderer:
                             "yes_quit" : pygame.image.load("images/button/yes_quit.png"),
                             "no_start" : pygame.image.load("images/button/no_start.png"),
                             "no_about" : pygame.image.load("images/button/no_about.png"),
-                            "no_quit" : pygame.image.load("images/button/no_quit.png"),
-
-                            
-
+                            "no_quit" : pygame.image.load("images/button/no_quit.png")
         }
+
+
+        self.number_dct = {
+                            "0": pygame.image.load("images/number/0.png"),
+                            "1": pygame.image.load("images/number/1.png"),
+                            "2": pygame.image.load("images/number/2.png"),
+                            "3": pygame.image.load("images/number/3.png"),
+                            "4": pygame.image.load("images/number/4.png"),
+                            "5": pygame.image.load("images/number/5.png"),
+                            "6": pygame.image.load("images/number/6.png"),
+                            "7": pygame.image.load("images/number/7.png"),
+                            "8": pygame.image.load("images/number/8.png"),
+                            "9": pygame.image.load("images/number/9.png")
+        }
+
         ###########英雄血量圖片#############
         self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0hp.png")]
         self.map_width = self.photo_dct["bg"].get_width()
@@ -141,8 +153,14 @@ class Renderer:
             self.screen.blit(pygame.transform.scale(self.hp_image[2], (250, 150)), (65, 20))
         elif hp==0:
             self.screen.blit(pygame.transform.scale(self.hp_image[3], (250, 150)), (65, 20))
+
     def draw_score(self, score):
-        self.draw_text(score, self.font, const.color["blue"], self.screen, 900, 100)
+        score_lst = [number for number in score]
+        score_lst.reverse()
+        for i in range(len(score_lst)):
+                number = pygame.transform.scale(self.number_dct[score_lst[i]], (52, 65))
+                self.screen.blit(number, const.score_loc[i])
+        # self.draw_text(score, self.font, const.color["blue"], self.screen, 900, 100)
 
     # 先畫出暫停的位置，之後要改成暫停鍵的圖片
     def draw_pasue_button(self):
@@ -208,13 +226,4 @@ class Renderer:
  ###########################################       
     def draw_bonus(self,bonus):  # 繪出bonus的圖案
         self.screen.blit(bonus.image, (bonus.x + const.map_x, bonus.y + const.map_y))
-
-    # def draw_menu_button(self,imagex,imagey,endy):
-    #     startButton = pygame.transform.scale(self.photo_dct["yes_start"], (400, 200))
-              
-    #     if imagey > endy:
-    #         delta = (imagey - endy)*0.05
-    #         imagey -= delta
-
-    #     self.screen.blit(startButton, (imagex, imagey))
         
