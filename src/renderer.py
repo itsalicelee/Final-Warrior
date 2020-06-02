@@ -9,7 +9,7 @@ class Renderer:
         self.photo_dct = {
                             "icon": pygame.image.load("images/avatar.png"),
                             "actorIMG": pygame.image.load("images/racecar.png"),
-                            "bg": pygame.image.load("images/background.jpg"),
+                            "bg": pygame.image.load("images/background/background.png"),
                             "game_over": pygame.image.load("images/game_over.jpeg"),
                             "replay": pygame.image.load("images/play_again.png"),
                             "replay_red": pygame.image.load("images/play_again_red.png"),

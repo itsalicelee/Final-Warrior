@@ -4,7 +4,7 @@ class Boss(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		self.hp = hp
 		self.alive = True
-		self.image = pygame.image.load("images/bad.png")
+		self.image = pygame.image.load("images/theme_ghost/boss1.png")
 		pygame.transform.scale(self.image,(80,60))
 		self.x = x
 		self.y = y
