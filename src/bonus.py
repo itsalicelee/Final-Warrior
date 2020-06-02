@@ -5,8 +5,15 @@ class Bonus(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         
-        # 隨機挑選 bonus 種類
-        self.type = const.bonus_type[random.randint(0, len(const.bonus_type)-1)]
+        # 隨機挑選 bonus 種類，給予不同的權重
+        self.index = random.randint(0, 100)
+        if 0 <= self.index <= 60: 
+            self.type = const.bonus_type[0]
+        elif 60 < self.index <= 80:
+            self.type = const.bonus_type[1]
+        else:
+            self.type = const.bonus_type[2]
+
         # bonus 的畫布大小
         self.surface = pygame.Surface([200, 200])
         

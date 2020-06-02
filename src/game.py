@@ -94,8 +94,15 @@ class Game:
                 sprite.expire_time += 1
 
                 # 檢查每個 bonus 存在的時間，超過上限就消除
-                if sprite.expire_time < 100:
+                if 0 <= sprite.expire_time <= 200:
                     self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
+
+                elif 200 < sprite.expire_time < 500:
+                    if sprite.expire_time % 30 == 0 or sprite.expire_time % 30 ==1:
+                        pass
+                    else:
+                        self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
+
                 else:
                     sprite.kill()
 
@@ -196,7 +203,7 @@ class Game:
 
                 '''bonus 事件區'''
                 # 出現隨機事件
-                if self.tick % 100 == 0: 
+                if self.tick % 300 == 0: 
                     self.bonus_event()
 
                 # 隨機事件被觸發
