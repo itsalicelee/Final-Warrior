@@ -19,7 +19,7 @@ class Bonus(pygame.sprite.Sprite):
         
         # 根據不同的 bonus 載入對應的圖片
         if self.type == "score":
-            self.image = pygame.image.load("images/bonus/bonus_spider.png")
+            self.image = pygame.image.load("images/theme_ghost/bonus1.png")
 
         elif self.type == "shoes":
             self.image = pygame.image.load("images/bonus/speed_up.png")
