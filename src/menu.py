@@ -82,6 +82,7 @@ class Menu():
                         click = True
                         self.sound.switchSound.play()
                     if event.key == const.key["space"]:
+                        self.sound.selectSound.play()
                         if button % 3 == 0:
                             self.game = Game()
                             self.game.game_start()
