@@ -180,14 +180,19 @@ class Game:
                 self.map_changex += map_change_x
                 self.map_changey += map_change_y
 
+                
                 '''
                 開始顯示地圖、主角、血量、子彈
                 '''
                 # 將 background 顯示在screen上
-                self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
-
-                # 將主角顯示在 screen 上
-                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                self.renderer.screen.blit(self.renderer.theme_ghost["bg_1"], (const.map_x, const.map_y))
+                if const.x_change == 0 and const.y_change == 0:
+                    self.renderer.screen.blit(const.character_tracked["last_pose"], (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                # else:
+                elif const.x_change != 0:
+                    self.renderer.draw_character_x(self.tick)
+                elif const.y_change != 0:
+                    self.renderer.draw_character_y(self.tick)
 
                 # 印血量、暫停按鈕
                 self.renderer.draw_hp(self.character.hp)
