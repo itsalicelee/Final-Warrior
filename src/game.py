@@ -63,7 +63,7 @@ class Game:
         self.map_changex = 0
         self.map_changey = 0
 
-        self.create_brick()
+        # self.create_brick()
 
 
     '''bonus 函數區'''
@@ -122,31 +122,31 @@ class Game:
     '''bonus 函數區結束'''
 
 
-    def create_brick(self):
-        # 製造周圍 Brick
-        for i in range(0, const.screen_width // 10):
-            up = 0
-            thebrick = brick((0, 0, 0), i * 10 + 1, up * 10 + 1)
-            self.bricksprite.add(thebrick)
-            self.allsprite.add(thebrick) 
+    # def create_brick(self):
+    #     # 製造周圍 Brick
+    #     for i in range(0, const.screen_width // 10):
+    #         up = 0
+    #         thebrick = brick((0, 0, 0), i * 10 + 1, up * 10 + 1)
+    #         self.bricksprite.add(thebrick)
+    #         self.allsprite.add(thebrick) 
 
-        for i in range(0, const.screen_width // 10):
-            down = const.screen_height // 10 - 1
-            thebrick = brick((0, 0, 0),i * 10 + 1, down * 10 + 1)
-            self.bricksprite.add(thebrick)
-            self.allsprite.add(thebrick)
+    #     for i in range(0, const.screen_width // 10):
+    #         down = const.screen_height // 10 - 1
+    #         thebrick = brick((0, 0, 0),i * 10 + 1, down * 10 + 1)
+    #         self.bricksprite.add(thebrick)
+    #         self.allsprite.add(thebrick)
 
-        for j in range(0, const.screen_height // 10):
-            left = 0
-            thebrick = brick((0, 0, 0), left * 10 + 1, j * 10 + 1)
-            self.bricksprite.add(thebrick)
-            self.allsprite.add(thebrick)
+    #     for j in range(0, const.screen_height // 10):
+    #         left = 0
+    #         thebrick = brick((0, 0, 0), left * 10 + 1, j * 10 + 1)
+    #         self.bricksprite.add(thebrick)
+    #         self.allsprite.add(thebrick)
 
-        for j in range(0, const.screen_height // 10):
-            right = const.screen_width // 10 - 1
-            thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
-            self.bricksprite.add(thebrick)
-            self.allsprite.add(thebrick)
+    #     for j in range(0, const.screen_height // 10):
+    #         right = const.screen_width // 10 - 1
+    #         thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
+    #         self.bricksprite.add(thebrick)
+    #         self.allsprite.add(thebrick)
         
         
     # 退出遊戲
@@ -201,7 +201,7 @@ class Game:
                 self.bulletsprite.update() # 刷新新的bulletgroup
 
                 # self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
-                hitbrick = pygame.sprite.groupcollide(self.bricksprite, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
+                hitbrick = pygame.sprite.groupcollide(boundary.group, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
                 
                 for sprite in self.bulletsprite.sprites():
                     self.renderer.screen.blit(sprite.image, (sprite.x+const.map_x, sprite.y+const.map_y))
@@ -212,9 +212,13 @@ class Game:
                 self.tick += 1
 
                 # 畫出不能走的區域方便觀察，這段之後可以註解掉
-                self.renderer.draw_block(boundary.block_1)
-                self.renderer.draw_block(boundary.block_2)
-                self.renderer.draw_block(boundary.block_3)
+                # self.renderer.draw_block(boundary.block_up)
+                # self.renderer.draw_block(boundary.block_down)
+                # self.renderer.draw_block(boundary.block_left)
+                # self.renderer.draw_block(boundary.block_right)
+                # self.renderer.draw_block(boundary.block_left_and_down)
+                # self.renderer.draw_block(boundary.block_right_and_down)
+
 
                 '''bonus 事件區'''
                 # 出現隨機事件
@@ -230,7 +234,6 @@ class Game:
 
 
                 self.renderer.draw_score(str(self.character.score))
-                # self.renderer.draw_score(str(120))
 
 
 

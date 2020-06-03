@@ -51,19 +51,14 @@ pauseButton = {
 map_x = 0
 map_y = 0
 
-#
-now_x = 0
-now_y = 0
-
-
 
 # 分數顯示位置
 score_loc = [(1300,80), (1250,80), (1200,80)]
 
 ###########################################################
 # 設定主角初始位置
-role_x = screen_width * 0.45
-role_y = screen_height * 0.8
+now_x = screen_width * 0.45
+now_y = screen_height * 0.8
 
 # 設定主角走動量初始值
 x_change = 0 
