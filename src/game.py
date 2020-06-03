@@ -32,7 +32,7 @@ class Game:
         # 初始化「繪圖」、「聲音」、「主角」
         self.renderer = Renderer()
         self.character = Character()
-        self.sound = Sound()
+        # self.sound = Sound()
 
 
         '''遊戲參數初始化設定'''
@@ -53,15 +53,14 @@ class Game:
         self.shoes_sprite = pygame.sprite.Group()
         self.heart_sprite = pygame.sprite.Group()
         self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]  # 突發class清單
-
-        # 魔王加群組
-        boss = Boss(const.screen_width // 2, const.screen_height // 2)
-        self.bosssprite.add(boss)
-        '''遊戲精靈群組初始化結束'''
-
-
+        self.direction = 0
+        self.num = 0
         self.map_changex = 0
         self.map_changey = 0
+        # 魔王加群組
+        boss = Boss(const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey)
+        self.bosssprite.add(boss)
+        '''遊戲精靈群組初始化結束'''
 
         # self.create_brick()
 
@@ -196,8 +195,25 @@ class Game:
                 '''
                 # 子彈出現
                 if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
-                    new_bul =(bullet(6, (const.screen_width // 2 + self.map_changex), (const.screen_height // 2 + self.map_changey), 8, (0, 0, 255))) # 子彈格式
-                    self.bulletsprite.add(new_bul)  # 更新敵機組
+                    self.num += 1
+                    if self.num <= 50:
+                        self.direction = random.randint(-180, 180)
+                        new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                        self.bulletsprite.add(new_bul)
+                    elif 50 <= self.num <= 70:
+                        self.direction = 0
+                        for i in range(8):
+                            new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                            self.bulletsprite.add(new_bul)
+                            self.direction += 45
+                    elif 70 <= self.num <= 120:
+                        new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                        self.direction += 22.5
+                        self.bulletsprite.add(new_bul)
+                        if self.direction >= 360:
+                            self.direction = 0
+                    if self.num >= 120:
+                        self.num = 0
                 self.bulletsprite.update() # 刷新新的bulletgroup
 
                 # self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
@@ -257,6 +273,10 @@ class Game:
                 # 畫血條
                 self.renderer.draw_hp(self.character.hp)
 
+                #畫子彈
+                for sprite in self.bulletsprite.sprites():
+                    self.renderer.screen.blit(sprite.image, (sprite.x+const.map_x, sprite.y+const.map_y))
+
                 # 使用者按下 p 鍵或是死亡都會觸發暫停，由主角的血量屬性來判斷有沒有死亡，在此先以按下g鍵表示死亡事件
                 if self.character.alive:
                     self.game_pause()
@@ -271,7 +291,7 @@ class Game:
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
             self.character.hp -= 1
-            self.sound.shotSound.play()
+            # self.sound.shotSound.play()
 
 
     def event_handler(self, event):
@@ -414,5 +434,6 @@ class Game:
 
         elif self.game_over_button %2 == 1:
             self.renderer.draw_back_to_menu_chosen()
+
 
 
