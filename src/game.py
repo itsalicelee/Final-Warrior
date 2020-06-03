@@ -32,7 +32,7 @@ class Game:
         # 初始化「繪圖」、「聲音」、「主角」
         self.renderer = Renderer()
         self.character = Character()
-        # self.sound = Sound()
+        self.sound = Sound()
 
 
         '''遊戲參數初始化設定'''
@@ -344,11 +344,11 @@ class Game:
                 if event.key == const.key["esc"]:
                     self.pause = False
                     
-                elif event.key == const.key["right"]:  # 若按下向右鍵
+                elif event.key == const.key["down"]:  # 若按下向下鍵
                     self.pause_button += 1
                     self.sound.switchSound.play()
 
-                elif event.key == const.key["left"]:   # 若按下向左鍵
+                elif event.key == const.key["up"]:   # 若按下向上鍵
                     self.pause_button -= 1
                     self.sound.switchSound.play()
 
@@ -366,10 +366,10 @@ class Game:
             self.renderer.draw_resume_chosen()
 
         elif self.pause_button % 3 == 1:  # 選到volume
-           self.renderer.draw_option_chosen()
+           self.renderer.draw_volume_chosen()
 
         elif self.pause_button % 3 == 2:  # 選到menu
-            self.renderer.draw_quit_chosen()
+            self.renderer.draw_menu_chosen()
 
     def volume(self):
         
