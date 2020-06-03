@@ -1,8 +1,8 @@
-import pygame,random,math,time
+import pygame,random,math,time, const
 
 class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色類別
 
-    def __init__(self,inputspeed,inputx,inputy,radius,color):
+    def __init__(self,inputspeed,inputx,inputy,radius,color, direction):
         pygame.sprite.Sprite.__init__(self)#一定要有這行，但不要問我為啥 我也不知道
 
         self.speed = inputspeed
@@ -10,15 +10,15 @@ class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色�
         self.y = inputy
         #!!!image,rect不是自己定的變量 特殊的角色類別一定要有 image是角色類別的畫布 可以在上面畫東西 rect式畫布的區塊!!!
         self.image = pygame.Surface([radius * 2, radius * 2])#繪製畫布
-        self.image.fill((255,255,255,0))#畫布塗上背景色
-        pygame.draw.circle(self.image, color, (radius,radius), radius, 0)#在畫布上畫圓
+        self.image.fill(const.color["black"])#畫布塗上背景色
+        pygame.draw.circle(self.image, const.color["white"], (radius,radius), radius, 0)#在畫布上畫圓
         self.rect = self.image.get_rect()#取得畫布的區塊
 
         self.rect.x = self.x
         self.rect.y = self.y
 
         self.rect.center = (inputx, inputy)#設置畫布區塊的中心點
-        self.direction = random.randint(-180, 180)#初始化角度 讓他是一個隨機生成 這樣就會亂跑惹
+        self.direction = direction
         
     def update(self):
         radian = math.radians(self.direction)#角度轉弧度 才能用sin cos函數 
