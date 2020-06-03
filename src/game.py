@@ -33,7 +33,7 @@ class Game:
         self.renderer = Renderer()
         self.character = Character()
         self.sound = Sound()
-
+        self.bgm = Sound()
 
         '''遊戲參數初始化設定'''
         self.pause = False  # 可控制遊戲暫停
@@ -64,7 +64,17 @@ class Game:
 
         # self.create_brick()
 
+        self.volume_dct = {
+                            "v_0": pygame.image.load("images/volume/volume.png"),
+                            "v_1": pygame.image.load("images/volume/volume5.png"),
+                            "v_2": pygame.image.load("images/volume/volume4.png"),
+                            "v_3": pygame.image.load("images/volume/volume3.png"),
+                            "v_4": pygame.image.load("images/volume/volume2.png"),
+                            "v_5": pygame.image.load("images/volume/volume1.png"),
+                            "v_6": pygame.image.load("images/volume/volume0.png")
+        }
 
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
     '''bonus 函數區'''
     # 出現 bonus 事件
     def bonus_event(self):
@@ -94,7 +104,6 @@ class Game:
         # 觸發加速bonus
         elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
             print("加速")
-            const.speed = 20
             self.sound.speedSound.play()
 
         # 觸發回血bonus
@@ -122,31 +131,28 @@ class Game:
     '''bonus 函數區結束'''
 
 
-    # def create_brick(self):
-    #     # 製造周圍 Brick
-    #     for i in range(0, const.screen_width // 10):
-    #         up = 0
-    #         thebrick = brick((0, 0, 0), i * 10 + 1, up * 10 + 1)
-    #         self.bricksprite.add(thebrick)
-    #         self.allsprite.add(thebrick) 
-
-    #     for i in range(0, const.screen_width // 10):
-    #         down = const.screen_height // 10 - 1
-    #         thebrick = brick((0, 0, 0),i * 10 + 1, down * 10 + 1)
-    #         self.bricksprite.add(thebrick)
-    #         self.allsprite.add(thebrick)
-
-    #     for j in range(0, const.screen_height // 10):
-    #         left = 0
-    #         thebrick = brick((0, 0, 0), left * 10 + 1, j * 10 + 1)
-    #         self.bricksprite.add(thebrick)
-    #         self.allsprite.add(thebrick)
-
-    #     for j in range(0, const.screen_height // 10):
-    #         right = const.screen_width // 10 - 1
-    #         thebrick = brick((0, 0, 0), right * 10 + 1, j * 10 + 1)
-    #         self.bricksprite.add(thebrick)
-    #         self.allsprite.add(thebrick)
+        # 子彈模式
+    def bullet_mode1(self, speed, width, height):
+        if self.tick % speed == 0: # 時間進行多少毫秒的時候出一次子彈
+            self.num += 1
+            if self.num <= 50:
+                self.direction = random.randint(-180, 180)
+                new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                self.bulletsprite.add(new_bul)
+            elif 50 <= self.num <= 60:
+                self.direction = 0
+                for i in range(8):
+                    new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                    self.bulletsprite.add(new_bul)
+                    self.direction += 45
+            elif 60 <= self.num <= 120:
+                new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                self.direction += 22.5
+                self.bulletsprite.add(new_bul)
+                if self.direction >= 360:
+                    self.direction = 0
+            if self.num >= 120:
+                self.num = 0 
         
         
     # 退出遊戲
@@ -194,29 +200,22 @@ class Game:
                 '''
                 子彈區
                 '''
-                # 子彈出現
-                if self.tick % const.bullet_add_speed == 0: # 時間進行多少毫秒的時候出一次子彈
-                    self.num += 1
-                    if self.num <= 50:
-                        self.direction = random.randint(-180, 180)
-                        new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
-                        self.bulletsprite.add(new_bul)
-                    elif 50 <= self.num <= 70:
+               # 子彈出現
+                if self.tick <= 3000:
+                    self.bullet_mode1(const.bullet_add_speed, const.screen_width, const.screen_height)
+                    self.bulletsprite.update() # 刷新新的bulletgroup
+                elif 3000 <= self.tick <= 3100:
+                    if self.tick % const.bullet_add_speed == 0:
                         self.direction = 0
-                        for i in range(8):
+                        for i in range(16):
                             new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
                             self.bulletsprite.add(new_bul)
-                            self.direction += 45
-                    elif 70 <= self.num <= 120:
-                        new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
-                        self.direction += 22.5
-                        self.bulletsprite.add(new_bul)
-                        if self.direction >= 360:
-                            self.direction = 0
-                    if self.num >= 120:
-                        self.num = 0
-                self.bulletsprite.update() # 刷新新的bulletgroup
-
+                            self.direction += 22.5
+                    self.bulletsprite.update() # 刷新新的bulletgroup
+                elif self.tick >= 3100:
+                    self.bullet_mode1(const.bullet_add_speed+5, const.screen_width, const.screen_height)
+                    self.bulletsprite.update()
+                    
                 # self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
                 hitbrick = pygame.sprite.groupcollide(boundary.group, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
                 
@@ -302,23 +301,23 @@ class Game:
 
         # 鍵盤：按下按鍵
         if event.type == pygame.KEYDOWN:  
-
+            
             # 若按下esc鍵，退出遊戲
             if event.key == const.key["esc"]:
                 self.quit_game()
 
             # 按「上、下、左、右」：改變人物方向
             if event.key == const.key["left"]: 
-                const.x_change = -const.speed
+                const.x_change = -5
 
             elif event.key == const.key["right"]:
-                const.x_change = const.speed
+                const.x_change = 5
 
             elif event.key == const.key["up"]:
-                const.y_change = -const.speed
+                const.y_change = -5
 
             elif event.key == const.key["down"]:
-                const.y_change = const.speed
+                const.y_change = 5
 
             # 按 p ，遊戲暫停，
             elif event.key == const.key["pause"]:
@@ -328,7 +327,7 @@ class Game:
             elif event.key == const.key["game_over"]:
                 self.pause = True
                 self.character.alive = False
-            print(const.speed)
+
         # 鍵盤：放掉按鍵
         if event.type == pygame.KEYUP:
             if event.key == const.key["left"] or event.key == const.key["right"]:
@@ -340,6 +339,8 @@ class Game:
 
     # 按下暫停後，遊戲暫停並跳出選單，預設為 “繼續遊戲”
     def game_pause(self):
+        
+        
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
                 if event.key == const.key["esc"]:
@@ -367,17 +368,17 @@ class Game:
             self.renderer.draw_resume_chosen()
 
         elif self.pause_button % 3 == 1:  # 選到volume
-           self.renderer.draw_volume_chosen()
+            self.renderer.draw_volume_chosen()
 
         elif self.pause_button % 3 == 2:  # 選到menu
             self.renderer.draw_menu_chosen()
 
+
     def volume(self):
-        
-        while True:
-            self.renderer.screen.fill(const.color["black"])  # 設定option背景顏色
-            self.renderer.draw_text('volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/4)
-            
+        back_to_pause = False
+        while back_to_pause == False:
+            self.renderer.draw_volume_chosen()
+            self.renderer.draw_volume()
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出volume
@@ -386,25 +387,21 @@ class Game:
                     if event.key == const.key["left"]:  # 若按下left，音量減小
                         if self.bgm.get_volume() < 0.1:
                             self.bgm.set_bgm(0.0)
+
                         else:
                             self.bgm.set_bgm(float(self.bgm.get_volume())-0.1)
 
                     if event.key == const.key["right"]:  # 若按下right，音量增大
                         if float(self.bgm.get_volume()) + 0.1 < 0.7:  # 不要讓音量太大 
                             self.bgm.set_bgm(float(self.bgm.get_volume())+ 0.1)
-
-                    if event.key == const.key["esc"]:    # 若按下esc
-                        
-                        #以下兩個指令都需要重開機千萬別嘗試
-                        self.pause = True
                         #self.game_pause()
-                    if event.key == const.key["up"]: # 防止卡死備用的：按上可以quit整個遊戲
-                        self.quit_game()
+                    if event.key == const.key["space"]:   # 若按下esc 跳出調整音量
+                        back_to_pause = True
 
-            self.renderer.draw_text('set volume', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/5)
-            
+
+            self.renderer.draw_volume()
             pygame.display.update()
-
+        self.game_pause()
 
     # 檢查死亡
     def check_whether_die(self):
@@ -414,27 +411,11 @@ class Game:
 
 
     # 定義game over 後，畫面要跳出的選單內容
+
     def game_over(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == const.key["right"]:  # 若按下向右鍵
-                    self.game_over_button += 1
-                    self.sound.switchSound.play()
-                elif event.key == const.key["left"]:   # 若按下向左鍵
-                    self.game_over_button -= 1
-                    self.sound.switchSound.play()
-                elif event.key == const.key["space"]:
+                if event.key == const.key["space"]:
                     self.sound.selectSound.play()
-                    if self.game_over_button % 2 == 0:  # 進入 replay
-                        pass
-                    elif self.game_over_button % 2 == 1:  # 進入 back_to_menu
-                        self.quit = True
-        
-        if self.game_over_button % 2 == 0:
-            self.renderer.draw_replay_chosen()
-
-        elif self.game_over_button %2 == 1:
-            self.renderer.draw_back_to_menu_chosen()
-
-
-
+                    self.renderer.draw_game_over()
+                    self.quit = True

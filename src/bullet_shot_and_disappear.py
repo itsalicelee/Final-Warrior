@@ -9,11 +9,9 @@ class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色�
         self.x = inputx
         self.y = inputy
         #!!!image,rect不是自己定的變量 特殊的角色類別一定要有 image是角色類別的畫布 可以在上面畫東西 rect式畫布的區塊!!!
-        self.image = pygame.Surface([radius * 2, radius * 2])#繪製畫布
-        self.image.fill(const.color["black"])#畫布塗上背景色
-        pygame.draw.circle(self.image, const.color["white"], (radius,radius), radius, 0)#在畫布上畫圓
+        self.image = pygame.image.load("images/theme_ghost/bullet1.png")
+        self.image = pygame.transform.scale(self.image, (int(2000*0.01), int(2000*0.01)))
         self.rect = self.image.get_rect()#取得畫布的區塊
-
         self.rect.x = self.x
         self.rect.y = self.y
 
@@ -37,4 +35,3 @@ class brick(pygame.sprite.Sprite): # 建立邊界 然後切記切記把它做成
         self.rect = self.image.get_rect() #方形畫布get
         self.rect.x = x
         self.rect.y = y
-
