@@ -64,6 +64,7 @@ now_y = screen_height * 0.8
 x_change = 0 
 y_change = 0
 
+speed = 5
 ###########################################################
 # 子彈初始速度(印象中是毫秒)
 bullet_add_speed = 5

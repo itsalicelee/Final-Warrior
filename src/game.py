@@ -94,6 +94,7 @@ class Game:
         # 觸發加速bonus
         elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
             print("加速")
+            const.speed = 20
             self.sound.speedSound.play()
 
         # 觸發回血bonus
@@ -301,23 +302,23 @@ class Game:
 
         # 鍵盤：按下按鍵
         if event.type == pygame.KEYDOWN:  
-            
+
             # 若按下esc鍵，退出遊戲
             if event.key == const.key["esc"]:
                 self.quit_game()
 
             # 按「上、下、左、右」：改變人物方向
             if event.key == const.key["left"]: 
-                const.x_change = -5
+                const.x_change = -const.speed
 
             elif event.key == const.key["right"]:
-                const.x_change = 5
+                const.x_change = const.speed
 
             elif event.key == const.key["up"]:
-                const.y_change = -5
+                const.y_change = -const.speed
 
             elif event.key == const.key["down"]:
-                const.y_change = 5
+                const.y_change = const.speed
 
             # 按 p ，遊戲暫停，
             elif event.key == const.key["pause"]:
@@ -327,7 +328,7 @@ class Game:
             elif event.key == const.key["game_over"]:
                 self.pause = True
                 self.character.alive = False
-
+            print(const.speed)
         # 鍵盤：放掉按鍵
         if event.type == pygame.KEYUP:
             if event.key == const.key["left"] or event.key == const.key["right"]:
