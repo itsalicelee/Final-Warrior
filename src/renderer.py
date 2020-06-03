@@ -16,6 +16,7 @@ class Renderer:
                             "back_to_menu": pygame.image.load("images/back_to_menu.png"),
                             "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
                             "main_menu": pygame.image.load("images/main_menu.png"),
+                            "pause_button": pygame.image.load("images/pause_button.png"),
 
                              ############ buttons ####################
                             "yes_start" : pygame.image.load("images/button/yes_start.png"),
@@ -140,32 +141,30 @@ class Renderer:
         return self.x_change, self.y_change
 
 
-    # 先畫出hp的位置，之後要改成 hp 血條的圖片
+    # 畫出hp
     def draw_hp(self, hp):
-        #如果放在game裡面的話
-       # hp_point = "hp"+":"+ str(hp)
-        #self.draw_text(hp_point, self.font, const.color["blue"], self.screen, 50, 20)
         if 20<hp<=30:
-            self.screen.blit(pygame.transform.scale(self.hp_image[0], (250, 150)), (65, 20))
+            self.screen.blit(pygame.transform.scale(self.hp_image[0], (int(579*0.5), int(199*0.5))), (30, 20))
         if 10<hp<=20:
-            self.screen.blit(pygame.transform.scale(self.hp_image[1], (250, 150)), (65, 20))
+            self.screen.blit(pygame.transform.scale(self.hp_image[1], (int(579*0.5), int(199*0.5))), (30, 20))
         if 0<hp<= 10:
-            self.screen.blit(pygame.transform.scale(self.hp_image[2], (250, 150)), (65, 20))
+            self.screen.blit(pygame.transform.scale(self.hp_image[2], (int(579*0.5), int(199*0.5))), (30, 20))
         elif hp==0:
-            self.screen.blit(pygame.transform.scale(self.hp_image[3], (250, 150)), (65, 20))
+            self.screen.blit(pygame.transform.scale(self.hp_image[3], (int(579*0.5), int(199*0.5))), (30, 20))
 
+    # 畫出暫停
+    def draw_pasue_button(self):
+        self.screen.blit(pygame.transform.scale(self.photo_dct["pause_button"], (int(133*0.45), int(145*0.45))), (const.screen_width -70, 37))
+
+    # 畫出分數
     def draw_score(self, score):
         score_lst = [number for number in score]
         score_lst.reverse()
         for i in range(len(score_lst)):
-                number = pygame.transform.scale(self.number_dct[score_lst[i]], (52, 65))
+                number = pygame.transform.scale(self.number_dct[score_lst[i]], (int(80*0.45), int(100*0.45)))
                 self.screen.blit(number, const.score_loc[i])
-        # self.draw_text(score, self.font, const.color["blue"], self.screen, 900, 100)
 
-    # 先畫出暫停的位置，之後要改成暫停鍵的圖片
-    def draw_pasue_button(self):
-        pygame.draw.rect(self.screen, const.color["red"], (const.screen_width -100, 50, 50, 50)) # [x坐標, y坐標, 寬度, 高度]
-        self.draw_text("pause", self.font, const.color["black"], self.screen, const.screen_width -100, 60)
+    
 
 
     '''

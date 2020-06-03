@@ -237,6 +237,7 @@ class Game:
 
 
 
+
                 # 檢查死亡
                 self.check_whether_die()
 

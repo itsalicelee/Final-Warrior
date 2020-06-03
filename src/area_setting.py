@@ -9,16 +9,16 @@ from block import Block
 block_up = Block(0, 61 ,2000, 1)
 
 # 下方邊界
-block_down = Block(0, 1268, 2000, 1)
+block_down = Block(0, 1200, 2000, 1)
 
 # 左方邊界
-block_left = Block(86, 0, 1, 1300)
+block_left = Block(88, 0, 1, 1300)
 
 # 右方邊界
-block_right = Block(1899, 0, 1, 1300)
+block_right = Block(1800, 0, 1, 1300)
 
-block_left_and_down = Block(0, 1213, 832, 54)
-block_right_and_down = Block(1156, 1213, 832, 54)
+block_left_and_down = Block(0, 1150, 793, 50)
+block_right_and_down = Block(1097, 1150, 793, 50)
 
 
 

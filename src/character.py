@@ -9,8 +9,8 @@ class Character(pygame.sprite.Sprite):
         self.set_properties()
 
         self.rect = self.image.get_rect()
-        self.rect.x = 500
-        self.rect.y = 500
+        self.rect.x = 915
+        self.rect.y = 1110
 
         # 設定人物的起始血量
         self.hp = hp
