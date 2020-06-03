@@ -38,7 +38,13 @@ class Renderer:
                             "no_menu" : pygame.image.load("images/button/no_menu.png")
 
         }
-
+        
+        self.theme_ghost = {
+                            "bg_1": pygame.image.load("images/theme_ghost/bg/bg.png"),
+                            "bg_1_num": pygame.image.load("images/theme_ghost/bg/bg_1_num.png"),
+                            "bg_sk": pygame.image.load("images/theme_ghost/bg/bg_sk.png"),
+                            "bg_tomb": pygame.image.load("images/theme_ghost/bg/bg_tomb.png")
+        }
 
         self.number_dct = {
                             "0": pygame.image.load("images/number/0.png"),
@@ -53,6 +59,27 @@ class Renderer:
                             "9": pygame.image.load("images/number/9.png")
         }
 
+        self.character_move = {
+                                "r1": pygame.image.load("images/character/3-1.png"),
+                                "r2": pygame.image.load("images/character/3-2.png"),
+                                "r3": pygame.image.load("images/character/3-3.png"),
+                                "r4": pygame.image.load("images/character/3-4.png"),
+
+                                "l1": pygame.image.load("images/character/2-1.png"),
+                                "l2": pygame.image.load("images/character/2-2.png"),
+                                "l3": pygame.image.load("images/character/2-3.png"),
+                                "l4": pygame.image.load("images/character/2-4.png"),
+
+                                "u1": pygame.image.load("images/character/4-1.png"),
+                                "u2": pygame.image.load("images/character/4-2.png"),
+                                "u3": pygame.image.load("images/character/4-3.png"),
+                                "u4": pygame.image.load("images/character/4-4.png"),
+
+                                "d1": pygame.image.load("images/character/1-1.png"),
+                                "d2": pygame.image.load("images/character/1-2.png"),
+                                "d3": pygame.image.load("images/character/1-3.png"),
+                                "d4": pygame.image.load("images/character/1-4.png")
+        }
 
         self.volume_dct = {
                             "v_6": pygame.image.load("images/volume/volume.png"),
@@ -130,7 +157,117 @@ class Renderer:
         self.textrect = self.textobj.get_rect()
         self.textrect.center = (x, y)
         surface.blit(self.textobj, self.textrect)
+    def draw_character_x(self, tick):
 
+
+        if const.x_change > 0:
+            const.character_tracked["direction"] = "x"
+            if tick % 4 == 0:
+                move_tempt = pygame.transform.scale(self.character_move["r1"], (28*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 1:
+                move_tempt = pygame.transform.scale(self.character_move["r2"], (28*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 2:
+                move_tempt = pygame.transform.scale(self.character_move["r3"], (26*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 3:
+                move_tempt =pygame.transform.scale(self.character_move["r1"], (30*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+        elif const.x_change < 0:
+            if tick % 4 == 0:
+                move_tempt = pygame.transform.scale(self.character_move["l1"], (28*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 1:
+                move_tempt = pygame.transform.scale(self.character_move["l2"], (28*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 2:
+                move_tempt = pygame.transform.scale(self.character_move["l3"], (26*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 3:
+                move_tempt =pygame.transform.scale(self.character_move["l1"], (30*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+            # const.character_tracked["direction"] = "x"
+            # if tick % 4 == 0:
+            #     move_tempt = pygame.transform.scale(self.character_move["l1"], (24*2, 53*2))
+            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+            #     const.character_tracked["last_pose"] = move_tempt
+
+            # if tick % 4 == 1:
+            #     move_tempt = pygame.transform.scale(self.character_move["l2"], (32*2, 53*2))
+            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+            #     const.character_tracked["last_pose"] = move_tempt
+
+            # elif tick % 4 == 2:
+            #     move_tempt = pygame.transform.scale(self.character_move["l3"], (25*2, 53*2))
+            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+            #     const.character_tracked["last_pose"] = move_tempt
+
+            # elif tick % 4 == 3:
+            #     move_tempt = pygame.transform.scale(self.character_move["l4"], (33*2, 53*2))
+            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+            #     const.character_tracked["last_pose"] = move_tempt
+
+    def draw_character_y(self, tick):
+
+        if const.y_change < 0:
+            const.character_tracked["direction"] = "y"
+            if tick % 4 == 0:
+                move_tempt = pygame.transform.scale(self.character_move["u1"], (45*2, 52*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 1:
+                move_tempt = pygame.transform.scale(self.character_move["u2"], (44*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 2:
+                move_tempt = pygame.transform.scale(self.character_move["u3"], (45*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 3:
+                move_tempt = pygame.transform.scale(self.character_move["u2"], (44*2, 52*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+        elif const.y_change > 0:
+            const.character_tracked["direction"] = "y"
+            if tick % 4 == 0:
+                move_tempt = pygame.transform.scale(self.character_move["d1"], (53*2, 52*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 1:
+                move_tempt = pygame.transform.scale(self.character_move["d2"], (54*2, 54*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 2:
+                move_tempt = pygame.transform.scale(self.character_move["d3"], (53*2, 52*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
+
+            elif tick % 4 == 3:
+                move_tempt = pygame.transform.scale(self.character_move["d1"], (52*2, 53*2))
+                self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
+                const.character_tracked["last_pose"] = move_tempt
     # 滾動地圖
     def rolling_map(self, role_x, role_y):
         self.role_x = role_x
