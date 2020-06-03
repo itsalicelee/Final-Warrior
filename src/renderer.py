@@ -24,7 +24,15 @@ class Renderer:
                             "yes_quit" : pygame.image.load("images/button/yes_quit.png"),
                             "no_start" : pygame.image.load("images/button/no_start.png"),
                             "no_about" : pygame.image.load("images/button/no_about.png"),
-                            "no_quit" : pygame.image.load("images/button/no_quit.png")
+                            "no_quit" : pygame.image.load("images/button/no_quit.png"),
+
+                             ############ pause #######################
+                            "yes_resume" : pygame.image.load("images/button/yes_resume.png"),
+                            "no_resume" : pygame.image.load("images/button/no_resume.png"),
+                            "yes_volume" : pygame.image.load("images/button/yes_volume.png"),
+                            "no_volume" : pygame.image.load("images/button/no_volume.png"),
+                            "yes_menu" : pygame.image.load("images/button/yes_menu.png"),
+                            "no_menu" : pygame.image.load("images/button/no_menu.png")
         }
 
 
@@ -75,6 +83,8 @@ class Renderer:
                                 "volume": pygame.Rect(const.pauseButton["volume"]),
                                 "menu": pygame.Rect(const.pauseButton["menu"])
         }
+        self.yes_resume = pygame.transform.scale(self.photo_dct["yes_resume"],(400,200))
+        self.no_resume = pygame.transform.scale(self.photo_dct["no_resume"],(400,200))
 ##########################################################################################
 
         # 建立字型和字體大小
@@ -190,25 +200,42 @@ class Renderer:
 
 
     '''
-    game over 選單
+    pause 選單：上到下
     '''
-    # 畫出game over 的選單，預設為回到主選單
-    def draw_game_over(self):
-        game_over = pygame.transform.scale(self.photo_dct["game_over"], (400, 200))
-        replay_red = pygame.transform.scale(self.photo_dct["replay_red"], (80, 80))
-        back_to_menu = pygame.transform.scale(self.photo_dct["back_to_menu"], (80,80))
+    # 選到 resume
+    def draw_resume_chosen(self):
+        yes_resume = pygame.transform.scale(self.photo_dct["yes_resume"], (300, 150))
+        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
+        not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
+        
+        self.screen.blit(yes_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
+        self.screen.blit(not_volume, (const.screen_width/2 - 150, const.screen_height/2 - 75))
+        self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
+    
+    
+    # 選到 volume
+    def draw_volume_chosen(self):
 
-        self.screen.blit(game_over, (const.screen_width/2 -150, const.screen_height/2 - 200))
-        self.screen.blit(replay_red, (const.screen_width/2 -100, const.screen_height/2))
-        self.screen.blit(back_to_menu, (const.screen_width/2 + 100, const.screen_height/2))
+        not_resume = pygame.transform.scale(self.photo_dct["no_resume"], (300, 150))
+        choose_volume = pygame.transform.scale(self.photo_dct["yes_volume"], (300, 150))
+        not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
+        
+        self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
+        self.screen.blit(choose_volume,(const.screen_width/2 - 150, const.screen_height/2 - 75))
+        self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
 
-    # game over 選單中，replay 被選中
-    def draw_replay_chosen(self):
-        chosen = pygame.transform.scale(self.photo_dct["replay_red"], (80, 80))
-        other = pygame.transform.scale(self.photo_dct["back_to_menu"], (80, 80))
+    # 選到 menu
+    def draw_menu_chosen(self):
 
-        self.screen.blit(chosen, (const.screen_width/2 -100, const.screen_height/2))
-        self.screen.blit(other, (const.screen_width/2 + 100, const.screen_height/2))
+        not_resume = pygame.transform.scale(self.photo_dct["no_resume"], (300, 150))
+        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
+        choose_menu = pygame.transform.scale(self.photo_dct["yes_menu"], (300, 150))
+        
+        self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
+        self.screen.blit(not_volume,(const.screen_width/2 - 150, const.screen_height/2 - 75))
+        self.screen.blit(choose_menu,(const.screen_width/2 - 150, const.screen_height/2 + 25))
+
+
 
     # game over 選單中，回到主選單被選中
     def draw_back_to_menu_chosen(self):
