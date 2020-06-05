@@ -36,7 +36,10 @@ class Renderer:
                             "yes_volume" : pygame.image.load("images/button/yes_volume.png"),
                             "no_volume" : pygame.image.load("images/button/no_volume.png"),
                             "yes_menu" : pygame.image.load("images/button/yes_menu.png"),
-                            "no_menu" : pygame.image.load("images/button/no_menu.png")
+                            "no_menu" : pygame.image.load("images/button/no_menu.png"),
+            
+                            "intro_pg1" : pygame.image.load("images/about_p1.png"),
+                            "intro_pg2" : pygame.image.load("images/about_p2.png")
 
         }
        
