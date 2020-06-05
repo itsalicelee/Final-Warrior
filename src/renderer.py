@@ -359,16 +359,16 @@ class Renderer:
                 number = pygame.transform.scale(self.number_dct[score_lst[i]], (int(80*0.5), int(100*0.5)))
                 self.screen.blit(number, const.score_loc_game_over[i])
     
-     # 選到 resume
+    # 選到 resume
     def draw_resume_chosen(self):
         pause_back_ground = pygame.transform.scale(self.photo_dct["pause_bg"],(1400, 900))
         yes_resume = pygame.transform.scale(self.photo_dct["yes_resume"], (300, 150))
-        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
+        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 100))
         not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
         
         self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
         self.screen.blit(yes_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
-        self.screen.blit(not_volume, (const.screen_width/2 - 150, const.screen_height/2 - 75))
+        self.screen.blit(not_volume, (const.screen_width/2 - 150, const.screen_height/2 - 45))
         self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
     
     
@@ -388,12 +388,12 @@ class Renderer:
     def draw_menu_chosen(self):
         pause_back_ground = pygame.transform.scale(self.photo_dct["pause_bg"],(1400, 900))
         not_resume = pygame.transform.scale(self.photo_dct["no_resume"], (300, 150))
-        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
+        not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 100))
         choose_menu = pygame.transform.scale(self.photo_dct["yes_menu"], (300, 150))
         
         self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
         self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
-        self.screen.blit(not_volume,(const.screen_width/2 - 150, const.screen_height/2 - 75))
+        self.screen.blit(not_volume,(const.screen_width/2 - 150, const.screen_height/2 - 45))
         self.screen.blit(choose_menu,(const.screen_width/2 - 150, const.screen_height/2 + 25))
     
 
