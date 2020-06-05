@@ -347,14 +347,14 @@ class Renderer:
                 number = pygame.transform.scale(self.number_dct[score_lst[i]], (int(80*0.45), int(100*0.45)))
                 self.screen.blit(number, const.score_loc[i])
     
-    # 選到 resume
+     # 選到 resume
     def draw_resume_chosen(self):
         pause_back_ground = pygame.transform.scale(self.photo_dct["pause_bg"],(1400, 900))
         yes_resume = pygame.transform.scale(self.photo_dct["yes_resume"], (300, 150))
         not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
         not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
         
-        self.screen.blit(pause_back_ground, (const.screen_width/2 - 700, const.screen_height/2 - 500))
+        self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
         self.screen.blit(yes_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
         self.screen.blit(not_volume, (const.screen_width/2 - 150, const.screen_height/2 - 75))
         self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
@@ -367,7 +367,7 @@ class Renderer:
         choose_volume = pygame.transform.scale(self.photo_dct["yes_volume"], (300, 150))
         not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
         
-        self.screen.blit(pause_back_ground, (const.screen_width/2 - 700, const.screen_height/2 - 500))
+        self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
         self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
         self.screen.blit(choose_volume,(const.screen_width/2 - 150, const.screen_height/2 - 75))
         self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
@@ -379,34 +379,42 @@ class Renderer:
         not_volume = pygame.transform.scale(self.photo_dct["no_volume"], (300, 150))
         choose_menu = pygame.transform.scale(self.photo_dct["yes_menu"], (300, 150))
         
-        self.screen.blit(pause_back_ground, (const.screen_width/2 - 700, const.screen_height/2 - 500))
+        self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
         self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
         self.screen.blit(not_volume,(const.screen_width/2 - 150, const.screen_height/2 - 75))
         self.screen.blit(choose_menu,(const.screen_width/2 - 150, const.screen_height/2 + 25))
     
 
     def draw_volume(self): 
+        pause_back_ground = pygame.transform.scale(self.photo_dct["pause_bg"],(1400, 900)) 
+        not_resume = pygame.transform.scale(self.photo_dct["no_resume"], (300, 150))
+        not_menu = pygame.transform.scale(self.photo_dct["no_menu"], (300, 150))
+
+        self.screen.blit(pause_back_ground, (const.screen_width/2 - 670, const.screen_height/2 - 500))
+        self.screen.blit(not_resume, (const.screen_width/2 - 150, const.screen_height/2 - 175))
+        self.screen.blit(not_menu, (const.screen_width/2 - 150, const.screen_height/2 + 25))
+
         if self.bgm.get_volume() == 0.0:
             vl_0 = pygame.transform.scale(self.volume_dct["v_0"], (150, 80))
-            self.screen.blit(vl_0, (const.screen_width/2 - 600, const.screen_height/2 - 40))
+            self.screen.blit(vl_0, (const.screen_width/2 - 75, const.screen_height/2 - 40))
         elif 0 < self.bgm.get_volume() <= 0.1: 
             vl_1 = pygame.transform.scale(self.volume_dct["v_1"], (150, 80))
-            self.screen.blit(vl_1, (const.screen_width/2 - 600, const.screen_height/2 - 40))
+            self.screen.blit(vl_1, (const.screen_width/2 - 75, const.screen_height/2 - 40))
         elif 0.1 < self.bgm.get_volume() <= 0.2:
             vl_2 = pygame.transform.scale(self.volume_dct["v_2"], (150, 80))
-            self.screen.blit(vl_2, (const.screen_width/2 - 600, const.screen_height/2 - 40))
+            self.screen.blit(vl_2, (const.screen_width/2 - 75, const.screen_height/2 - 40))
         elif 0.2 < self.bgm.get_volume() <= 0.3:
             vl_3 = pygame.transform.scale(self.volume_dct["v_3"], (150, 80))
-            self.screen.blit(vl_3, (const.screen_width/2 - 600, const.screen_height/2 - 40))
+            self.screen.blit(vl_3, (const.screen_width/2 - 75, const.screen_height/2 - 40))
         elif 0.3 < self.bgm.get_volume() <= 0.4:
             vl_4 = pygame.transform.scale(self.volume_dct["v_4"], (150, 80))
-            self.screen.blit(vl_4, (const.screen_width/2 - 600, const.screen_height/2 - 40))
-        elif 0.5 < self.bgm.get_volume() <= 0.6:
+            self.screen.blit(vl_4, (const.screen_width/2 - 75, const.screen_height/2 - 40))
+        elif 0.4 < self.bgm.get_volume() <= 0.5:
             vl_5 = pygame.transform.scale(self.volume_dct["v_5"], (150, 80))
-            self.screen.blit(vl_5, (const.screen_width/2 - 600, const.screen_height/2 - 40))
-        elif 0.6 < self.bgm.get_volume():
+            self.screen.blit(vl_5, (const.screen_width/2 - 75, const.screen_height/2 - 40))
+        elif 0.5 < self.bgm.get_volume():
             vl_6 = pygame.transform.scale(self.volume_dct["v_6"], (150, 80))
-            self.screen.blit(vl_6, (const.screen_width/2 - 600, const.screen_height/2 - 40))
+            self.screen.blit(vl_6, (const.screen_width/2 - 75, const.screen_height/2 - 40))
 
 
     # game over 選單中，回到主選單被選中
