@@ -125,7 +125,10 @@ class Game:
         for group in self.bonus_lst:
             for sprite in group.sprites():
                 sprite.expire_time += 1
-
+                pygame.sprite.spritecollide(sprite, boundary.group, True)
+                pygame.sprite.spritecollide(sprite, boundary.group, True)
+                pygame.sprite.spritecollide(sprite, boundary.group, True)
+                
                 if 0 <= sprite.expire_time <= 200:  # 檢查每個 bonus 存在的時間，超過上限就消除
                     self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
 
