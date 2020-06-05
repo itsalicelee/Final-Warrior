@@ -111,7 +111,7 @@ class Renderer:
 
 
         ###########英雄血量圖片#############
-        self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0hp.png")]
+        self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2.5hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1.5hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0.5hp.png"),pygame.image.load("images/HP/0hp.png")]
         self.map_width = self.photo_dct["bg"].get_width()
         self.map_height = self.photo_dct["bg"].get_height()
 
