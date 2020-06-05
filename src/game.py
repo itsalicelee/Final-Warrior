@@ -100,6 +100,9 @@ class Game:
         # 觸發分數bonus
         if pygame.sprite.spritecollide(self.character, self.score_sprite, True):
             self.character.score += 1
+            self.bonus = Bonus()
+            self.bonus.score()
+            self.score_sprite.add(self.bonus)
             self.sound.bonusSound.play()
 
         # 觸發加速bonus
