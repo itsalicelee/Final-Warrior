@@ -12,6 +12,7 @@ class Renderer:
                             "icon": pygame.image.load("images/avatar.png"),
                             "actorIMG": pygame.image.load("images/racecar.png"),
                             "bg": pygame.image.load("images/background/background.png"),
+                            "bg_upper": pygame.image.load("images/background/background_upper.png"),
                             "game_over": pygame.image.load("images/gameover.png"),
                             "replay": pygame.image.load("images/play_again.png"),
                             "replay_red": pygame.image.load("images/play_again_red.png"),
