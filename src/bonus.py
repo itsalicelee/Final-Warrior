@@ -41,5 +41,6 @@ class Bonus(pygame.sprite.Sprite):
 
 
         self.expire_time = 0
-        
+    def score(self):
+        self.image = pygame.image.load("images/theme_ghost/bonus1.png")        
 
