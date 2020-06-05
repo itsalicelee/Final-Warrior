@@ -326,11 +326,11 @@ class Renderer:
 
     # 畫出hp
     def draw_hp(self, hp):
-        if 20<hp<=30:
+        if hp==3:
             self.screen.blit(pygame.transform.scale(self.hp_image[0], (int(579*0.5), int(199*0.5))), (30, 20))
-        if 10<hp<=20:
+        if hp==2:
             self.screen.blit(pygame.transform.scale(self.hp_image[1], (int(579*0.5), int(199*0.5))), (30, 20))
-        if 0<hp<= 10:
+        if hp==1:
             self.screen.blit(pygame.transform.scale(self.hp_image[2], (int(579*0.5), int(199*0.5))), (30, 20))
         elif hp==0:
             self.screen.blit(pygame.transform.scale(self.hp_image[3], (int(579*0.5), int(199*0.5))), (30, 20))
