@@ -5,7 +5,7 @@ import const
 class Character(pygame.sprite.Sprite):
     def __init__(self, hp = 3, score = 0,  alive = True):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("images/racecar.png")
+        self.image = pygame.transform.scale(pygame.image.load("images/character/1-1.png"), (37*2, 50*2))
         self.set_properties()
 
         self.rect = self.image.get_rect()
