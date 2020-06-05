@@ -173,13 +173,31 @@ class Menu():
     def intro(self):
 
         while True:
-            self.renderer.screen.fill(const.color["black"])  # 設定背景顏色
-            self.renderer.draw_text('*add pic here* press Space to go back to menu', self.renderer.font, const.color["white"], self.renderer.screen,  const.screen_width/2, const.screen_height/4)
+            pg1 = pygame.transform.scale(self.renderer.photo_dct["intro_pg1"], (const.screen_width, const.screen_height))
+            self.renderer.screen.blit(pg1, (0,0))
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:  # 若按下space鍵，退出
-                    if event.key == const.key["space"]:    # 若按下space，回到選單
+                    if event.key == const.key["esc"]:    # 若按下space，回到選單
                         self.main_menu()
+                    if event.key == const.key["right"]:
+                        self.intro_pg2()
+            
+            pygame.display.update()
+
+
+    def intro_pg2(self):
+
+        while True:
+            pg2 = pygame.transform.scale(self.renderer.photo_dct["intro_pg2"], (const.screen_width, const.screen_height))
+            self.renderer.screen.blit(pg2, (0,0))
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:  # 若按下space鍵，退出
+                    if event.key == const.key["esc"]:    # 若按下space，回到選單
+                        self.main_menu()
+                    if event.key == const.key["left"]:
+                        self.intro()
             
             pygame.display.update()
 
