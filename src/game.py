@@ -57,12 +57,13 @@ class Game:
         self.num = 0
         self.map_changex = 0
         self.map_changey = 0
+        self.speed_up = False
+        self.speed_up_time = 0
         # 魔王加群組
         boss = Boss(const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey)
         self.bosssprite.add(boss)
         '''遊戲精靈群組初始化結束'''
 
-        # self.create_brick()
 
         self.volume_dct = {
                             "v_0": pygame.image.load("images/volume/volume.png"),
@@ -103,7 +104,9 @@ class Game:
 
         # 觸發加速bonus
         elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
-            print("加速")
+            const.speed += 5
+            self.speed_up_time = 0
+            self.speed_up = True
             self.sound.speedSound.play()
 
         # 觸發回血bonus
@@ -251,6 +254,14 @@ class Game:
 
                 # 印出未消除的bonus
                 self.draw_bonus()
+                
+                #速度回覆
+                if self.speed_up:
+                    self.speed_up_time += 1
+                    if self.speed_up_time >= 200:
+                        const.speed = 5
+                        self.speed_up = False
+                        self.speed_up_time = 0
                 '''bonus 事件區結束'''
 
 
