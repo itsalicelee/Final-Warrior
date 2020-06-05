@@ -38,12 +38,31 @@ class Renderer:
                             "no_menu" : pygame.image.load("images/button/no_menu.png")
 
         }
-        
+       
         self.theme_ghost = {
                             "bg_1": pygame.image.load("images/theme_ghost/bg/bg.png"),
                             "bg_1_num": pygame.image.load("images/theme_ghost/bg/bg_1_num.png"),
                             "bg_sk": pygame.image.load("images/theme_ghost/bg/bg_sk.png"),
                             "bg_tomb": pygame.image.load("images/theme_ghost/bg/bg_tomb.png")
+        }
+
+        self.theme_cat = {
+                            "bg_3": pygame.image.load("images/theme_cat/bg/bg_3.png"),
+                            "bg3": pygame.image.load("images/theme_cat/bg3.png"),
+                            "bg3": pygame.image.load("images/theme_cat/bullet3.png"),
+                            "bonus3": pygame.image.load("images/theme_cat/bonus3.png"),
+        }
+
+        self.theme_dessert = {
+                            "bonus2": pygame.image.load("images/theme_dessert/bonus2.png"),
+                            "boss2": pygame.image.load("images/theme_dessert/boss2.png"),
+                            "bullet2": pygame.image.load("images/theme_dessert/bullet2.png"),
+                            "bg_2": pygame.image.load("images/theme_dessert/bg2/bg_2.png"),
+                            "bg2_ca": pygame.image.load("images/theme_dessert/bg2/bg2_ca.png"),
+                            "bg2_sc": pygame.image.load("images/theme_dessert/bg2/bg2_sc.png"),
+                            "bg2_sc": pygame.image.load("images/theme_dessert/bg2/bg2_ca.png"),
+                            "bg2": pygame.image.load("images/theme_dessert/bg2/bg2.png"),
+
         }
 
         self.number_dct = {
