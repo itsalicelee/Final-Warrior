@@ -47,7 +47,7 @@ class Renderer:
         }
 
         self.theme_cat = {
-                            "bg_3": pygame.image.load("images/theme_cat/bg/bg_3.png"),
+                            "bg_3": pygame.image.load("images/theme_cat/bg_3.png"),
                             "bg3": pygame.image.load("images/theme_cat/bg3.png"),
                             "bullet3": pygame.image.load("images/theme_cat/bullet3.png"),
                             "bonus3": pygame.image.load("images/theme_cat/bonus3.png"),
