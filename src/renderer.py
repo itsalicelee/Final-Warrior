@@ -9,113 +9,109 @@ class Renderer:
         pygame.init()
 
         self.photo_dct = {
-                            "icon": pygame.image.load("images/avatar.png"),
-                            "actorIMG": pygame.image.load("images/racecar.png"),
-                            "bg": pygame.image.load("images/background/background.png"),
-                            "bg_upper": pygame.image.load("images/background/background_upper.png"),
-                            "game_over": pygame.image.load("images/gameover.png"),
-                            "replay": pygame.image.load("images/play_again.png"),
-                            "replay_red": pygame.image.load("images/play_again_red.png"),
-                            "back_to_menu": pygame.image.load("images/back_to_menu.png"),
-                            "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
-                            "main_menu": pygame.image.load("images/main_menu.png"),
-                            "pause_button": pygame.image.load("images/pause_button.png"),
-                            "vine" : pygame.image.load("images/vine.png"),
+                            "icon": pygame.image.load("images/avatar.png").convert_alpha(),
+                            "actorIMG": pygame.image.load("images/racecar.png").convert_alpha(),
+                            "bg": pygame.image.load("images/background/background.png").convert_alpha(),
+                            "bg_upper": pygame.image.load("images/background/background_upper.png").convert_alpha(),
+                            "game_over": pygame.image.load("images/gameover.png").convert_alpha(),
+                            "replay": pygame.image.load("images/play_again.png").convert_alpha(),
+                            "replay_red": pygame.image.load("images/play_again_red.png").convert_alpha(),
+                            "back_to_menu": pygame.image.load("images/back_to_menu.png").convert_alpha(),
+                            "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png").convert_alpha(),
+                            "main_menu": pygame.image.load("images/main_menu.png").convert_alpha(),
+                            "pause_button": pygame.image.load("images/pause_button.png").convert_alpha(),
+                            "vine" : pygame.image.load("images/vine.png").convert_alpha(),
                              ############ buttons ####################
-                            "yes_start" : pygame.image.load("images/button/yes_start.png"),
-                            "yes_about" : pygame.image.load("images/button/yes_about.png"),
-                            "yes_quit" : pygame.image.load("images/button/yes_quit.png"),
-                            "no_start" : pygame.image.load("images/button/no_start.png"),
-                            "no_about" : pygame.image.load("images/button/no_about.png"),
-                            "no_quit" : pygame.image.load("images/button/no_quit.png"),
+                            "yes_start" : pygame.image.load("images/button/yes_start.png").convert_alpha(),
+                            "yes_about" : pygame.image.load("images/button/yes_about.png").convert_alpha(),
+                            "yes_quit" : pygame.image.load("images/button/yes_quit.png").convert_alpha(),
+                            "no_start" : pygame.image.load("images/button/no_start.png").convert_alpha(),
+                            "no_about" : pygame.image.load("images/button/no_about.png").convert_alpha(),
+                            "no_quit" : pygame.image.load("images/button/no_quit.png").convert_alpha(),
 
                              ############ pause #######################
-                            "pause_bg" : pygame.image.load("images/pause_menu.png"),
-                            "yes_resume" : pygame.image.load("images/button/yes_resume.png"),
-                            "no_resume" : pygame.image.load("images/button/no_resume.png"),
-                            "yes_volume" : pygame.image.load("images/button/yes_volume.png"),
-                            "no_volume" : pygame.image.load("images/button/no_volume.png"),
-                            "yes_menu" : pygame.image.load("images/button/yes_menu.png"),
-                            "no_menu" : pygame.image.load("images/button/no_menu.png"),
+                            "pause_bg" : pygame.image.load("images/pause_menu.png").convert_alpha(),
+                            "yes_resume" : pygame.image.load("images/button/yes_resume.png").convert_alpha(),
+                            "no_resume" : pygame.image.load("images/button/no_resume.png").convert_alpha(),
+                            "yes_volume" : pygame.image.load("images/button/yes_volume.png").convert_alpha(),
+                            "no_volume" : pygame.image.load("images/button/no_volume.png").convert_alpha(),
+                            "yes_menu" : pygame.image.load("images/button/yes_menu.png").convert_alpha(),
+                            "no_menu" : pygame.image.load("images/button/no_menu.png").convert_alpha(),
             
-                            "intro_pg1" : pygame.image.load("images/about_p1.png"),
-                            "intro_pg2" : pygame.image.load("images/about_p2.png"),
-                            "level_select1" : pygame.transform.scale(pygame.image.load("images/level select1.png"),(const.screen_width,const.screen_height)),
-                            "level_select2" : pygame.transform.scale(pygame.image.load("images/level select2.png"),(const.screen_width,const.screen_height)),
-                            "level_select3" : pygame.transform.scale(pygame.image.load("images/level select3.png"),(const.screen_width,const.screen_height)),
+                            "intro_pg1" : pygame.image.load("images/about_p1.png").convert_alpha(),
+                            "intro_pg2" : pygame.image.load("images/about_p2.png").convert_alpha()
 
         }
        
         self.theme_ghost = {
-                            "bg_1": pygame.image.load("images/theme_ghost/bg/bg.png"),
-                            "bg_1_num": pygame.image.load("images/theme_ghost/bg/bg_1_num.png"),
-                            "bg_sk": pygame.image.load("images/theme_ghost/bg/bg_sk.png"),
-                            "bg_tomb": pygame.image.load("images/theme_ghost/bg/bg_tomb.png")
+                            "bg_1": pygame.image.load("images/theme_ghost/bg/bg.png").convert_alpha(),
+                            "bg_1_num": pygame.image.load("images/theme_ghost/bg/bg_1_num.png").convert_alpha(),
+                            "bg_sk": pygame.image.load("images/theme_ghost/bg/bg_sk.png").convert_alpha(),
+                            "bg_tomb": pygame.image.load("images/theme_ghost/bg/bg_tomb.png").convert_alpha()
         }
 
         self.theme_cat = {
-                            "bg_3": pygame.image.load("images/theme_cat/bg_3.png"),
-                            "bg3": pygame.image.load("images/theme_cat/bg3.png"),
-                            "bullet3": pygame.image.load("images/theme_cat/bullet3.png"),
-                            "bonus3": pygame.image.load("images/theme_cat/bonus3.png"),
+                            "bg_3": pygame.image.load("images/theme_cat/bg_3.png").convert_alpha(),
+                            "bg3": pygame.image.load("images/theme_cat/bg3.png").convert_alpha(),
+                            "bullet3": pygame.image.load("images/theme_cat/bullet3.png").convert_alpha(),
+                            "bonus3": pygame.image.load("images/theme_cat/bonus3.png").convert_alpha(),
         }
 
         self.theme_desert = {
-                            "bonus2": pygame.image.load("images/theme_desert/bonus2.png"),
-                            "boss2": pygame.image.load("images/theme_desert/boss2.png"),
-                            "bullet2": pygame.image.load("images/theme_desert/bullet2.png"),
-                            "bg_2": pygame.image.load("images/theme_desert/bg2/bg_2.png"),
-                            "bg2_ca": pygame.image.load("images/theme_desert/bg2/bg2_ca.png"),
-                            "bg2_sc": pygame.image.load("images/theme_desert/bg2/bg2_sc.png"),
-                            "bg2": pygame.image.load("images/theme_desert/bg2/bg2.png"),
+                            "bonus2": pygame.image.load("images/theme_desert/bonus2.png").convert_alpha(),
+                            "boss2": pygame.image.load("images/theme_desert/boss2.png").convert_alpha(),
+                            "bullet2": pygame.image.load("images/theme_desert/bullet2.png").convert_alpha(),
+                            "bg_2": pygame.image.load("images/theme_desert/bg2/bg_2.png").convert_alpha(),
+                            "bg2_ca": pygame.image.load("images/theme_desert/bg2/bg2_ca.png").convert_alpha(),
+                            "bg2_sc": pygame.image.load("images/theme_desert/bg2/bg2_sc.png").convert_alpha(),
+                            "bg2": pygame.image.load("images/theme_desert/bg2/bg2.png").convert_alpha(),
 
         }
 
         self.number_dct = {
-                            "0": pygame.image.load("images/number/0.png"),
-                            "1": pygame.image.load("images/number/1.png"),
-                            "2": pygame.image.load("images/number/2.png"),
-                            "3": pygame.image.load("images/number/3.png"),
-                            "4": pygame.image.load("images/number/4.png"),
-                            "5": pygame.image.load("images/number/5.png"),
-                            "6": pygame.image.load("images/number/6.png"),
-                            "7": pygame.image.load("images/number/7.png"),
-                            "8": pygame.image.load("images/number/8.png"),
-                            "9": pygame.image.load("images/number/9.png")
+                            "0": pygame.image.load("images/number/0.png").convert_alpha(),
+                            "1": pygame.image.load("images/number/1.png").convert_alpha(),
+                            "2": pygame.image.load("images/number/2.png").convert_alpha(),
+                            "3": pygame.image.load("images/number/3.png").convert_alpha(),
+                            "4": pygame.image.load("images/number/4.png").convert_alpha(),
+                            "5": pygame.image.load("images/number/5.png").convert_alpha(),
+                            "6": pygame.image.load("images/number/6.png").convert_alpha(),
+                            "7": pygame.image.load("images/number/7.png").convert_alpha(),
+                            "8": pygame.image.load("images/number/8.png").convert_alpha(),
+                            "9": pygame.image.load("images/number/9.png").convert_alpha()
         }
 
         self.character_move = {
-                                "r1": pygame.image.load("images/character/3-1.png"),
-                                "r2": pygame.image.load("images/character/3-2.png"),
-                                "r3": pygame.image.load("images/character/3-3.png"),
-                                "r4": pygame.image.load("images/character/3-4.png"),
+                                "r1": pygame.image.load("images/character/3-1.png").convert_alpha(),
+                                "r2": pygame.image.load("images/character/3-2.png").convert_alpha(),
+                                "r3": pygame.image.load("images/character/3-3.png").convert_alpha(),
+                                "r4": pygame.image.load("images/character/3-4.png").convert_alpha(),
 
-                                "l1": pygame.image.load("images/character/2-1.png"),
-                                "l2": pygame.image.load("images/character/2-2.png"),
-                                "l3": pygame.image.load("images/character/2-3.png"),
-                                "l4": pygame.image.load("images/character/2-4.png"),
+                                "l1": pygame.image.load("images/character/2-1.png").convert_alpha(),
+                                "l2": pygame.image.load("images/character/2-2.png").convert_alpha(),
+                                "l3": pygame.image.load("images/character/2-3.png").convert_alpha(),
+                                "l4": pygame.image.load("images/character/2-4.png").convert_alpha(),
 
-                                "u1": pygame.image.load("images/character/4-1.png"),
-                                "u2": pygame.image.load("images/character/4-2.png"),
-                                "u3": pygame.image.load("images/character/4-3.png"),
-                                "u4": pygame.image.load("images/character/4-4.png"),
+                                "u1": pygame.image.load("images/character/4-1.png").convert_alpha(),
+                                "u2": pygame.image.load("images/character/4-2.png").convert_alpha(),
+                                "u3": pygame.image.load("images/character/4-3.png").convert_alpha(),
+                                "u4": pygame.image.load("images/character/4-4.png").convert_alpha(),
 
-                                "d1": pygame.image.load("images/character/1-1.png"),
-                                "d2": pygame.image.load("images/character/1-2.png"),
-                                "d3": pygame.image.load("images/character/1-3.png"),
-                                "d4": pygame.image.load("images/character/1-4.png")
+                                "d1": pygame.image.load("images/character/1-1.png").convert_alpha(),
+                                "d2": pygame.image.load("images/character/1-2.png").convert_alpha(),
+                                "d3": pygame.image.load("images/character/1-3.png").convert_alpha(),
+                                "d4": pygame.image.load("images/character/1-4.png").convert_alpha()
         }
 
         self.volume_dct = {
-                            "v_6": pygame.image.load("images/volume/volume.png"),
-                            "v_5": pygame.image.load("images/volume/volume5.png"),
-                            "v_4": pygame.image.load("images/volume/volume4.png"),
-                            "v_3": pygame.image.load("images/volume/volume3.png"),
-                            "v_2": pygame.image.load("images/volume/volume2.png"),
-                            "v_1": pygame.image.load("images/volume/volume1.png"),
-                            "v_0": pygame.image.load("images/volume/volume0.png")
+                            "v_6": pygame.image.load("images/volume/volume.png").convert_alpha(),
+                            "v_5": pygame.image.load("images/volume/volume5.png").convert_alpha(),
+                            "v_4": pygame.image.load("images/volume/volume4.png").convert_alpha(),
+                            "v_3": pygame.image.load("images/volume/volume3.png").convert_alpha(),
+                            "v_2": pygame.image.load("images/volume/volume2.png").convert_alpha(),
+                            "v_1": pygame.image.load("images/volume/volume1.png").convert_alpha(),
+                            "v_0": pygame.image.load("images/volume/volume0.png").convert_alpha()
         }
-
 
         ###########英雄血量圖片#############
         self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2.5hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1.5hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0.5hp.png"),pygame.image.load("images/HP/0hp.png")]
