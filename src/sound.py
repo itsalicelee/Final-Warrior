@@ -9,6 +9,7 @@ class Sound:
 	speedSound = pygame.mixer.Sound("music/speed_up.wav")
 	hpSound = pygame.mixer.Sound("music/hp.wav")
 	shotSound = pygame.mixer.Sound("music/shot.ogg")
+	gameoverSound = pygame.mixer.Sound("music/gameover.wav")
 	
 
 	def __init__(self):
