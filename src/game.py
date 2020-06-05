@@ -314,7 +314,7 @@ class Game:
 
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
-            self.character.hp -= 1
+            self.character.hp -= 0.5
             self.sound.shotSound.play()
 
 
