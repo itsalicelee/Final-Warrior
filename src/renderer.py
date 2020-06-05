@@ -40,9 +40,9 @@ class Renderer:
             
                             "intro_pg1" : pygame.image.load("images/about_p1.png"),
                             "intro_pg2" : pygame.image.load("images/about_p2.png"),
-                            "level_select1" : pygame.transform.scale(pygame.image.load("images/level1.png"),(const.screen_width,const.screen_height)),
-                            "level_select2" : pygame.transform.scale(pygame.image.load("images/level2.png"),(const.screen_width,const.screen_height)),
-                            "level_select3" : pygame.transform.scale(pygame.image.load("images/level3.png"),(const.screen_width,const.screen_height)),
+                            "level_select1" : pygame.transform.scale(pygame.image.load("images/level select1.png"),(const.screen_width,const.screen_height)),
+                            "level_select2" : pygame.transform.scale(pygame.image.load("images/level select2.png"),(const.screen_width,const.screen_height)),
+                            "level_select3" : pygame.transform.scale(pygame.image.load("images/level select3.png"),(const.screen_width,const.screen_height)),
 
         }
        
