@@ -328,16 +328,18 @@ class Renderer:
     def draw_hp(self, hp):
         if hp==3:
             self.screen.blit(pygame.transform.scale(self.hp_image[0], (int(579*0.5), int(199*0.5))), (30, 20))
-        if hp==2.5:
+        elif hp==2.5:
             self.screen.blit(pygame.transform.scale(self.hp_image[1], (int(579*0.5), int(199*0.5))), (30, 20))
-        if hp==2:
+        elif hp==2:
             self.screen.blit(pygame.transform.scale(self.hp_image[2], (int(579*0.5), int(199*0.5))), (30, 20))
-        if hp == 1.5:
+        elif hp == 1.5:
             self.screen.blit(pygame.transform.scale(self.hp_image[3], (int(579*0.5), int(199*0.5))), (30, 20))
-        if hp==1:
+        elif hp==1:
             self.screen.blit(pygame.transform.scale(self.hp_image[4], (int(579*0.5), int(199*0.5))), (30, 20))
-        elif hp==0:
+        elif hp==0.5:
             self.screen.blit(pygame.transform.scale(self.hp_image[5], (int(579*0.5), int(199*0.5))), (30, 20))
+        elif hp==0:
+            self.screen.blit(pygame.transform.scale(self.hp_image[6], (int(579*0.5), int(199*0.5))), (30, 20))
 
     # 畫出暫停
     def draw_pasue_button(self):
