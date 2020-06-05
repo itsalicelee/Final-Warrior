@@ -22,12 +22,10 @@ class Game:
         # 初始化 pygame
         pygame.init()
 
-
         # 初始化時間，遊戲幀數為每秒60幀
         self.mainClock = pygame.time.Clock()
         self.mainClock.tick(60)
         self.tick = 0
-
 
         # 初始化「繪圖」、「聲音」、「主角」
         self.renderer = Renderer()
@@ -42,7 +40,6 @@ class Game:
         self.game_over_button = 0  # 遊戲死亡選單按鍵 
         '''遊戲參數初始化設定結束'''
 
-
         '''遊戲精靈群組初始化'''
         self.allsprite = pygame.sprite.Group()  # 精靈群組的總群組
         self.bulletsprite = pygame.sprite.Group() # 子彈群組
@@ -55,6 +52,7 @@ class Game:
         self.bonus_lst = [self.score_sprite, self.shoes_sprite, self.heart_sprite]  # 突發class清單
         self.direction = 0
         self.num = 0
+        self.speed_adjust = 0
         self.map_changex = 0
         self.map_changey = 0
         self.speed_up = False
@@ -91,7 +89,9 @@ class Game:
 
         # 添加回血bonus
         elif self.bonus.type == "heart":
-            self.heart_sprite.add(self.bonus)
+            ########改!!
+            if self.character.hp <= 20:
+                self.heart_sprite.add(self.bonus)
 
 
     # 觸發 bonus 效果
@@ -104,6 +104,8 @@ class Game:
 
         # 觸發加速bonus
         elif pygame.sprite.spritecollide(self.character, self.shoes_sprite, True):
+            #print("加速")
+            ########改!!
             const.speed += 5
             self.speed_up_time = 0
             self.speed_up = True
@@ -113,6 +115,7 @@ class Game:
         elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
             self.character.hp += 1
             self.sound.hpSound.play()
+            #print(self.character.hp)
 
     # 顯示 bonus 到螢幕上
     def draw_bonus(self):
@@ -136,25 +139,33 @@ class Game:
 
         # 子彈模式
     def bullet_mode1(self, speed, width, height):
-        if self.tick % speed == 0: # 時間進行多少毫秒的時候出一次子彈
+        if self.tick % 5 == 0: # 時間進行多少毫秒的時候出一次子彈
             self.num += 1
             if self.num <= 50:
                 self.direction = random.randint(-180, 180)
-                new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                new_bul =(bullet(speed, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
                 self.bulletsprite.add(new_bul)
             elif 50 <= self.num <= 60:
                 self.direction = 0
                 for i in range(8):
-                    new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                    new_bul =(bullet(speed, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
                     self.bulletsprite.add(new_bul)
                     self.direction += 45
             elif 60 <= self.num <= 120:
-                new_bul =(bullet(6, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                new_bul =(bullet(speed, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
                 self.direction += 22.5
                 self.bulletsprite.add(new_bul)
                 if self.direction >= 360:
                     self.direction = 0
-            if self.num >= 120:
+            elif 120 <= self.num <= 180:
+                self.direction += 22.5
+                new_bul =(bullet(speed, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                self.bulletsprite.add(new_bul)
+                new_bul =(bullet(speed, ((width // 2) + 70), ((height // 2) + 100), 8, (0, 0, 255), -self.direction)) # 子彈格式
+                self.bulletsprite.add(new_bul)
+                if self.direction >= 180:
+                    self.direction = 0
+            if self.num >= 180:
                 self.num = 0 
         
         
@@ -166,7 +177,7 @@ class Game:
 
     # 主遊戲的 main loop
     def game_start(self):
-        
+        played = False
         # 建立無窮迴圈，開始進行遊戲
         while not self.quit :
             # 當使用者沒有按下暫停：
@@ -183,7 +194,6 @@ class Game:
                 self.map_changex += map_change_x
                 self.map_changey += map_change_y
 
-                
                 '''
                 開始顯示地圖、主角、血量、子彈
                 '''
@@ -208,23 +218,27 @@ class Game:
                 '''
                 子彈區
                 '''
+                if self.tick % 1000 == 0 and self.tick > 1500:
+                    self.speed_adjust += 2
                # 子彈出現
                 if self.tick <= 3000:
-                    self.bullet_mode1(const.bullet_add_speed, const.screen_width, const.screen_height)
+                    self.bullet_mode1(const.bullet_add_speed + self.speed_adjust, const.screen_width, const.screen_height)
                     self.bulletsprite.update() # 刷新新的bulletgroup
                 elif 3000 <= self.tick <= 3100:
                     if self.tick % const.bullet_add_speed == 0:
                         self.direction = 0
                         for i in range(16):
-                            new_bul =(bullet(6, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
+                            new_bul =(bullet(const.bullet_add_speed + self.speed_adjust, ((const.screen_width // 2) + 70), ((const.screen_height // 2) + 100), 8, (0, 0, 255), self.direction)) # 子彈格式
                             self.bulletsprite.add(new_bul)
                             self.direction += 22.5
                     self.bulletsprite.update() # 刷新新的bulletgroup
                 elif self.tick >= 3100:
-                    self.bullet_mode1(const.bullet_add_speed+5, const.screen_width, const.screen_height)
+                    self.bullet_mode1(const.bullet_add_speed + self.speed_adjust, const.screen_width, const.screen_height)
                     self.bulletsprite.update()
+                if self.tick >= 100000:
+                    self.tick = 0
                     
-                # self.bulletsprite.draw(self.renderer.screen)  # 畫到螢幕上
+
                 hitbrick = pygame.sprite.groupcollide(boundary.group, self.bulletsprite, False, True) # 改動TRUE，FALSE就可
                 
                 for sprite in self.bulletsprite.sprites():
@@ -235,26 +249,16 @@ class Game:
                 # 螢幕更新
                 self.tick += 1
 
-                # 畫出不能走的區域方便觀察，這段之後可以註解掉
-                # self.renderer.draw_block(boundary.block_up)
-                # self.renderer.draw_block(boundary.block_down)
-                # self.renderer.draw_block(boundary.block_left)
-                # self.renderer.draw_block(boundary.block_right)
-                # self.renderer.draw_block(boundary.block_left_and_down)
-                # self.renderer.draw_block(boundary.block_right_and_down)
-
 
                 '''bonus 事件區'''
                 # 出現隨機事件
                 if self.tick % 300 == 0: 
                     self.bonus_event()
-
                 # 隨機事件被觸發
                 self.bonus_triggered()
-
                 # 印出未消除的bonus
                 self.draw_bonus()
-                
+
                 #速度回覆
                 if self.speed_up:
                     self.speed_up_time += 1
@@ -262,13 +266,10 @@ class Game:
                         const.speed = 5
                         self.speed_up = False
                         self.speed_up_time = 0
+                    
                 '''bonus 事件區結束'''
 
-
                 self.renderer.draw_score(str(self.character.score))
-
-
-
 
                 # 檢查死亡
                 self.check_whether_die()
@@ -283,7 +284,8 @@ class Game:
                 self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
 
                 # 將主角顯示在screen上
-                self.renderer.screen.blit(self.renderer.photo_dct["actorIMG"],
+                ########改!!
+                self.renderer.screen.blit(const.character_tracked["last_pose"],
                                          (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 
                 # 畫血條
@@ -299,6 +301,10 @@ class Game:
                 else:
                     self.renderer.draw_game_over()
                     self.game_over()
+                    if played == False:
+                        self.sound.gameoverSound.play()
+                        played = True
+
 
                  # 螢幕更新
                 pygame.display.update()
@@ -307,7 +313,7 @@ class Game:
     def bullet_hit_actor(self):
         if pygame.sprite.spritecollide(self.character, self.bulletsprite, True):
             self.character.hp -= 1
-            # self.sound.shotSound.play()
+            self.sound.shotSound.play()
 
 
     def event_handler(self, event):
@@ -323,17 +329,18 @@ class Game:
                 self.quit_game()
 
             # 按「上、下、左、右」：改變人物方向
-            if event.key == const.key["left"]: 
-                const.x_change = -5
+            if event.key == const.key["left"]:
+            ########改!! 
+                const.x_change = -const.speed
 
             elif event.key == const.key["right"]:
-                const.x_change = 5
+                const.x_change = const.speed
 
             elif event.key == const.key["up"]:
-                const.y_change = -5
+                const.y_change = -const.speed
 
             elif event.key == const.key["down"]:
-                const.y_change = 5
+                const.y_change = const.speed
 
             # 按 p ，遊戲暫停，
             elif event.key == const.key["pause"]:
@@ -355,8 +362,7 @@ class Game:
 
     # 按下暫停後，遊戲暫停並跳出選單，預設為 “繼續遊戲”
     def game_pause(self):
-        
-        
+
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  # 若按下ESC鍵，退出option
                 if event.key == const.key["esc"]:
@@ -393,7 +399,7 @@ class Game:
     def volume(self):
         back_to_pause = False
         while back_to_pause == False:
-            self.renderer.draw_volume_chosen()
+            #self.renderer.draw_volume_chosen()
             self.renderer.draw_volume()
 
             for event in pygame.event.get():
@@ -408,10 +414,11 @@ class Game:
                             self.bgm.set_bgm(float(self.bgm.get_volume())-0.1)
 
                     if event.key == const.key["right"]:  # 若按下right，音量增大
-                        if float(self.bgm.get_volume()) + 0.1 < 0.7:  # 不要讓音量太大 
+                        if float(self.bgm.get_volume()) + 0.1 <= 0.6:  # 不要讓音量太大 
                             self.bgm.set_bgm(float(self.bgm.get_volume())+ 0.1)
                         #self.game_pause()
                     if event.key == const.key["space"]:   # 若按下esc 跳出調整音量
+                        self.sound.selectSound.play()
                         back_to_pause = True
 
 
@@ -427,7 +434,6 @@ class Game:
 
 
     # 定義game over 後，畫面要跳出的選單內容
-
     def game_over(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
