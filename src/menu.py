@@ -179,8 +179,10 @@ class Menu():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:  # 若按下space鍵，退出
                     if event.key == const.key["esc"]:    # 若按下space，回到選單
+                        self.sound.selectSound.play()                    
                         self.main_menu()
                     if event.key == const.key["right"]:
+                        self.sound.switchSound.play()
                         self.intro_pg2()
             
             pygame.display.update()
@@ -195,8 +197,10 @@ class Menu():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:  # 若按下space鍵，退出
                     if event.key == const.key["esc"]:    # 若按下space，回到選單
+                        self.sound.selectSound.play()
                         self.main_menu()
                     if event.key == const.key["left"]:
+                        self.sound.switchSound.play()
                         self.intro()
             
             pygame.display.update()
