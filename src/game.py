@@ -452,3 +452,24 @@ class Game:
                     self.sound.selectSound.play()
                     self.renderer.draw_game_over()
                     self.quit = True
+    def level_select(self):
+        select_button = 0 
+        press = False
+        while press == False:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == const.key["right"]:
+                        select_button += 1
+                    if event.key == const.key["left"]:
+                        select_button -= 1
+                    if event.key == const.key["space"]:
+                        self.game_start()
+                        press = True
+                if select_button % 3 == 0:
+                    self.renderer.screen.blit(self.renderer.photo_dct["level_select1"],(0,0))
+                elif select_button % 3 == 1:
+                    self.renderer.screen.blit(self.renderer.photo_dct["level_select2"],(0,0))
+                elif select_button % 3 == 2:
+                    self.renderer.screen.blit(self.renderer.photo_dct["level_select3"], (0,0))
+                pygame.display.update()
+
