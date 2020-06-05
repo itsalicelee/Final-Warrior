@@ -49,19 +49,18 @@ class Renderer:
         self.theme_cat = {
                             "bg_3": pygame.image.load("images/theme_cat/bg/bg_3.png"),
                             "bg3": pygame.image.load("images/theme_cat/bg3.png"),
-                            "bg3": pygame.image.load("images/theme_cat/bullet3.png"),
+                            "bullet3": pygame.image.load("images/theme_cat/bullet3.png"),
                             "bonus3": pygame.image.load("images/theme_cat/bonus3.png"),
         }
 
-        self.theme_dessert = {
-                            "bonus2": pygame.image.load("images/theme_dessert/bonus2.png"),
-                            "boss2": pygame.image.load("images/theme_dessert/boss2.png"),
-                            "bullet2": pygame.image.load("images/theme_dessert/bullet2.png"),
-                            "bg_2": pygame.image.load("images/theme_dessert/bg2/bg_2.png"),
-                            "bg2_ca": pygame.image.load("images/theme_dessert/bg2/bg2_ca.png"),
-                            "bg2_sc": pygame.image.load("images/theme_dessert/bg2/bg2_sc.png"),
-                            "bg2_sc": pygame.image.load("images/theme_dessert/bg2/bg2_ca.png"),
-                            "bg2": pygame.image.load("images/theme_dessert/bg2/bg2.png"),
+        self.theme_desert = {
+                            "bonus2": pygame.image.load("images/theme_desert/bonus2.png"),
+                            "boss2": pygame.image.load("images/theme_desert/boss2.png"),
+                            "bullet2": pygame.image.load("images/theme_desert/bullet2.png"),
+                            "bg_2": pygame.image.load("images/theme_desert/bg2/bg_2.png"),
+                            "bg2_ca": pygame.image.load("images/theme_desert/bg2/bg2_ca.png"),
+                            "bg2_sc": pygame.image.load("images/theme_desert/bg2/bg2_sc.png"),
+                            "bg2": pygame.image.load("images/theme_desert/bg2/bg2.png"),
 
         }
 
