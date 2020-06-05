@@ -90,7 +90,7 @@ class Game:
         # 添加回血bonus
         elif self.bonus.type == "heart":
             ########改!!
-            if self.character.hp <= 2:
+            if self.character.hp <= 2.5:
                 self.heart_sprite.add(self.bonus)
 
 
