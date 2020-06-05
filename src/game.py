@@ -206,6 +206,8 @@ class Game:
                     self.renderer.draw_character_x(self.tick)
                 elif const.y_change != 0:
                     self.renderer.draw_character_y(self.tick)
+                
+                self.renderer.screen.blit(self.renderer.photo_dct ["vine"], (const.map_x, const.map_y))
 
                 # 印血量、暫停按鈕
                 self.renderer.draw_hp(self.character.hp)
