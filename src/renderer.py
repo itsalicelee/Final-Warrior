@@ -343,13 +343,21 @@ class Renderer:
     def draw_pasue_button(self):
         self.screen.blit(pygame.transform.scale(self.photo_dct["pause_button"], (int(133*0.45), int(145*0.45))), (const.screen_width -70, 37))
 
-    # 畫出分數
-    def draw_score(self, score):
+    # 遊戲中畫出分數
+    def draw_score_while_game(self, score):
         score_lst = [number for number in score]
         score_lst.reverse()
         for i in range(len(score_lst)):
                 number = pygame.transform.scale(self.number_dct[score_lst[i]], (int(80*0.45), int(100*0.45)))
                 self.screen.blit(number, const.score_loc[i])
+    
+    # 遊戲結束畫出分數
+    def draw_score_game_over(self, score):
+        score_lst = [number for number in score]
+        #score_lst.reverse()
+        for i in range(len(score_lst)):
+                number = pygame.transform.scale(self.number_dct[score_lst[i]], (int(80*0.5), int(100*0.5)))
+                self.screen.blit(number, const.score_loc_game_over[i])
     
      # 選到 resume
     def draw_resume_chosen(self):
