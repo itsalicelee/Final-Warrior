@@ -116,7 +116,7 @@ class Game:
 
         # 觸發回血bonus
         elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
-            self.character.hp += 1
+            self.character.hp += 0.5
             self.sound.hpSound.play()
             #print(self.character.hp)
 
