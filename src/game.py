@@ -271,7 +271,7 @@ class Game:
                     
                 '''bonus 事件區結束'''
 
-                self.renderer.draw_score(str(self.character.score))
+                self.renderer.draw_score_while_game(str(self.character.score))
 
                 # 檢查死亡
                 self.check_whether_die()
@@ -302,6 +302,8 @@ class Game:
                     self.game_pause()
                 else:
                     self.renderer.draw_game_over()
+                    self.renderer.draw_score_game_over(str(self.character.score))
+                    
                     self.game_over()
                     if played == False:
                         self.sound.gameoverSound.play()
