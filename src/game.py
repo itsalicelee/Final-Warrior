@@ -452,6 +452,7 @@ class Game:
                     self.sound.selectSound.play()
                     self.renderer.draw_game_over()
                     self.quit = True
+    '''
     def level_select(self):
         select_button = 0 
         press = False
@@ -471,5 +472,6 @@ class Game:
                     self.renderer.screen.blit(self.renderer.photo_dct["level_select2"],(0,0))
                 elif select_button % 3 == 2:
                     self.renderer.screen.blit(self.renderer.photo_dct["level_select3"], (0,0))
+                    
                 pygame.display.update()
-
+'''
