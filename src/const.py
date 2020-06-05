@@ -52,8 +52,11 @@ map_x = 0
 map_y = 0
 
 
-# 分數顯示位置
+# 遊戲中分數顯示位置
 score_loc = [(1320,45), (1270,45), (1220,45)]
+
+# 遊戲結束分數顯示位置
+score_loc_game_over = [(screen_width/2 - 115,screen_height/2 - 160),(screen_width/2 - 65,screen_height/2 - 160),(screen_width/2 - 15,screen_height/2 - 160)]
 
 ###########################################################
 # 設定主角初始位置
