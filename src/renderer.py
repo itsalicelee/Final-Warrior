@@ -19,7 +19,7 @@ class Renderer:
                             "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png"),
                             "main_menu": pygame.image.load("images/main_menu.png"),
                             "pause_button": pygame.image.load("images/pause_button.png"),
-                            "vine" : pygame.image.load("images/vine.png")
+                            "vine" : pygame.image.load("images/vine.png"),
                              ############ buttons ####################
                             "yes_start" : pygame.image.load("images/button/yes_start.png"),
                             "yes_about" : pygame.image.load("images/button/yes_about.png"),
