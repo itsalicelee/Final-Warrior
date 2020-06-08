@@ -1,6 +1,6 @@
-import pygame
+import pygame, const
 class Boss(pygame.sprite.Sprite):
-	def __init__(self, x, y, hp = 100):
+	def __init__(self, x = const.screen_width // 2, y = const.screen_height // 2, hp = 100):
 		pygame.sprite.Sprite.__init__(self)
 		self.hp = hp
 		self.alive = True

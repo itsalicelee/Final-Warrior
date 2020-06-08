@@ -58,8 +58,9 @@ class Game:
         self.speed_up = False
         self.speed_up_time = 0
         # 魔王加群組
-        boss = Boss(const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey)
-        self.bosssprite.add(boss)
+        self.boss = Boss()
+        # boss = Boss(const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey)
+        self.bosssprite.add(self.boss)
         '''遊戲精靈群組初始化結束'''
 
 
@@ -118,16 +119,15 @@ class Game:
         elif pygame.sprite.spritecollide(self.character, self.heart_sprite, True):
             self.character.hp += 0.5
             self.sound.hpSound.play()
-            #print(self.character.hp)
 
     # 顯示 bonus 到螢幕上
     def draw_bonus(self):
         for group in self.bonus_lst:
             for sprite in group.sprites():
                 sprite.expire_time += 1
-                pygame.sprite.spritecollide(sprite, boundary.group, True)
-                pygame.sprite.spritecollide(sprite, boundary.group, True)
-                pygame.sprite.spritecollide(sprite, boundary.group, True)
+                if pygame.sprite.spritecollide(sprite, boundary.group, False) or pygame.sprite.spritecollide(sprite, self.bosssprite, False):
+                    sprite.kill()
+
                 
                 if 0 <= sprite.expire_time <= 200:  # 檢查每個 bonus 存在的時間，超過上限就消除
                     self.renderer.screen.blit(sprite.image, (sprite.x + const.map_x,sprite.y + const.map_y))
@@ -145,7 +145,7 @@ class Game:
 
         # 子彈模式
     def bullet_mode1(self, speed, width, height):
-        if self.tick % 5 == 0: # 時間進行多少毫秒的時候出一次子彈
+        if self.tick % 10 == 0: # 時間進行多少毫秒的時候出一次子彈
             self.num += 1
             if self.num <= 50:
                 self.direction = random.randint(-180, 180)
@@ -222,7 +222,7 @@ class Game:
 
                 # 魔王出現
                 for sprite in self.bosssprite.sprites():
-                    self.renderer.screen.blit(sprite.image, (const.screen_width // 2 + self.map_changex, const.screen_height // 2 + self.map_changey))
+                    self.renderer.screen.blit(sprite.image, (const.screen_width // 2 + const.map_x, const.screen_height // 2 + const.map_y))
 
                 '''
                 子彈區
@@ -456,3 +456,4 @@ class Game:
                     self.sound.selectSound.play()
                     self.renderer.draw_game_over()
                     self.quit = True
+                    const.speed = 5

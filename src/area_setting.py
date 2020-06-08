@@ -21,7 +21,6 @@ block_left_and_down = Block(0, 1140, 793, 50)
 block_right_and_down = Block(1100, 1150, 793, 50)
 
 
-
 # 建立群組，並把所有的邊界加入群組
 group = pygame.sprite.Group()
 group.add(block_up, block_down, block_left, block_right, block_left_and_down, block_right_and_down)
