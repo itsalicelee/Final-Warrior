@@ -261,7 +261,7 @@ class Game:
 
                 '''bonus 事件區'''
                 # 出現隨機事件
-                if self.tick % 300 == 0: 
+                if self.tick % 200 == 0: 
                     self.bonus_event()
                 # 隨機事件被觸發
                 self.bonus_triggered()
@@ -442,6 +442,10 @@ class Game:
         if self.character.hp == 0:
             self.pause = True
             self.character.alive = False
+            const.x_change = 0
+            const.y_change = 0
+            move_tempt = pygame.transform.scale(self.renderer.character_move["r1"], (int(28*1.5), int(53*1.5)))
+            const.character_tracked["last_pose"] = move_tempt
 
 
     # 定義game over 後，畫面要跳出的選單內容
@@ -452,26 +456,3 @@ class Game:
                     self.sound.selectSound.play()
                     self.renderer.draw_game_over()
                     self.quit = True
-    '''
-    def level_select(self):
-        select_button = 0 
-        press = False
-        while press == False:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == const.key["right"]:
-                        select_button += 1
-                    if event.key == const.key["left"]:
-                        select_button -= 1
-                    if event.key == const.key["space"]:
-                        self.game_start()
-                        press = True
-                if select_button % 3 == 0:
-                    self.renderer.screen.blit(self.renderer.photo_dct["level_select1"],(0,0))
-                elif select_button % 3 == 1:
-                    self.renderer.screen.blit(self.renderer.photo_dct["level_select2"],(0,0))
-                elif select_button % 3 == 2:
-                    self.renderer.screen.blit(self.renderer.photo_dct["level_select3"], (0,0))
-                    
-                pygame.display.update()
-'''

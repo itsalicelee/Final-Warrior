@@ -3,21 +3,14 @@ import const
 from sound import Sound
 
 class Renderer:
-    """docstring for Render"""
-
     def __init__(self):
         pygame.init()
 
         self.photo_dct = {
                             "icon": pygame.image.load("images/avatar.png").convert_alpha(),
-                            "actorIMG": pygame.image.load("images/racecar.png").convert_alpha(),
                             "bg": pygame.image.load("images/background/background.png").convert_alpha(),
                             "bg_upper": pygame.image.load("images/background/background_upper.png").convert_alpha(),
                             "game_over": pygame.image.load("images/gameover.png").convert_alpha(),
-                            "replay": pygame.image.load("images/play_again.png").convert_alpha(),
-                            "replay_red": pygame.image.load("images/play_again_red.png").convert_alpha(),
-                            "back_to_menu": pygame.image.load("images/back_to_menu.png").convert_alpha(),
-                            "back_to_menu_red": pygame.image.load("images/back_to_menu_red.png").convert_alpha(),
                             "main_menu": pygame.image.load("images/main_menu.png").convert_alpha(),
                             "pause_button": pygame.image.load("images/pause_button.png").convert_alpha(),
                             "vine" : pygame.image.load("images/vine.png").convert_alpha(),
@@ -113,6 +106,7 @@ class Renderer:
                             "v_0": pygame.image.load("images/volume/volume0.png").convert_alpha()
         }
 
+
         ###########英雄血量圖片#############
         self.hp_image =[pygame.image.load("images/HP/3hp.png"),pygame.image.load("images/HP/2.5hp.png"),pygame.image.load("images/HP/2hp.png"),pygame.image.load("images/HP/1.5hp.png"),pygame.image.load("images/HP/1hp.png"),pygame.image.load("images/HP/0.5hp.png"),pygame.image.load("images/HP/0hp.png")]
         self.map_width = self.photo_dct["bg"].get_width()
@@ -184,109 +178,89 @@ class Renderer:
         if const.x_change > 0:
             const.character_tracked["direction"] = "x"
             if tick % 4 == 0:
-                move_tempt = pygame.transform.scale(self.character_move["r1"], (28*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["r1"], (int(28*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 1:
-                move_tempt = pygame.transform.scale(self.character_move["r2"], (28*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["r2"], (int(28*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 2:
-                move_tempt = pygame.transform.scale(self.character_move["r3"], (26*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["r3"], (int(26*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 3:
-                move_tempt =pygame.transform.scale(self.character_move["r1"], (30*2, 53*2))
+                move_tempt =pygame.transform.scale(self.character_move["r1"], (int(30*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
         elif const.x_change < 0:
             if tick % 4 == 0:
-                move_tempt = pygame.transform.scale(self.character_move["l1"], (28*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["l1"], (int(28*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 1:
-                move_tempt = pygame.transform.scale(self.character_move["l2"], (28*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["l2"], (int(28*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 2:
-                move_tempt = pygame.transform.scale(self.character_move["l3"], (26*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["l3"], (int(26*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 3:
-                move_tempt =pygame.transform.scale(self.character_move["l1"], (30*2, 53*2))
+                move_tempt =pygame.transform.scale(self.character_move["l1"], (int(30*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
-            # const.character_tracked["direction"] = "x"
-            # if tick % 4 == 0:
-            #     move_tempt = pygame.transform.scale(self.character_move["l1"], (24*2, 53*2))
-            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-            #     const.character_tracked["last_pose"] = move_tempt
-
-            # if tick % 4 == 1:
-            #     move_tempt = pygame.transform.scale(self.character_move["l2"], (32*2, 53*2))
-            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-            #     const.character_tracked["last_pose"] = move_tempt
-
-            # elif tick % 4 == 2:
-            #     move_tempt = pygame.transform.scale(self.character_move["l3"], (25*2, 53*2))
-            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-            #     const.character_tracked["last_pose"] = move_tempt
-
-            # elif tick % 4 == 3:
-            #     move_tempt = pygame.transform.scale(self.character_move["l4"], (33*2, 53*2))
-            #     self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
-            #     const.character_tracked["last_pose"] = move_tempt
 
     def draw_character_y(self, tick):
 
         if const.y_change < 0:
             const.character_tracked["direction"] = "y"
             if tick % 4 == 0:
-                move_tempt = pygame.transform.scale(self.character_move["u1"], (45*2, 52*2))
+                move_tempt = pygame.transform.scale(self.character_move["u1"], (int(45*1.5), int(52*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 1:
-                move_tempt = pygame.transform.scale(self.character_move["u2"], (44*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["u2"], (int(44*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 2:
-                move_tempt = pygame.transform.scale(self.character_move["u3"], (45*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["u3"], (int(45*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 3:
-                move_tempt = pygame.transform.scale(self.character_move["u2"], (44*2, 52*2))
+                move_tempt = pygame.transform.scale(self.character_move["u2"], (int(44*1.5), int(52*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
         elif const.y_change > 0:
             const.character_tracked["direction"] = "y"
             if tick % 4 == 0:
-                move_tempt = pygame.transform.scale(self.character_move["d1"], (53*2, 52*2))
+                move_tempt = pygame.transform.scale(self.character_move["d1"], (int(53*1.5), int(52*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 1:
-                move_tempt = pygame.transform.scale(self.character_move["d2"], (54*2, 54*2))
+                move_tempt = pygame.transform.scale(self.character_move["d2"], (int(54*1.5), int(54*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 2:
-                move_tempt = pygame.transform.scale(self.character_move["d3"], (53*2, 52*2))
+                move_tempt = pygame.transform.scale(self.character_move["d3"], (int(53*1.5), int(52*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
 
             elif tick % 4 == 3:
-                move_tempt = pygame.transform.scale(self.character_move["d1"], (52*2, 53*2))
+                move_tempt = pygame.transform.scale(self.character_move["d1"], (int(52*1.5), int(53*1.5)))
                 self.screen.blit(move_tempt, (int(const.map_x + const.now_x), int(const.map_y + const.now_y)))
                 const.character_tracked["last_pose"] = move_tempt
     # 滾動地圖

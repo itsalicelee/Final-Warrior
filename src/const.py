@@ -88,5 +88,5 @@ key = {
 
 user_click = 0
 character_tracked = {
-						"last_pose": pygame.transform.scale(pygame.image.load("images/character/4-1.png"), (45*2, 52*2))}
+						"last_pose": pygame.transform.scale(pygame.image.load("images/character/4-1.png"), (int(45*1.5), int(52*1.5)))}
 
