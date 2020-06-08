@@ -1,3 +1,6 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import pygame, const
 class Boss(pygame.sprite.Sprite):
 	def __init__(self, x = const.screen_width // 2, y = const.screen_height // 2, hp = 100):

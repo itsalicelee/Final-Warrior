@@ -1,3 +1,6 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import pygame
 
 # 設定每一個用來當邊界的矩形的屬性，are_setting的檔案會呼叫

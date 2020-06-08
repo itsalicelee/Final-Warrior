@@ -1,3 +1,6 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import pygame,random,math,time, const
 
 class bullet(pygame.sprite.Sprite):#輸入代表這個類別是特殊的角色類別

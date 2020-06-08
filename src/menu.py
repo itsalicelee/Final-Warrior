@@ -1,3 +1,6 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import const
 from renderer import Renderer
 import pygame, sys
@@ -41,7 +44,7 @@ class Menu():
         while True:
 
             pygame.mouse.set_visible(False)  # 隱藏原本的游標
-            #self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
+            self.renderer.screen.fill(const.color["black"])  # 背景底色為黑色
             #self.renderer.screen.blit(self.renderer.photo_dct["main_menu"], (0, 0))
             temp_menu = pygame.transform.scale(self.renderer.photo_dct["main_menu"], (const.screen_width,const.screen_height))
             #self.renderer.draw_text('main menu', self.renderer.font, const.color["white"], self.renderer.screen, const.screen_width/2, const.screen_height/5) # 畫上text，位置設定在螢幕的中間

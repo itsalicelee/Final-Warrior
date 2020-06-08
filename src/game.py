@@ -1,4 +1,7 @@
 '''匯入模組'''
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 import pygame, sys, random
 import const
 import area_setting as boundary

@@ -1,7 +1,8 @@
 '''
 這是負責存全部 constant 的檔案，請不要在裡面引用任何其他的class，避免circular import。
 '''
-
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 # 使用 pygame 模組
 import pygame
