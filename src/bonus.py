@@ -9,7 +9,7 @@ class Bonus(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # 隨機挑選 bonus 種類，給予不同的權重
-        self.index = random.randint(0, 100)
+        self.index = random.randint(0, 120)
         if 0 <= self.index <= 60: 
             self.type = const.bonus_type[0]
         elif 60 < self.index <= 80:

@@ -128,7 +128,7 @@ class Game:
         for group in self.bonus_lst:
             for sprite in group.sprites():
                 sprite.expire_time += 1
-                if pygame.sprite.spritecollide(sprite, boundary.group, False) or pygame.sprite.spritecollide(sprite, self.bosssprite, False):
+                if pygame.sprite.spritecollide(sprite, boundary.group, False):
                     sprite.kill()
 
                 
@@ -293,7 +293,7 @@ class Game:
             else:
 
                 # 將 background 顯示在screen上
-                self.renderer.screen.blit(self.renderer.photo_dct["bg"], (const.map_x, const.map_y))
+                self.renderer.screen.blit(self.renderer.theme_ghost["bg_1"], (const.map_x, const.map_y))
 
                 # 將主角顯示在screen上
                 ########改!!
