@@ -26,6 +26,6 @@ This is the 2D PC game for the final project of the class, Programming for Busin
 ![About Uus](./src/images/demo/about_p2.png)
 
 ## Demo Link
-[Demo Link](https://www.youtube.com/watch?v=Dp6nXQ0Y3R4&ab_channel=%E7%BE%85%E9%82%B5%E6%9F%8F)
-[Demo to our family Link](https://www.youtube.com/watch?v=k-x5WQfzvZU)
+- [Demo Link](https://www.youtube.com/watch?v=Dp6nXQ0Y3R4&ab_channel=%E7%BE%85%E9%82%B5%E6%9F%8F)
+- [Demo to our family Link](https://www.youtube.com/watch?v=k-x5WQfzvZU)
 
