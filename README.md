@@ -1,5 +1,5 @@
 # :crossed_swords: Final Warrior :crossed_swords:
-This is the 2D PC game for the final project of the class, Programming for Business Computing, at Naional Taiwan University(NTU) instructed by Prof. Ling-Chieh Kung.
+This is the 2D PC game for the final project of the class, Programming for Business Computing(108-2 PBC Spring), at Naional Taiwan University(NTU) instructed by Prof. Ling-Chieh Kung.
 
 ## Usage
 1. clone this repo `git clone https://github.com/itsalicelee/Final-Warrior`
@@ -8,9 +8,9 @@ This is the 2D PC game for the final project of the class, Programming for Busin
 4. run the command `python3 main.py`, and enjoy! :partying_face:
 
 ## How to control
-- Use the keyboard(up, down), press space to select
-- Use ESC to quit the game or the quit the option page 
-- Use P to pause the game or adjust volume
+- Use the keyboard(**up**, **down**), press **space** to select
+- Use **ESC** to quit the game or the quit the option page 
+- Use **P** to pause the game or adjust volume
 ![Screenshot](./src/images/demo/about_p1.png)
 
 ## Screenshots of the game
@@ -26,5 +26,4 @@ This is the 2D PC game for the final project of the class, Programming for Busin
 
 ## Demo Link
 [Demo Link](https://www.youtube.com/watch?v=k-x5WQfzvZU)
-
 
