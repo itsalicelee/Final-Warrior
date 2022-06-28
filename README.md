@@ -19,11 +19,13 @@ This is the 2D PC game for the final project of the class, Programming for Busin
 ![Screenshot](./src/images/demo/play2.png)
 ![Screenshot](./src/images/demo/gameover.png)
 
+
 ## About us
 - Special thanks to Tsai-Heng Lee(stacy668149@gmail.com) for the amazing art design! :love_you_gesture:
 
 ![About Uus](./src/images/demo/about_p2.png)
 
 ## Demo Link
-[Demo Link](https://www.youtube.com/watch?v=k-x5WQfzvZU)
+[Demo Link](https://www.youtube.com/watch?v=Dp6nXQ0Y3R4&ab_channel=%E7%BE%85%E9%82%B5%E6%9F%8F)
+[Demo to our family Link](https://www.youtube.com/watch?v=k-x5WQfzvZU)
 
